@@ -41,10 +41,10 @@
                                  </button>
                                  <div class="dropdown-menu">
                                      <a class="dropdown-item" href="#">Détail</a>
-                                     <a class="dropdown-item" href="#">Editer</a>
+                                     <a class="dropdown-item" href="patient/{{ $patient->id_patient }}">Editer</a>
                                      <a class="dropdown-item" href="#">Supprimer</a>
                                      <div class="dropdown-divider"></div>
-                                     <a class="dropdown-item" href="#">Admission</a>
+                                     <a class="dropdown-item" href="admission/create?idp={{ $patient->id_patient }}">Admission</a>
                                      <a class="dropdown-item" href="#">Consigne</a>
                                      <a class="dropdown-item" href="#">Prescription</a>
                                      <a class="dropdown-item" href="#">Infèrmière</a>

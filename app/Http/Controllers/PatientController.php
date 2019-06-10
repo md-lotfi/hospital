@@ -41,7 +41,8 @@ class PatientController extends Controller
     }
 
     public function update() {
-        
+        echo 'je suis la';
+        exit();
     }
 
     public function destroy() {
