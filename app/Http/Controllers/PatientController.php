@@ -32,8 +32,6 @@ class PatientController extends Controller
         $patient->save();
         //return redirect('admission/create?idp='.$patient->getKey());
         return redirect('patient?idp='.$patient->getKey());
-
-        
     }
 
     public function edit() {
@@ -43,6 +41,15 @@ class PatientController extends Controller
     public function update() {
         echo 'je suis la';
         exit();
+    }
+
+    public function get($id) {
+        $patient = Patient::where('id_patient', $id)
+            //->orderBy('name', 'desc')
+            ->take(1    )
+            ->get();
+        //echo 'je suis la';
+        return view('patient.details', ['patient' => $patient[0] ]);
     }
 
     public function destroy() {

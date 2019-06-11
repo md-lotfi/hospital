@@ -54,6 +54,7 @@ Route::delete('service/{id}', 'ServiceController@destroy');
 Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
 Route::post('patient', 'PatientController@store');
+Route::get('patient/get/{id}', 'PatientController@get');
 Route::get('patient/update/{id}', 'PatientController@update');
 Route::get('patient/delete/{id}', 'PatientController@destroy');
 

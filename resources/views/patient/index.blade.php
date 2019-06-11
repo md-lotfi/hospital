@@ -40,8 +40,8 @@
                                      Action
                                  </button>
                                  <div class="dropdown-menu">
-                                     <a class="dropdown-item" href="#">Détail</a>
-                                     <a class="dropdown-item" href="patient/{{ $patient->id_patient }}">Editer</a>
+                                     <a class="dropdown-item" href="patient/get/{{ $patient->id_patient }}">Détail</a>
+                                     <a class="dropdown-item" href="patient/update/{{ $patient->id_patient }}">Editer</a>
                                      <a class="dropdown-item" href="#">Supprimer</a>
                                      <div class="dropdown-divider"></div>
                                      <a class="dropdown-item" href="admission/create?idp={{ $patient->id_patient }}">Admission</a>
