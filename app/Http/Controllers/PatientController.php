@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admission;
 use Illuminate\Http\Request;
 use App\Patient;
 
@@ -45,13 +46,16 @@ class PatientController extends Controller
 
     public function get($id) {
         $patient = Patient::where('patients.id_patient', $id)
-            ->join('admissions', 'patients.id_patient', '=', 'admissions.id_patient')
+            ->leftJoin('admissions', 'patients.id_patient', '=', 'admissions.id_patient')
             //->orderBy('name', 'desc')
             ->get();
-        /*var_dump($patient);
-        exit();*/
+        //var_dump($patient);
+        //exit();
         //echo 'je suis la';
-        return view('patient.details', ['patient' => $patient[0], 'admissions'=>$patient]);
+        if( count($patient) > 0 )
+            return view('patient.details', ['patient' => $patient[0], 'admissions'=>$patient]);
+        else
+            return view('patient.details', ['patient' => new Patient(), 'admissions'=>null]);
     }
 
     public function destroy() {

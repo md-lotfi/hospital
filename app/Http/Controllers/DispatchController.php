@@ -8,7 +8,6 @@ class DispatchController extends Controller
 {
     public function dispatch($id) {
         $listpatient = Patient::all();
-
         return view('patient.index', ['patients' => $listpatient ]);
     }
 }

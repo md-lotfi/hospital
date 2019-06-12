@@ -3,28 +3,30 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4 offset-4">
 
         <form action="{{ url('admission') }}" method="post">
         
           {{ csrf_field() }}
 
             <div class="form-group">
-            <label for="">motif</label>
-            <input type="text" name="motif" class="from-control">
+                <label for="motif">motif</label>
+                <textarea name="motif" class="form-control" id="motif" rows="3">
+                </textarea>
             </div>
 
             <div class="form-group">
-            <label for="">diagnostic</label>
-            <input type="text" name="diag" class="from-control">
+                <label for="diag">diagnostic</label>
+                <textarea name="diag" class="form-control" id="diag" rows="3">
+                </textarea>
             </div>
 
             <div class="form-group">
-            <label for="">date admission</label>
-            <input type="text" name="date_adm" class="from-control">
+            <label for="date_adm">date admission</label>
+            <input type="date" name="date_adm" class="form-control" id="date_adm" aria-describedby="date_adm" placeholder="Date d'admission">
             </div>
 
-            <div class="form-group">
+            <!--<div class="form-group">
             <label for="">date sortie</label>
             <input type="text" name="date_sort" class="from-control">
             </div>
@@ -32,12 +34,12 @@
             <div class="form-group">
             <label for="">etat sortie</label>
             <input type="text" name="etat_sort" class="from-control">
-            </div>
+            </div>-->
 
             <input type="hidden" name="idpatient" value="<?= $_GET['idp'] ?>"/>
 
-            <div class="form-group">
-            <input type="submit" class="from-control" btn btn-danger value="Enregistrer">
+            <div class="form-group text-right">
+            <input type="submit" class="btn btn-info" value="Enregistrer">
             </div>
 
         </form>

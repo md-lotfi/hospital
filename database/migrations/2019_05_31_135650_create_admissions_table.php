@@ -19,8 +19,8 @@ class CreateAdmissionsTable extends Migration
             $table->string('motif');
             $table->string('diag');
             $table->dateTime('date_adm');
-            $table->dateTime('date_sort');
-            $table->string('etat_sort');
+            //$table->dateTime('date_sort');
+            //$table->string('etat_sort');
             $table->timestamps();
         });
         Schema::table('admissions',function($table){

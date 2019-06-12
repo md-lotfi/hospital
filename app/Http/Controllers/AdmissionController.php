@@ -24,8 +24,9 @@ class AdmissionController extends Controller
             $admission->motif = $request->input('motif');
             $admission->diag = $request->input('diag');
             $admission->date_adm = $request->input('date_adm');
-            $admission->date_sort= $request->input('date_sort');
-            $admission->etat_sort = $request->input('etat_sort');
+            /*if( !empty($request->input('date_sort', null)) )
+                $admission->date_sort= $request->input('date_sort');
+            $admission->etat_sort = $request->input('etat_sort');*/
             
             $admission->save();
             //return redirect('salle/create?idadm='.$admission->getKey());
