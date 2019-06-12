@@ -20,10 +20,10 @@ class CreatePrescriptionTable extends Migration
             $table->timestamp('date_pres');
             $table->text('observation');
         });
-        Schema::table('prescription',function($table){
+        /*Schema::table('prescription',function($table){
             $table->foreign('id_patient')->references('id_patient')->on('patients');
             $table->foreign('id_medecin')->references('id_medecin')->on('medecins');
-        });
+        });*/
     }
 
     /**

@@ -28,7 +28,8 @@ class AdmissionController extends Controller
             $admission->etat_sort = $request->input('etat_sort');
             
             $admission->save();
-            return redirect('salle/create?idadm='.$admission->getKey());
+            //return redirect('salle/create?idadm='.$admission->getKey());
+            return redirect('patient/get/'.$admission->id_patient);
         }
        
         else

@@ -20,10 +20,10 @@ class CreateConsigneTable extends Migration
             $table->timestamp('date_heur');
             $table->text('observation');
         });
-        Schema::table('consigne',function($table){
+        /*Schema::table('consigne',function($table){
             $table->foreign('id_patient')->references('id_patient')->on('patients');
             $table->foreign('id_medecin')->references('id_medecin')->on('medecins');
-        });
+        });*/
     }
 
     /**

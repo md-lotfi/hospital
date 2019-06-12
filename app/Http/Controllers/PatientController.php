@@ -44,12 +44,14 @@ class PatientController extends Controller
     }
 
     public function get($id) {
-        $patient = Patient::where('id_patient', $id)
+        $patient = Patient::where('patients.id_patient', $id)
+            ->join('admissions', 'patients.id_patient', '=', 'admissions.id_patient')
             //->orderBy('name', 'desc')
-            ->take(1    )
             ->get();
+        /*var_dump($patient);
+        exit();*/
         //echo 'je suis la';
-        return view('patient.details', ['patient' => $patient[0] ]);
+        return view('patient.details', ['patient' => $patient[0], 'admissions'=>$patient]);
     }
 
     public function destroy() {

@@ -14,9 +14,14 @@ class CreateUniteTable extends Migration
     public function up()
     {
         Schema::create('unite', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id_unite');
+            $table->integer('id_service')->unsigned();
+            $table->string('nom_unite');
             $table->timestamps();
         });
+        /*Schema::table('unite',function($table){
+            $table->foreign('id_service')->references('id_service')->on('services');
+        });*/
     }
 
     /**
