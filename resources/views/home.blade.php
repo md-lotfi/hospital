@@ -32,9 +32,10 @@
          Ficher
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="service/create">service</a>
+          <a class="dropdown-item" href="/service">service</a>
           <a class="dropdown-item" href="{{ url('medecin/create')}}">Médecins</a>
           <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/gardem">Garde Malade</a>
           <a class="dropdown-item" href="#">infirmières</a>
         </div>
       </li>

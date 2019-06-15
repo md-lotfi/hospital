@@ -20,7 +20,7 @@ class CreateGardemTable extends Migration
             $table->string('lien_parent');
             $table->string('adr');
             $table->integer('tel');
-            $table->string('date_fin');
+            $table->timestamps();
         });
     }
 

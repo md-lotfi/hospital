@@ -3,22 +3,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4 offset-md-4">
 
         <form action="{{ url('service') }}" method="post">
         
           {{ csrf_field() }}
-
             <div class="form-group">
-            <label for="">nom</label>
-            <input type="text" name="nom" class="from-control">
+                <label for="name">Nom du service</label>
+                <input type="text" class="form-control" id="name" name="nom" aria-describedby="nomdels" placeholder="Nom du service">
+                <small id="nomdels" class="form-text text-muted">Saisisser un nom pour le service</small>
             </div>
 
-            <div class="form-group">
-            <input type="submit" class="from-control" btn btn-danger value="Enregistrer">
-            </div>
-
+            <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
+            <div class="clearfix"></div>
         </form>
+            <a href="/service"><- Retoure</a>
         </div>
     </div>
 </div>

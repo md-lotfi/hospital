@@ -15,7 +15,8 @@ class CreateLitsTable extends Migration
     {
         Schema::create('lits', function (Blueprint $table) {
             $table->increments('id_lit');
-            $table->integer('num_lit');
+            $table->integer('id_salle')->unsigned();
+            $table->string('nom_lit');
             $table->timestamps();
         });
     }

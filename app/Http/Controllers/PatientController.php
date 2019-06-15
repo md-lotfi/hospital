@@ -40,18 +40,30 @@ class PatientController extends Controller
     }
 
     public function update() {
-        echo 'je suis la';
-        exit();
     }
 
     public function get($id) {
         $patient = Patient::where('patients.id_patient', $id)
             ->leftJoin('admissions', 'patients.id_patient', '=', 'admissions.id_patient')
+            ->leftJoin('patient_lit', 'admissions.id_adm', '=', 'patient_lit.id_adm')
+            ->leftJoin('lits', 'lits.id_lit', '=', 'patient_lit.id_lit')
+            ->leftJoin('salls', 'salls.id_salle', '=', 'lits.id_salle')
+            ->leftJoin('unite', 'unite.id_unite', '=', 'salls.id_unite')
+            ->leftJoin('services', 'services.id_service', '=', 'unite.id_service')
+            ->select(
+                'patients.*',
+                'admissions.id_adm as id_admission',
+                'admissions.motif',
+                'admissions.diag',
+                'admissions.date_adm',
+                'patient_lit.*',
+                'lits.*',
+                'salls.*',
+                'unite.*',
+                'services.nom as nom_service'
+            )
             //->orderBy('name', 'desc')
             ->get();
-        //var_dump($patient);
-        //exit();
-        //echo 'je suis la';
         if( count($patient) > 0 )
             return view('patient.details', ['patient' => $patient[0], 'admissions'=>$patient]);
         else
