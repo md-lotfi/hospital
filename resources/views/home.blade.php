@@ -36,7 +36,7 @@
           <a class="dropdown-item" href="{{ url('medecin/create')}}">Médecins</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/gardem">Garde Malade</a>
-          <a class="dropdown-item" href="#">infirmières</a>
+          <a class="dropdown-item" href="/infermiere">infirmières</a>
         </div>
       </li>
     </form>

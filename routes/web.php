@@ -64,6 +64,13 @@ Route::get('lit/get/{id_lit}', 'LitController@edit');
 Route::post('lit/update', 'LitController@update');
 Route::get('lit/remove/{id_lit}', 'LitController@destroy');
 
+Route::get('assign/add/{id_adm}', 'GardemAdmController@create');
+Route::post('gardemAdm', 'GardemAdmController@store');
+Route::get('dconfig_show/{id_adm}/{id_gardem}', 'GardemAdmController@dconfig_show');
+Route::post('dconfig_show', 'GardemAdmController@dconfig_store');
+Route::get('gardem/historique/{id_patient}', 'GardemAdmController@myGardem');
+//Route::index('gardemadm', 'GardemAdmController@index');
+
 Route::get('patientlit/service/{id_adm}', 'PatientLitController@service');
 Route::get('patientlit/unite/{id_adm}/{id_service}', 'PatientLitController@unite');
 Route::get('patientlit/salle/{id_adm}/{id_unite}', 'PatientLitController@salle');
@@ -76,6 +83,13 @@ Route::post('gardem', 'GardeMaladeController@store');
 Route::get('gardem/get/{id_gardem}', 'GardeMaladeController@edit');
 Route::post('gardem/update', 'GardeMaladeController@update');
 Route::get('gardem/remove/{id_gardem}', 'GardeMaladeController@destroy');
+
+Route::get('infermiere', 'InfermiereController@index');
+Route::get('infermiere/create', 'InfermiereController@create');
+Route::post('infermiere', 'InfermiereController@store');
+Route::get('infermiere/get/{id_gardem}', 'InfermiereController@edit');
+Route::post('infermiere/update', 'InfermiereController@update');
+Route::get('infermiere/remove/{id_gardem}', 'InfermiereController@destroy');
 
 Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
