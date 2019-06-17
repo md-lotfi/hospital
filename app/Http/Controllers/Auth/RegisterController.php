@@ -63,10 +63,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = User::all();
+        $type = User::DEFAULT_TYPE;
+        if( $user->count() == 0 )
+            $type = User::ADMIN_TYPE;
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'type' => $type,
         ]);
     }
 }

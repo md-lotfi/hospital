@@ -6,6 +6,7 @@ use App\Admission;
 use App\GardemAdm;
 use Illuminate\Http\Request;
 use App\Patient;
+use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
@@ -43,6 +44,9 @@ class PatientController extends Controller
     }
 
     public function get($id) {
+        $id = Auth::user();
+        var_dump($id);
+        exit();
         $patient = Patient::where('patients.id_patient',$id)
             ->whereNull('gardem_adm.date_fin')
             ->leftJoin('admissions', 'patients.id_patient', '=', 'admissions.id_patient')

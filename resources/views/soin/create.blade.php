@@ -16,18 +16,6 @@
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email de l'infermiere">
-                <small class="form-text text-muted">Saisisser un email</small>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="*********">
-                <small class="form-text text-muted">Saisisser un mot de passe</small>
-            </div>
-
-            <div class="form-group">
                 <label for="prenom">Prénom</label>
                 <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom de l'infermiere">
                 <small class="form-text text-muted">Saisisser un prénom</small>

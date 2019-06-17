@@ -86,7 +86,7 @@
                                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      Action
                                  </button>
-                                 <div class="dropdown-menu">
+                                 <div class="dropdown-menu dropdown-menu-right">
                                      <a class="dropdown-item" href="patient/get/{{ $patient->id_patient }}">Détail</a>
                                      <a class="dropdown-item" href="patient/update/{{ $patient->id_patient }}">Editer</a>
                                      <a class="dropdown-item" href="#">Supprimer</a>
@@ -97,11 +97,16 @@
                                      <li class="dropdown-submenu">
                                          <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>
                                          <ul class="dropdown-menu">
-                                             <li><a class="dropdown-item" href="#">Traitements</a></li>
+                                             <li class="dropdown-submenu">
+                                             <li><a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
+                                                 <ul class="dropdown-menu">
+                                                     <li><a class="dropdown-item" href="#">Médicaments</a></li>
+                                                     <li><a class="dropdown-item" href="#">Psycotropes</a></li>
+                                                 </ul>
+                                             </li>
                                              <li><a class="dropdown-item" href="#">Prélevements</a></li>
                                          </ul>
                                      </li>
-                                     <a class="dropdown-item" href="#">Enregistrer soins</a>
                                      <a class="dropdown-item" href="#">Sortie de patient</a>
                                  </div>
                              </div>

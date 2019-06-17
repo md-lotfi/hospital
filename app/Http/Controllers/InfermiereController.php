@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\GardMalade;
 use App\Infermiere;
 use App\Sall;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\In;
 
 class InfermiereController extends Controller
@@ -22,13 +25,21 @@ class InfermiereController extends Controller
     }
 
     public function store(Request $request) {
-        $inf = new Infermiere();
-        $inf->nom_inf = $request->input('nom');
-        $inf->prenom_inf = $request->input('prenom');
-        $inf->adr_inf = $request->input('adr');
-        $inf->tel_inf = $request->input('tel');
-        $inf->save();
-        return redirect('infermiere');
+        $user = new User();
+        $user->password = Hash::make($request->input('password'));
+        $user->email = $request->input('email');
+        $user->name = $request->input('nom');
+        $user->type = User::INFERMIERE_TYPE;
+        $user->save();
+        if( $user ) {
+            $inf = new Infermiere();
+            $inf->id_user = $user->getKey();
+            $inf->prenom_inf = $request->input('prenom');
+            $inf->adr_inf = $request->input('adr');
+            $inf->tel_inf = $request->input('tel');
+            $inf->save();
+            return redirect('infermiere');
+        }
     }
 
     public function edit($id_inf) {

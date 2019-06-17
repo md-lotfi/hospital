@@ -91,6 +91,13 @@ Route::get('infermiere/get/{id_gardem}', 'InfermiereController@edit');
 Route::post('infermiere/update', 'InfermiereController@update');
 Route::get('infermiere/remove/{id_gardem}', 'InfermiereController@destroy');
 
+Route::get('medicament', 'MedicamentController@index');
+Route::get('medicament/create', 'MedicamentController@create');
+Route::post('medicament', 'MedicamentController@store');
+Route::get('medicament/get/{id_gardem}', 'MedicamentController@edit');
+Route::post('medicament/update', 'MedicamentController@update');
+Route::get('medicament/remove/{id_gardem}', 'MedicamentController@destroy');
+
 Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
 Route::post('patient', 'PatientController@store');
@@ -98,6 +105,10 @@ Route::get('patient/get/{id}', 'PatientController@get');
 Route::get('patient/update/{id}', 'PatientController@update');
 Route::get('patient/delete/{id}', 'PatientController@destroy');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
