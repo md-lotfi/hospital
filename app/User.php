@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -13,6 +12,7 @@ class User extends Authenticatable
     const ADMIN_TYPE = 'admin';
     const MEDECIN_TYPE = 'medecin';
     const INFERMIERE_TYPE = 'infermiere';
+    const SECRETAIRE_TYPE = 'secretaire';
     const DEFAULT_TYPE = 'default';
 
     public function isAdmin()    {
@@ -37,7 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type',
     ];
 
     /**

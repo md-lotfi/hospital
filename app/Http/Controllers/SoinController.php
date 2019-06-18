@@ -13,6 +13,7 @@ use App\Service;
 use App\Soin;
 use App\Unite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SoinController extends Controller
 {
@@ -39,10 +40,9 @@ class SoinController extends Controller
      * @param $id_inf
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function link($id_patient, $id_medic, $id_inf){
+    public function link($id_patient, $id_medic){
         $medics = Medicaments::all();
-        $infs = Infermiere::all();
-        return view('soin.index', ['medics' => $medics, 'infs' => $infs, 'id_patient'=>$id_patient, 'id_medic'=>$id_medic, 'id_inf'=>$id_inf]);
+        return view('soin.index', ['medics' => $medics, 'id_patient'=>$id_patient, 'id_medic'=>$id_medic]);
     }
 
     public function link_store(Request $request){

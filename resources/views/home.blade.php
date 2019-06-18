@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Service pediatrie</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +32,19 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/service">service</a>
-          <a class="dropdown-item" href="{{ url('medecin/create')}}">Médecins</a>
+          @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+            <a class="dropdown-item" href="{{ url('medecin/create')}}">Ajouter Médecins</a>
+          @endif
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/gardem">Garde Malade</a>
-          <a class="dropdown-item" href="/infermiere">infirmières</a>
+          @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+            <a class="dropdown-item" href="/infermiere">Ajouter Infirmières</a>
+          @endif
+          @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+            <a class="dropdown-item" href="/secretaire">Ajouter Secrétaire</a>
+          @endif
+          @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::SECRETAIRE_TYPE )
+            <a class="dropdown-item" href="/gardem">Ajouter Garde Malade</a>
+          @endif
         </div>
       </li>
     </form>

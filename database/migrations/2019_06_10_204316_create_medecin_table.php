@@ -14,13 +14,14 @@ class CreateMedecinTable extends Migration
     public function up()
     {
         Schema::create('medecin', function (Blueprint $table) {
-            $table->increments('id_medecin');
+            $table->increments('id_med');
             $table->integer('id_user');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('specialite');
-            $table->string('grade');
-            $table->timestamp('added');
+            $table->string('prenom_med');
+            $table->string('spec_med');
+            $table->string('grade_med');
+            $table->string('adr_med');
+            $table->string('tel_med');
+            $table->timestamps();
         });
     }
 

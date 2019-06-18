@@ -47,7 +47,17 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
+                                    <?php
+                                        $user = \Illuminate\Support\Facades\Auth::user();
+                                        $auth = false;
+                                        if( !empty($user) )
+                                            if( $user->type === \App\User::ADMIN_TYPE )
+                                                $auth = true;
+                                            echo 'user '.$auth;
+                                    ?>
+                                    @if( $auth )
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        @endif
                                 </li>
                             @endif
                         @else

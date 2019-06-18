@@ -22,13 +22,6 @@ Route::get('cvs/{id}/edit', 'CvController@edit');
 Route::put('cvs/{id}', 'CvController@update');
 Route::delete('cvs/{id}', 'CvController@destroy');
 
-Route::get('medecin', 'MedecinController@index');
-Route::get('medecin/create', 'MedecinController@create');
-Route::post('medecin', 'MedecinController@store');
-Route::get('medecin/{id}/edit', 'MedecinController@edit');
-Route::put('medecin/{id}', 'MedecinController@update');
-Route::delete('medecin/{id}', 'MedecinController@destroy');
-
 Route::get('admission', 'AdmissionController@index');
 Route::get('admission/create', 'AdmissionController@create');
 Route::post('admission', 'AdmissionController@store');
@@ -90,6 +83,20 @@ Route::post('infermiere', 'InfermiereController@store');
 Route::get('infermiere/get/{id_gardem}', 'InfermiereController@edit');
 Route::post('infermiere/update', 'InfermiereController@update');
 Route::get('infermiere/remove/{id_gardem}', 'InfermiereController@destroy');
+
+Route::get('secretaire', 'SecretaireController@index');
+Route::get('secretaire/create', 'SecretaireController@create');
+Route::post('secretaire', 'SecretaireController@store');
+Route::get('secretaire/get/{id_sec}', 'SecretaireController@edit');
+Route::post('secretaire/update', 'SecretaireController@update');
+Route::get('secretaire/remove/{id_sec}', 'SecretaireController@destroy');
+
+Route::get('medecin', 'MedecinController@index');
+Route::get('medecin/create', 'MedecinController@create');
+Route::post('medecin', 'MedecinController@store');
+Route::get('medecin/get/{id}', 'MedecinController@edit');
+Route::post('medecin/update', 'MedecinController@update');
+Route::get('medecin/remove/{id}', 'MedecinController@destroy');
 
 Route::get('medicament', 'MedicamentController@index');
 Route::get('medicament/create', 'MedicamentController@create');

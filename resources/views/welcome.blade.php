@@ -71,9 +71,16 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <?php
+                                $u = \App\User::all();
+                                $auth = $u->count() === 0;
+                            ?>
+
+                            @if($auth)
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            @endif
+
                         @endif
                     @endauth
                 </div>

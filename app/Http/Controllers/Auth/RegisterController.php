@@ -65,8 +65,9 @@ class RegisterController extends Controller
     {
         $user = User::all();
         $type = User::DEFAULT_TYPE;
-        if( $user->count() == 0 )
+        if( $user->count() === 0 ) {
             $type = User::ADMIN_TYPE;
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

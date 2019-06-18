@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Liste des médecins<a href="/medecin/create" class="btn btn-warning float-right">Ajouter un médecin</a></h1>
+                <h1>Liste des secrétaires<a href="/secretaire/create" class="btn btn-warning float-right">Ajouter une secrétaire</a></h1>
                 <table class="table">
                     <head>
                         <tr class="d-flex">
@@ -19,21 +19,21 @@
                     </head>
 
                     <body>
-                    @foreach($meds as $med)
+                    @foreach($secs as $sec)
                         <tr class="d-flex">
-                            <td class="col-md-1">{{ $med->id_med }}</td>
-                            <td class="col-md-3">{{ $med->name }}</td>
-                            <td class="col-md-3">{{ $med->prenom_med }}</td>
-                            <td class="col-md-2">{{ $med->adr_med }}</td>
-                            <td class="col-md-2">{{ $med->tel_med }}</td>
+                            <td class="col-md-1">{{ $sec->id_sec }}</td>
+                            <td class="col-md-3">{{ $sec->nom_sec }}</td>
+                            <td class="col-md-3">{{ $sec->prenom_sec }}</td>
+                            <td class="col-md-2">{{ $sec->adr_sec }}</td>
+                            <td class="col-md-2">{{ $sec->tel_sec }}</td>
                             <td class="col-md-1">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/medecin/get/{{ $med->id_med }}">Editer</a>
-                                        <a class="dropdown-item" href="/medecin/remove/{{ $med->id_med }}">Supprimer</a>
+                                        <a class="dropdown-item" href="/infermiere/get/{{ $sec->id_sec }}">Editer</a>
+                                        <a class="dropdown-item" href="/infermiere/remove/{{ $sec->id_sec }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>
