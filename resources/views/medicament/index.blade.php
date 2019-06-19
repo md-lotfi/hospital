@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Liste des médicaments<a href="/medicament/create" class="btn btn-warning float-right">Ajouter une infermiere</a></h1>
+                <h1>Liste des médicaments<a href="/medicament/create" class="btn btn-warning float-right">Ajouter un médicament</a></h1>
                 <table class="table">
                     <head>
                         <tr class="d-flex">

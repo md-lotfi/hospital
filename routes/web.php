@@ -105,6 +105,20 @@ Route::get('medicament/get/{id_gardem}', 'MedicamentController@edit');
 Route::post('medicament/update', 'MedicamentController@update');
 Route::get('medicament/remove/{id_gardem}', 'MedicamentController@destroy');
 
+Route::get('soin/{id_patient}', 'SoinController@index');
+Route::get('soins/create/{id_patient}', 'SoinController@create');
+Route::post('soin', 'SoinController@store');
+Route::get('soin/get/{id_patient}', 'SoinController@edit');
+Route::post('soin/update', 'SoinController@update');
+Route::get('soin/remove/{id_patient}', 'SoinController@destroy');
+
+Route::get('prelevement/{id_patient}', 'PrelevementController@index');
+Route::get('prelevement/create/{id_patient}', 'PrelevementController@create');
+Route::post('prelevement', 'PrelevementController@store');
+Route::get('prelevement/get/{id_patient}', 'PrelevementController@edit');
+Route::post('prelevement/update', 'PrelevementController@update');
+Route::get('prelevement/remove/{id_patient}', 'PrelevementController@destroy');
+
 Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
 Route::post('patient', 'PatientController@store');

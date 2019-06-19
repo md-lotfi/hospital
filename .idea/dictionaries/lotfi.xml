@@ -3,11 +3,17 @@
     <words>
       <w>gardem</w>
       <w>infermiere</w>
+      <w>infirmiere</w>
       <w>medecin</w>
       <w>mededcin</w>
+      <w>medicaments</w>
       <w>patientlit</w>
+      <w>prelevement</w>
+      <w>prelevements</w>
       <w>salle</w>
       <w>secretaire</w>
+      <w>soin</w>
+      <w>soins</w>
     </words>
   </dictionary>
 </component>

@@ -94,13 +94,14 @@
                                      <a class="dropdown-item" href="admission/create?idp={{ $patient->id_patient }}">Admission</a>
                                      <a class="dropdown-item" href="#">Consigne</a>
                                      <a class="dropdown-item" href="#">Prescription</a>
+                                     <a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Voire les soins</a>
                                      <li class="dropdown-submenu">
                                          <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>
                                          <ul class="dropdown-menu">
                                              <li class="dropdown-submenu">
                                              <li><a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
                                                  <ul class="dropdown-menu">
-                                                     <li><a class="dropdown-item" href="#">Médicaments</a></li>
+                                                     <li><a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Médicaments</a></li>
                                                      <li><a class="dropdown-item" href="#">Psycotropes</a></li>
                                                  </ul>
                                              </li>

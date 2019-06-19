@@ -35,9 +35,39 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('patient')}}">Mes patients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('patient/create')}}">Admission</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Prescrire</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Fichier
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if(\Illuminate\Support\Facades\Auth::user())
+                                    <a class="dropdown-item" href="/service">service</a>
+                                    <a class="dropdown-item" href="/medicament/create">Ajouter Médicaments</a>
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+                                        <a class="dropdown-item" href="{{ url('medecin/create')}}">Ajouter Médecins</a>
+                                    @endif
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+                                        <a class="dropdown-item" href="/infermiere">Ajouter Infirmières</a>
+                                    @endif
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+                                        <a class="dropdown-item" href="/secretaire">Ajouter Secrétaire</a>
+                                    @endif
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::SECRETAIRE_TYPE )
+                                        <a class="dropdown-item" href="/gardem">Ajouter Garde Malade</a>
+                                    @endif
+                                @endif
+                            </div>
+                        </li>
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -53,7 +83,6 @@
                                         if( !empty($user) )
                                             if( $user->type === \App\User::ADMIN_TYPE )
                                                 $auth = true;
-                                            echo 'user '.$auth;
                                     ?>
                                     @if( $auth )
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>

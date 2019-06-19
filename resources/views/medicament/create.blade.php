@@ -16,8 +16,8 @@
             </div>
 
             <div class="form-group">
-                <label for="prenom">Ajouter une dose</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Ajouter une dose">
+                <label for="dose">Ajouter une dose</label>
+                <input type="text" class="form-control" id="dose" name="dose_medic" placeholder="Ajouter une dose">
                 <small class="form-text text-muted">Saisisser une dose</small>
             </div>
             <input type="submit" class="btn btn-danger float-right" value="Enregistrer">

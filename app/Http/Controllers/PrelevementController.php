@@ -8,6 +8,7 @@ use App\Lit;
 use App\Medicaments;
 use App\Patient;
 use App\PatientLit;
+use App\Prelevement;
 use App\Sall;
 use App\Service;
 use App\Soin;
@@ -17,9 +18,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
-class SoinController extends Controller
+class PrelevementController extends Controller
 {
-    const TABLE = 'soins';
+    const TABLE = 'prelevements';
 
     /**
      * Afficher les soins des patients déja enregistrer
@@ -27,14 +28,21 @@ class SoinController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($id_patient){
-        $soins = Soin::where('soins.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'soins.id_patient')
-            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'soins.id_inf')
-            ->leftJoin('medicaments', 'medicaments.id_medic', '=', 'soins.id_medic')
-            ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
-            //->orderBy('name', 'desc')
+        $prelvs = Prelevement::where('prelevements.id_patient', $id_patient)
+            ->leftJoin('patients', 'patients.id_patient', '=', 'prelevements.id_patient')
+            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'prelevements.id_inf')
+            ->leftJoin('medecin', 'medecin.id_med', '=', 'prelevements.id_med')
+            ->leftJoin('users as u_inf', 'u_inf.id', '=', 'infirmiere.id_user')
+            ->leftJoin('users as u_med', 'u_med.id', '=', 'medecin.id_user')
+            ->select(
+                'patients.*',
+                'infirmiere.*',
+                'medecin.*',
+                'u_inf.name as name_inf',
+                'u_med.name as name_med'
+            )
             ->get();
-        return view('soin.index', ['soins' => $soins, 'id_patient'=>$id_patient]);
+        return view('prelevement.index', ['prelevs' => $prelvs, 'id_patient'=>$id_patient]);
     }
 
     public function create($id_patient) {
