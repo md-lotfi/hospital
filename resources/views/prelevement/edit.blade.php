@@ -5,44 +5,69 @@
         <div class="row">
             <div class="col-md-4 offset-md-4">
 
-                <form action="{{ url('soin/update') }}" method="post">
+                <form action="{{ url('prelevement/update') }}" method="post">
 
                     {{ csrf_field() }}
 
-                    <div class="form-group">
-                        <label for="nature">Nature</label>
-                        <select id="nature" name="id_medic" class="form-control">
-                            @foreach($medics as $medic)
-                                @if($medic->id_medic === $soin->id_medic)
-                                    <option selected value="{{$medic->id_medic}}">{{$medic->nom_medic}}</option>
-                                @else
-                                    <option value="{{$medic->id_medic}}">{{$medic->nom_medic}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        <small class="form-text text-muted">Sélectionner un médicament</small>
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->temp}}" id="temp" name="temp" class="form-control" placeholder="Température">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">C°</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->poid}}" id="poid" name="poid" class="form-control" placeholder="Poid">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">Kg</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->taille}}" id="taille" name="taille" class="form-control" placeholder="Taille">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">Cm</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->pouls}}" id="pouls" name="pouls" class="form-control" placeholder="pouls">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">/min</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->tension_bas}}" id="tension1" name="tension_bas" class="form-control" placeholder="Tension Bas">
+                        <div class="input-group-append">
+                            <input type="text" id="tension2" value="{{$prel->tension_haut}}" name="tension_haut" class="form-control" placeholder="Tension Haut">
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->glecymie}}" id="glecemie" name="glecemie" class="form-control" placeholder="Glécemie">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">mg/dl</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" value="{{$prel->diurese}}" id="diurese" name="diurese" class="form-control" placeholder="Diurese">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">ml/24h</span>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="dose">Dose</label>
-                        <input type="text" class="form-control" id="dose" value="{{$soin->dose_admini}}" name="dose" placeholder="Dose du médicament">
-                        <small class="form-text text-muted">Saisisser une dose</small>
+                        <label for="obs">Observation</label>
+                        <textarea class="form-control" id="obs" name="observation" rows="3">
+                            {{$prel->observation}}
+                        </textarea>
+                        <small class="form-text text-muted">Saisisser une observation</small>
                     </div>
 
-                    <div class="form-group">
-                        <label for="voie">Voie</label>
-                        <select id="voie" name="nom_voie" class="form-control">
-                            @foreach(\App\Soin::VOIE_ADMINISTRATIONS as $voie)
-                                @if($voie === $soin->voie)
-                                    <option selected value="{{$voie}}">{{$voie}}</option>
-                                @else
-                                    <option value="{{$voie}}">{{$voie}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        <small class="form-text text-muted">Sélectionner une voie</small>
-                    </div>
-                    <input type="hidden" value="{{$soin->id_soin}}" name="id_soin">
+                    <input type="hidden" value="{{$prel->id_prel}}" name="id_prel">
+                    <input type="hidden" value="{{$prel->id_patient}}" name="id_patient">
                     <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
                     <div class="clearfix"></div>
                 </form>

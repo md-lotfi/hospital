@@ -31,23 +31,19 @@ class PrelevementController extends Controller
         $prelvs = Prelevement::where('prelevements.id_patient', $id_patient)
             ->leftJoin('patients', 'patients.id_patient', '=', 'prelevements.id_patient')
             ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'prelevements.id_inf')
-            ->leftJoin('medecin', 'medecin.id_med', '=', 'prelevements.id_med')
             ->leftJoin('users as u_inf', 'u_inf.id', '=', 'infirmiere.id_user')
-            ->leftJoin('users as u_med', 'u_med.id', '=', 'medecin.id_user')
             ->select(
+                'prelevements.*',
                 'patients.*',
                 'infirmiere.*',
-                'medecin.*',
-                'u_inf.name as name_inf',
-                'u_med.name as name_med'
+                'u_inf.name as name_inf'
             )
             ->get();
         return view('prelevement.index', ['prelevs' => $prelvs, 'id_patient'=>$id_patient]);
     }
 
     public function create($id_patient) {
-        $medics = Medicaments::all();
-        return view('soin.create', ['medics'=>$medics, 'id_patient'=>$id_patient]);
+        return view('prelevement.create', ['id_patient'=>$id_patient]);
     }
 
     public function store(Request $request) {
@@ -55,41 +51,52 @@ class PrelevementController extends Controller
         if( $user ) {
             if( $user->type = User::INFERMIERE_TYPE ) {
                 $inf = Infermiere::where('id_user', $user->id)->get()->first();
-                $medic = new Soin();
-                $medic->id_patient = $request->input('id_patient');
-                $medic->id_inf = $inf->id_inf;
-                $medic->id_medic = $request->input('id_medic');
-                $medic->voie = $request->input('nom_voie');
-                $medic->dose_admini = $request->input('dose');
-                $medic->save();
+                $prelev = new Prelevement();
+                $prelev->id_patient = $request->input('id_patient');
+                $prelev->id_inf = $inf->id_inf;
+                $prelev->temp = $request->input('temp');
+                $prelev->poid = $request->input('poid');
+                $prelev->taille = $request->input('taille');
+                $prelev->pouls = $request->input('pouls');
+                $prelev->tension_bas = $request->input('tension_bas');
+                $prelev->tension_haut = $request->input('tension_bas');
+                $prelev->glecymie = $request->input('glecemie');
+                $prelev->diurese = $request->input('diurese');
+                $prelev->observation = $request->input('observation');
+                $prelev->save();
             }
         }
-        return redirect('soin/'.$request->input('id_patient'));
+        return redirect('prelevement/'.$request->input('id_patient'));
     }
 
-    public function edit($id_soin) {
-        $medics = Medicaments::all();
-        $soin = Soin::where('id_soin', $id_soin)->get()->first();
-        return view('soin.edit', ['soin'=>$soin, 'medics'=>$medics]);
+    public function edit($id_prel) {
+        $prel = Prelevement::where('id_prel', $id_prel)->get()->first();
+        return view('prelevement.edit', ['prel'=>$prel]);
     }
 
     public function update(Request $request) {
-        $soin = Soin::where(self::TABLE.'.id_soin', $request->input('id_soin'));
-        $id_patient = $soin->get()->first()->id_patient;
-        $soin->update(
+        $prel = Prelevement::where(self::TABLE.'.id_prel', $request->input('id_prel'));
+        $id_patient = $prel->get()->first()->id_patient;
+        $prel->update(
             [
-                'id_medic' => $request->input('id_medic'),
-                'dose_admini' => $request->input('dose'),
-                'voie' => $request->input('nom_voie')
+                'temp' => $request->input('temp'),
+                'poid' => $request->input('poid'),
+                'taille' => $request->input('taille'),
+                'pouls' => $request->input('pouls'),
+                'tension_bas' => $request->input('tension_bas'),
+                'tension_haut' => $request->input('tension_haut'),
+                'glecymie' => $request->input('glecemie'),
+                'diurese' => $request->input('diurese'),
+                'observation' => $request->input('observation')
             ]
         );
-        return redirect('soin/'.$id_patient);
+        return redirect('prelevement/'.$id_patient);
     }
 
-    public function destroy($id_soin) {
-        $soin = Soin::find($id_soin);
-        $id_patient = $soin->get()->first()->id_patient;
-        $soin->delete();
-        return redirect('soin/'.$id_patient);
+    public function destroy($id_prel) {
+        $prel = Prelevement::find($id_prel);
+        $id_patient = $prel->get()->first()->id_patient;
+        $prel->delete();
+        return redirect('prelevement/'.$id_patient);
     }
 }

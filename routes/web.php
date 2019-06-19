@@ -119,6 +119,13 @@ Route::get('prelevement/get/{id_patient}', 'PrelevementController@edit');
 Route::post('prelevement/update', 'PrelevementController@update');
 Route::get('prelevement/remove/{id_patient}', 'PrelevementController@destroy');
 
+Route::get('consigne/{id_patient}', 'ConsigneController@index');
+Route::get('consigne/create/{id_patient}', 'ConsigneController@create');
+Route::post('consigne', 'ConsigneController@store');
+Route::get('consigne/get/{id_consigne}', 'ConsigneController@edit');
+Route::post('consigne/update', 'ConsigneController@update');
+Route::get('consigne/remove/{id_consigne}', 'ConsigneController@destroy');
+
 Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
 Route::post('patient', 'PatientController@store');

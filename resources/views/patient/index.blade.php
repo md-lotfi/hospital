@@ -92,9 +92,10 @@
                                      <a class="dropdown-item" href="#">Supprimer</a>
                                      <div class="dropdown-divider"></div>
                                      <a class="dropdown-item" href="admission/create?idp={{ $patient->id_patient }}">Admission</a>
-                                     <a class="dropdown-item" href="#">Consigne</a>
+                                     <a class="dropdown-item" href="/consigne/{{$patient->id_patient}}">Consigne</a>
                                      <a class="dropdown-item" href="#">Prescription</a>
                                      <a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Voire les soins</a>
+                                     <a class="dropdown-item" href="/prelevement/{{$patient->id_patient}}">Prélevements</a>
                                      <li class="dropdown-submenu">
                                          <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>
                                          <ul class="dropdown-menu">
@@ -105,7 +106,7 @@
                                                      <li><a class="dropdown-item" href="#">Psycotropes</a></li>
                                                  </ul>
                                              </li>
-                                             <li><a class="dropdown-item" href="#">Prélevements</a></li>
+                                             <li><a class="dropdown-item" href="/prelevement/create/{{$patient->id_patient}}">Prélevements</a></li>
                                          </ul>
                                      </li>
                                      <a class="dropdown-item" href="#">Sortie de patient</a>

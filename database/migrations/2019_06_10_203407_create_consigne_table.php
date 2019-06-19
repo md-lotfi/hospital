@@ -17,8 +17,8 @@ class CreateConsigneTable extends Migration
             $table->increments('id_consigne');
             $table->integer('id_patient');
             $table->integer('id_medecin');
-            $table->timestamp('date_heur');
             $table->text('observation');
+            $table->timestamps();
         });
         /*Schema::table('consigne',function($table){
             $table->foreign('id_patient')->references('id_patient')->on('patients');

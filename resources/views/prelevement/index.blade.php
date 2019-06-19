@@ -13,10 +13,17 @@
                 <table class="table">
                     <head>
                         <tr class="d-flex">
-                            <th class="col-md-3">Infermiere</th>
-                            <th class="col-md-3">Médecin</th>
-                            <th class="col-md-3">Temp.</th>
-                            <th class="col-md-2">Date et Heure</th>
+                            <th class="col-md-1">Infermiere</th>
+                            <th class="col-md-1">Temp.</th>
+                            <th class="col-md-1">Poids</th>
+                            <th class="col-md-1">Taille</th>
+                            <th class="col-md-1">Pouls</th>
+                            <th class="col-md-1">Glécemie</th>
+                            <th class="col-md-1">Diurese</th>
+                            <th class="col-md-1">Tension B.</th>
+                            <th class="col-md-1">Tension H.</th>
+                            <th class="col-md-1">Date</th>
+                            <th class="col-md-1">Observation</th>
                             <th class="col-md-1">Action</th>
                         </tr>
                     </head>
@@ -24,18 +31,25 @@
                     <body>
                     @foreach($prelevs as $prelev)
                         <tr class="d-flex">
-                            <td class="col-md-3">{{ $prelev->name_inf }} {{ $prelev->prenom_inf }}</td>
-                            <td class="col-md-3">{{ $prelev->name_med }} {{ $prelev->prenom_med }}</td>
-                            <td class="col-md-3">{{ $prelev->temp_prel }}</td>
-                            <td class="col-md-2">{{ $prelev->created_at }}</td>
+                            <td class="col-md-1">{{ $prelev->name_inf }} {{ $prelev->prenom_inf }}</td>
+                            <td class="col-md-1">{{ $prelev->temp }}</td>
+                            <td class="col-md-1">{{ $prelev->poid }}</td>
+                            <td class="col-md-1">{{ $prelev->taille }}</td>
+                            <td class="col-md-1">{{ $prelev->pouls }}</td>
+                            <td class="col-md-1">{{ $prelev->glecymie }}</td>
+                            <td class="col-md-1">{{ $prelev->diurese }}</td>
+                            <td class="col-md-1">{{ $prelev->tension_bas }}</td>
+                            <td class="col-md-1">{{ $prelev->tension_haut }}</td>
+                            <td class="col-md-1">{{ $prelev->created_at }}</td>
+                            <td class="col-md-1">{{ $prelev->observation }}</td>
                             <td class="col-md-1">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/soin/get/{{ $prelev->id_prel }}">Editer</a>
-                                        <a class="dropdown-item" href="/soin/remove/{{ $prelev->id_prel }}">Supprimer</a>
+                                        <a class="dropdown-item" href="/prelevement/get/{{ $prelev->id_prel }}">Editer</a>
+                                        <a class="dropdown-item" href="/prelevement/remove/{{ $prelev->id_prel }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

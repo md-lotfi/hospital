@@ -16,9 +16,16 @@ class CreatePrelevementsTable extends Migration
         Schema::create('prelevements', function (Blueprint $table) {
             $table->increments('id_prel');
             $table->integer('id_patient');
-            $table->integer('id_med');
+            //$table->integer('id_med');
             $table->integer('id_inf');
-            $table->string('temp_prel');
+            $table->string('temp');
+            $table->string('poid');
+            $table->string('taille');
+            $table->string('pouls');
+            $table->string('tension_bas');
+            $table->string('tension_haut');
+            $table->string('glecymie');
+            $table->string('diurese');
             $table->text('observation');
             $table->timestamps();
         });
