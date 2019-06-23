@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace SP\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use SP\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/patient';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

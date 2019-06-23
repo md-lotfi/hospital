@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Unite;
+use SP\Unite;
 use Illuminate\Http\Request;
-use App\Service;
+use SP\Service;
 
 class UniteController extends Controller
 {

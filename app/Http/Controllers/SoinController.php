@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Admission;
-use App\Infermiere;
-use App\Lit;
-use App\Medicaments;
-use App\Patient;
-use App\PatientLit;
-use App\Sall;
-use App\Service;
-use App\Soin;
-use App\Unite;
-use App\User;
+use SP\Admission;
+use SP\Infermiere;
+use SP\Lit;
+use SP\Medicaments;
+use SP\Patient;
+use SP\PatientLit;
+use SP\Sall;
+use SP\Service;
+use SP\Soin;
+use SP\Unite;
+use SP\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +39,9 @@ class SoinController extends Controller
 
     public function create($id_patient) {
         $medics = Medicaments::all();
-        return view('soin.create', ['medics'=>$medics, 'id_patient'=>$id_patient]);
+        $p = Patient::where('id_patient', $id_patient)->get()->first();
+        $a = new \DateTime($p->datenai);
+        return view('soin.create', ['medics'=>$medics, 'age'=>$a->diff(Now())->y, 'patient'=>$p, 'id_patient'=>$id_patient]);
     }
 
     public function store(Request $request) {

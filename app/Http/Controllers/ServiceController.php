@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
+use SP\Service;
 class ServiceController extends Controller
 {
     public function index() {

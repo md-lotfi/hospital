@@ -53,7 +53,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h1>Liste des patients<a href="patient/create" class="btn btn-warning float-right">Ajouter un patient</a></h1>
+            <h1>Liste des patients</h1>
               <table class="table">
                 <head>
                   <tr>
@@ -91,9 +91,6 @@
                                      <a class="dropdown-item" href="patient/update/{{ $patient->id_patient }}">Editer</a>
                                      <a class="dropdown-item" href="#">Supprimer</a>
                                      <div class="dropdown-divider"></div>
-                                     <a class="dropdown-item" href="admission/create?idp={{ $patient->id_patient }}">Admission</a>
-                                     <a class="dropdown-item" href="/consigne/{{$patient->id_patient}}">Consigne</a>
-                                     <a class="dropdown-item" href="#">Prescription</a>
                                      <a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Voire les soins</a>
                                      <a class="dropdown-item" href="/prelevement/{{$patient->id_patient}}">Prélevements</a>
                                      <li class="dropdown-submenu">
@@ -103,7 +100,7 @@
                                              <li><a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
                                                  <ul class="dropdown-menu">
                                                      <li><a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Médicaments</a></li>
-                                                     <li><a class="dropdown-item" href="#">Psycotropes</a></li>
+                                                     <li><a class="dropdown-item" href="/psychotrope/create/{{$patient->id_patient}}">Psycotropes</a></li>
                                                  </ul>
                                              </li>
                                              <li><a class="dropdown-item" href="/prelevement/create/{{$patient->id_patient}}">Prélevements</a></li>

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Liste des soins
-                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::INFERMIERE_TYPE )
+                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
                         <a href="/soins/create/{{$id_patient}}" class="btn btn-warning float-right">Ajouter un traitement</a>
                     @endif
                 </h1>
@@ -36,8 +36,8 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/soin/get/{{ $soin->id_soin }}">Editer</a>
-                                        <a class="dropdown-item" href="/soin/remove/{{ $soin->id_soin }}">Supprimer</a>
+                                        <a class="dropdown-item" href="/soin/get/{{ $soin->id_soin }}">Modifier</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/soin/remove/{{ $soin->id_soin }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

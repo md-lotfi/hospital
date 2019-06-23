@@ -23,7 +23,7 @@ Route::put('cvs/{id}', 'CvController@update');
 Route::delete('cvs/{id}', 'CvController@destroy');
 
 Route::get('admission', 'AdmissionController@index');
-Route::get('admission/create', 'AdmissionController@create');
+Route::get('admission/create/{id_patient}', 'AdmissionController@create');
 Route::post('admission', 'AdmissionController@store');
 Route::get('admission/{id}/edit', 'AdmissionController@edit');
 Route::put('admission/{id}', 'AdmissionController@update');
@@ -118,6 +118,17 @@ Route::post('prelevement', 'PrelevementController@store');
 Route::get('prelevement/get/{id_patient}', 'PrelevementController@edit');
 Route::post('prelevement/update', 'PrelevementController@update');
 Route::get('prelevement/remove/{id_patient}', 'PrelevementController@destroy');
+
+Route::get('psychotrope/{id_patient}', 'PsychotropeController@index');
+Route::get('psychotrope/create/{id_patient}', 'PsychotropeController@create');
+Route::post('psychotrope', 'PsychotropeController@store');
+Route::get('psychotrope/get/{id_psy}', 'PsychotropeController@edit');
+Route::post('psychotrope/update', 'PsychotropeController@update');
+Route::get('psychotrope/remove/{id_psy}', 'PsychotropeController@destroy');
+
+Route::get('messages', 'MessagesController@index');
+Route::get('patient/search/{action}/{route}', 'PatientSearchController@index');
+Route::post('patient/search', 'PatientSearchController@find');
 
 Route::get('consigne/{id_patient}', 'ConsigneController@index');
 Route::get('consigne/create/{id_patient}', 'ConsigneController@create');

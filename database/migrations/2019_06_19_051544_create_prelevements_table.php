@@ -18,15 +18,15 @@ class CreatePrelevementsTable extends Migration
             $table->integer('id_patient');
             //$table->integer('id_med');
             $table->integer('id_inf');
-            $table->string('temp');
-            $table->string('poid');
-            $table->string('taille');
-            $table->string('pouls');
-            $table->string('tension_bas');
-            $table->string('tension_haut');
-            $table->string('glecymie');
-            $table->string('diurese');
-            $table->text('observation');
+            $table->string('temp')->nullable();
+            $table->string('poid')->nullable();
+            $table->string('taille')->nullable();
+            $table->string('pouls')->nullable();
+            $table->string('tension_bas')->nullable();
+            $table->string('tension_haut')->nullable();
+            $table->string('glecymie')->nullable();
+            $table->string('diurese')->nullable();
+            $table->text('observation')->nullable();
             $table->timestamps();
         });
     }

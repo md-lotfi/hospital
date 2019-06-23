@@ -23,6 +23,7 @@
 </head>
 <body>
     <div id="app">
+        @if( \Illuminate\Support\Facades\Auth::user() )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -38,30 +39,71 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('patient')}}">Mes patients</a>
                         </li>
+                        @if( \Illuminate\Support\Facades\Auth::user()->type !== \SP\User::MEDECIN_TYPE )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('patient/create')}}">Admission</a>
+                            <a class="nav-link" href="/patient/create">Admission</a>
                         </li>
+                        @endif
+                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle" href="/patient/search/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">
+                                    Consigne
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">Ajouter</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">Consulter</a>
+                                </div>
+                            </li>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="/patient/search/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">Consigne</a>
+                        </li>-->
+
+                        @endif
+                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle" href="#">Enregistrer soins</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_MEDICAMENT}}">Médicaments</a></li>
+                                            <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE}}">Psycotropes</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PRELEVEMENT}}">Prélevements</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Prescrire</a>
+                            <a class="nav-link" href="/patient/search/{{\SP\Http\Controllers\PatientSearchController::ROUTE_PRESCRIRE}}">Prescrire</a>
                         </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Fichier
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if(\Illuminate\Support\Facades\Auth::user())
-                                    <a class="dropdown-item" href="/service">service</a>
-                                    <a class="dropdown-item" href="/medicament/create">Ajouter Médicaments</a>
-                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
+                                        <a class="dropdown-item" href="/service">service</a>
+                                    @endif
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
+                                        <a class="dropdown-item" href="/medicament/create">Ajouter Médicaments</a>
+                                        @endif
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
                                         <a class="dropdown-item" href="{{ url('medecin/create')}}">Ajouter Médecins</a>
                                     @endif
-                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
                                         <a class="dropdown-item" href="/infermiere">Ajouter Infirmières</a>
                                     @endif
-                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::ADMIN_TYPE )
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
                                         <a class="dropdown-item" href="/secretaire">Ajouter Secrétaire</a>
                                     @endif
-                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::SECRETAIRE_TYPE )
+                                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
                                         <a class="dropdown-item" href="/gardem">Ajouter Garde Malade</a>
                                     @endif
                                 @endif
@@ -81,7 +123,7 @@
                                         $user = \Illuminate\Support\Facades\Auth::user();
                                         $auth = false;
                                         if( !empty($user) )
-                                            if( $user->type === \App\User::ADMIN_TYPE )
+                                            if( $user->type === \SP\User::ADMIN_TYPE )
                                                 $auth = true;
                                     ?>
                                     @if( $auth )
@@ -112,8 +154,10 @@
                 </div>
             </div>
         </nav>
-
+        @endif
         <main class="py-4">
+            @include('flash-message')
+
             @yield('content')
         </main>
     </div>

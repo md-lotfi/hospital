@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        echo Auth::user()->type;
         return view('home');
     }
 }

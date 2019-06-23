@@ -26,17 +26,7 @@
             <input type="date" name="date_adm" class="form-control" id="date_adm" aria-describedby="date_adm" placeholder="Date d'admission">
             </div>
 
-            <!--<div class="form-group">
-            <label for="">date sortie</label>
-            <input type="text" name="date_sort" class="from-control">
-            </div>
-
-            <div class="form-group">
-            <label for="">etat sortie</label>
-            <input type="text" name="etat_sort" class="from-control">
-            </div>-->
-
-            <input type="hidden" name="idpatient" value="<?= $_GET['idp'] ?>"/>
+            <input type="hidden" name="id_patient" value="{{$id_patient}}"/>
 
             <div class="form-group text-right">
             <input type="submit" class="btn btn-info" value="Enregistrer">

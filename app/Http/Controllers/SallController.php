@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Sall;
+use SP\Sall;
 use Illuminate\Http\Request;
 
 class SallController extends Controller

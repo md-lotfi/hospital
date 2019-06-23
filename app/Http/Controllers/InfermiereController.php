@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\GardMalade;
-use App\Infermiere;
-use App\Sall;
-use App\User;
+use SP\GardMalade;
+use SP\Infermiere;
+use SP\Sall;
+use SP\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

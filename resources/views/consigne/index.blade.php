@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Liste des consignes
-                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::MEDECIN_TYPE )
+                <h3>Liste des consignes pour <u>{{$p_name}} {{$p_prenom}}</u>
+                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
                         <a href="/consigne/create/{{$id_patient}}" class="btn btn-warning float-right">Ajouter une consigne</a>
                     @endif
-                </h1>
+                </h3>
                 <table class="table">
                     <head>
                         <tr class="d-flex">
@@ -32,13 +32,15 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/consigne/get/{{ $consigne->id_consigne }}">Editer</a>
-                                        <a class="dropdown-item" href="/consigne/remove/{{ $consigne->id_consigne }}">Supprimer</a>
+                                        <a class="dropdown-item" href="/consigne/get/{{ $consigne->id_consigne }}">Modifier</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/consigne/remove/{{ $consigne->id_consigne }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
+                    <form method="GET" id="formDelete">
+                    </form>
                     </body>
                 </table>
             </div>

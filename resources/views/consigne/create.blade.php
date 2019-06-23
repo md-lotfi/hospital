@@ -3,8 +3,19 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-5">
+            <dl class="row">
+                <dt class="col-sm-4">Nom</dt>
+                <dd class="col-sm-8">{{$patient->nom}}</dd>
 
+                <dt class="col-sm-4">Prénom</dt>
+                <dd class="col-sm-8">{{$patient->prenom}}</dd>
+
+                <dt class="col-sm-4">Age</dt>
+                <dd class="col-sm-8">{{$age}}</dd>
+            </dl>
+        </div>
+        <div class="col-md-7">
         <form action="{{ url('consigne') }}" method="post">
         
           {{ csrf_field() }}

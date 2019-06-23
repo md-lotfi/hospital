@@ -16,6 +16,7 @@ class CreatePatientLitTable extends Migration
         Schema::create('patient_lit', function (Blueprint $table) {
             $table->increments('id_patient_lit');
             $table->integer('id_adm')->unsigned();
+            $table->integer('id_salle')->unsigned();
             $table->integer('id_lit')->unsigned();
             $table->timestamps();
         });

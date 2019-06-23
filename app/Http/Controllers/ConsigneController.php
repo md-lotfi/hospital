@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Admission;
-use App\Consigne;
-use App\Infermiere;
-use App\Lit;
-use App\Medecin;
-use App\Medicaments;
-use App\Patient;
-use App\PatientLit;
-use App\Prelevement;
-use App\Sall;
-use App\Service;
-use App\Soin;
-use App\Unite;
-use App\User;
+use SP\Admission;
+use SP\Consigne;
+use SP\Infermiere;
+use SP\Lit;
+use SP\Medecin;
+use SP\Medicaments;
+use SP\Patient;
+use SP\PatientLit;
+use SP\Prelevement;
+use SP\Sall;
+use SP\Service;
+use SP\Soin;
+use SP\Unite;
+use SP\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -35,11 +35,17 @@ class ConsigneController extends Controller
             ->Join('medecin', 'medecin.id_med', '=', 'consigne.id_medecin')
             ->Join('users', 'users.id', '=', 'medecin.id_user')
             ->get();
-        return view('consigne.index', ['consignes' => $consignes, 'id_patient'=>$id_patient]);
+        return view('consigne.index', [
+            'consignes' => $consignes,
+            'p_name' => $consignes->count() > 0  ? $consignes[0]->name : '',
+            'p_prenom' => $consignes->count() > 0  ? $consignes[0]->prenom : '',
+            'id_patient'=>$id_patient]);
     }
 
     public function create($id_patient) {
-        return view('consigne.create', ['id_patient'=>$id_patient]);
+        $p = Patient::where('id_patient', $id_patient)->get()->first();
+        $a = new \DateTime($p->datenai);
+        return view('consigne.create', ['patient'=>$p, 'age'=>$a->diff(Now())->y, 'id_patient'=>$id_patient]);
     }
 
     public function store(Request $request) {
@@ -47,14 +53,18 @@ class ConsigneController extends Controller
         if( $user ) {
             if( $user->type = User::MEDECIN_TYPE ) {
                 $med = Medecin::where('id_user', $user->id)->get()->first();
-                $cons = new Consigne();
-                $cons->id_patient = $request->input('id_patient');
-                $cons->id_medecin = $med->id_med;
-                $cons->observation = $request->input('observation');
-                $cons->save();
+                if( $med ) {
+                    $cons = new Consigne();
+                    $cons->id_patient = $request->input('id_patient');
+                    $cons->id_medecin = $med->id_med;
+                    $cons->observation = $request->input('observation');
+                    $cons->save();
+                }
             }
         }
-        return redirect('consigne/'.$request->input('id_patient'));
+        return response()->redirectTo('messages?redirect='.urldecode('consigne/'.$request->input('id_patient')))
+            ->with('success', "Consigne enregistrer avec succées, Redirection vers la page des consignes aprés 5 seconds...");
+        //return redirect('consigne/'.$request->input('id_patient'));
     }
 
     public function edit($id_consigne) {

@@ -18,6 +18,7 @@
                         </select>
                         <small class="form-text text-muted">Choisisser un lit</small>
                     </div>
+                    <input type="hidden" name="id_salle" value="{{ $id_salle }}" />
                     <input type="hidden" name="id_adm" value="{{ $id_adm }}" />
                     <input type="hidden" name="type" value="lit" />
                     <input type="submit" class="btn btn-outline-primary float-right" value="Suivant >>">

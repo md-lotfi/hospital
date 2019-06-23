@@ -12,4 +12,17 @@ $(document).ready(function(){
         });
         return false;
     });
+
+    $('#confirmModalSubmit').click(function(){
+        $('#formSbm').submit();
+    });
+
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+
+    /*$('#submitBtn').click(function() {
+        $('#lname').text($('#lastname').val());
+        $('#fname').text($('#firstname').val());
+    });*/
 });

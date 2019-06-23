@@ -99,6 +99,7 @@
                                                 <a class="dropdown-item" href="/admission/update/{{ $admission->id_admission }}">Editer</a>
                                                 <a class="dropdown-item" href="#">Supprimer</a>
                                                 <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/soin/{{ $admission->id_patient }}">Soins</a>
                                                 <a class="dropdown-item" href="/patientlit/service/{{ $admission->id_admission }}">Service</a>
                                                 <a class="dropdown-item" href="/assign/add/{{ $admission->id_admission }}">Garde malade</a>
                                                 <a class="dropdown-item" href="/validate/update?idadm={{ $admission->id_admission }}">Valider admission</a>

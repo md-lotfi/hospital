@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\User;
+use SP\User;
 use Illuminate\Http\Request;
-use App\Medecin;
+use SP\Medecin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

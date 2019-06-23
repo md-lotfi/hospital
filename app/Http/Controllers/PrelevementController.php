@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Admission;
-use App\Infermiere;
-use App\Lit;
-use App\Medicaments;
-use App\Patient;
-use App\PatientLit;
-use App\Prelevement;
-use App\Sall;
-use App\Service;
-use App\Soin;
-use App\Unite;
-use App\User;
+use SP\Admission;
+use SP\Infermiere;
+use SP\Lit;
+use SP\Medicaments;
+use SP\Patient;
+use SP\PatientLit;
+use SP\Prelevement;
+use SP\Sall;
+use SP\Service;
+use SP\Soin;
+use SP\Unite;
+use SP\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;

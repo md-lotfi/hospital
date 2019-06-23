@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Lit;
-use App\Sall;
+use SP\Lit;
+use SP\Sall;
 use Illuminate\Http\Request;
 
 class LitController extends Controller

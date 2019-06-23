@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\GardMalade;
-use App\Infermiere;
-use App\Medicaments;
-use App\Sall;
+use SP\GardMalade;
+use SP\Infermiere;
+use SP\Medicaments;
+use SP\Sall;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
 

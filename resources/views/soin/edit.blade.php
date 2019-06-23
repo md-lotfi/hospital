@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="voie">Voie</label>
                         <select id="voie" name="nom_voie" class="form-control">
-                            @foreach(\App\Soin::VOIE_ADMINISTRATIONS as $voie)
+                            @foreach(\SP\Soin::VOIE_ADMINISTRATIONS as $voie)
                                 @if($voie === $soin->voie)
                                     <option selected value="{{$voie}}">{{$voie}}</option>
                                 @else
@@ -43,7 +43,7 @@
                         <small class="form-text text-muted">Sélectionner une voie</small>
                     </div>
                     <input type="hidden" value="{{$soin->id_soin}}" name="id_soin">
-                    <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
+                    <input type="button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger float-right" value="Enregistrer">
                     <div class="clearfix"></div>
                 </form>
             </div>

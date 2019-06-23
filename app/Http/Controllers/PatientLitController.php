@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Admission;
-use App\Lit;
-use App\PatientLit;
-use App\Sall;
-use App\Service;
-use App\Unite;
+use SP\Admission;
+use SP\Lit;
+use SP\PatientLit;
+use SP\Sall;
+use SP\Service;
+use SP\Unite;
 use Illuminate\Http\Request;
 
 class PatientLitController extends Controller
@@ -31,7 +31,7 @@ class PatientLitController extends Controller
 
     public function lit($id_adm, $id_salle){
         $lits = Lit::where('id_salle', $id_salle)->get();
-        return view('patientLit.lit', ['lits' => $lits, 'id_adm'=>$id_adm]);
+        return view('patientLit.lit', ['lits' => $lits, 'id_salle'=>$id_salle, 'id_adm'=>$id_adm]);
     }
 
     public function next(Request $request){
@@ -50,9 +50,18 @@ class PatientLitController extends Controller
             $pl = new PatientLit();
             $pl->id_adm = $id_adm;
             $pl->id_lit = $request->input('id_lit');
+            $pl->id_salle = $request->input('id_salle');
             $pl->save();
-            $adm = Admission::find($id_adm);
-            return redirect('patient/get/'.$adm->id_patient);
+            $adm = Admission::where('id_adm',$id_adm)
+                ->join('patients', 'patients.id_patient', 'admissions.id_patient')->get()->first();
+            if( $adm ) {
+                return response()->redirectTo('messages?redirect=' . urldecode('patient/get/' . $adm->id_patient))
+                    ->with('success', "Service enregistrer pour le patient $adm->nom $adm->prenom, Redirection vers les détails du patients dans 5 seconds...");
+            }else{
+                return back()
+                    ->with('error', "Une érreur est survenue lors de l'insertion, veuillez réssayer.");
+            }
         }
+        return back()->with('error', "Commande inconnue");
     }
 }

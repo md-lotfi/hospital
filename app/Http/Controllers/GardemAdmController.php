@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\Admission;
-use App\GardemAdm;
-use App\GardMalade;
+use SP\Admission;
+use SP\GardemAdm;
+use SP\GardMalade;
 use Illuminate\Http\Request;
 
 class GardemAdmController extends Controller

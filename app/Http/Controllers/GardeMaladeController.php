@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
-use App\GardMalade;
-use App\Sall;
+use SP\GardMalade;
+use SP\Sall;
 use Illuminate\Http\Request;
 
 class GardeMaladeController extends Controller

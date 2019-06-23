@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SP\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Cv;
+use SP\Cv;
 
 class CvController extends Controller
 {

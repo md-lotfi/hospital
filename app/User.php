@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace SP;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,6 +25,10 @@ class User extends Authenticatable
 
     public function isInfermiere()    {
         return $this->type === self::INFERMIERE_TYPE;
+    }
+
+    public function isSecretaire(){
+        return $this->type === self::SECRETAIRE_TYPE;
     }
 
     public function isDefault()    {

@@ -3,7 +3,19 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-sm-4">Nom</dt>
+                <dd class="col-sm-8">{{$patient->nom}}</dd>
+
+                <dt class="col-sm-4">Prénom</dt>
+                <dd class="col-sm-8">{{$patient->prenom}}</dd>
+
+                <dt class="col-sm-4">Age</dt>
+                <dd class="col-sm-8">{{$age}}</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
 
         <form action="{{ url('soin') }}" method="post">
         
@@ -28,7 +40,7 @@
             <div class="form-group">
                 <label for="voie">Voie</label>
                 <select id="voie" name="nom_voie" class="form-control">
-                    @foreach(\App\Soin::VOIE_ADMINISTRATIONS as $voie)
+                    @foreach(\SP\Soin::VOIE_ADMINISTRATIONS as $voie)
                         <option value="{{$voie}}">{{$voie}}</option>
                     @endforeach
                 </select>
@@ -38,6 +50,8 @@
             <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
             <div class="clearfix"></div>
         </form>
+        </div>
+        <div class="col-md-2">
         </div>
     </div>
 </div>
