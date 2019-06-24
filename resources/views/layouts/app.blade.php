@@ -40,9 +40,14 @@
                             <a class="nav-link" href="{{ url('patient')}}">Mes patients</a>
                         </li>
                         @if( \Illuminate\Support\Facades\Auth::user()->type !== \SP\User::MEDECIN_TYPE )
-                        <li class="nav-item">
-                            <a class="nav-link" href="/patient/create">Admission</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/patient/create">Admission</a>
+                            </li>
+                        @endif
+                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
+                            <li class="nav-item">
+                                <a class="nav-link" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_SORTIE_PATIENT}}">Sortie patient</a>
+                            </li>
                         @endif
                         @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
                             <li class="nav-item dropdown">
@@ -55,9 +60,6 @@
                                     <a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">Consulter</a>
                                 </div>
                             </li>
-                        <!--<li class="nav-item">
-                            <a class="nav-link" href="/patient/search/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">Consigne</a>
-                        </li>-->
 
                         @endif
                         @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )

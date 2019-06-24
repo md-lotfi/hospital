@@ -112,6 +112,13 @@ Route::get('soin/get/{id_patient}', 'SoinController@edit');
 Route::post('soin/update', 'SoinController@update');
 Route::get('soin/remove/{id_patient}', 'SoinController@destroy');
 
+Route::get('spatient/{id_patient}', 'SortiePatientController@index');
+Route::get('spatient/create/{id_patient}', 'SortiePatientController@create');
+Route::post('spatient', 'SortiePatientController@store');
+Route::get('spatient/get/{id_patient}', 'SortiePatientController@edit');
+Route::post('spatient/update', 'SortiePatientController@update');
+Route::get('spatient/remove/{id_patient}', 'SortiePatientController@destroy');
+
 Route::get('prelevement/{id_patient}', 'PrelevementController@index');
 Route::get('prelevement/create/{id_patient}', 'PrelevementController@create');
 Route::post('prelevement', 'PrelevementController@store');
@@ -129,6 +136,8 @@ Route::get('psychotrope/remove/{id_psy}', 'PsychotropeController@destroy');
 Route::get('messages', 'MessagesController@index');
 Route::get('patient/search/{action}/{route}', 'PatientSearchController@index');
 Route::post('patient/search', 'PatientSearchController@find');
+
+Route::get('detail/soin/{id_patient}', 'DetailSoinController@index');
 
 Route::get('consigne/{id_patient}', 'ConsigneController@index');
 Route::get('consigne/create/{id_patient}', 'ConsigneController@create');

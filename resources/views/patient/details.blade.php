@@ -3,7 +3,13 @@
 @section('content')
 
 <div class="container">
-    <h3>Détails sur le patient <a href="/gardem/historique/{{$patient->id_patient}}" class="btn btn-warning float-right">Historique des gardes malades</a> </h3>
+    <h3>Détails sur le patient
+        @if( app('request')->input('state') === 'es' )
+            <a href="/spatient/create/{{$patient->id_patient}}" class="btn btn-warning float-right">Diagnostique de sortie</a>
+        @else
+            <a href="/gardem/historique/{{$patient->id_patient}}" class="btn btn-warning float-right">Historique des gardes malades</a>
+        @endif
+    </h3>
     <div class="row">
         <div class="col-md-6">
             <dl class="row">

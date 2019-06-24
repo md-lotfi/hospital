@@ -2,6 +2,7 @@
   <dictionary name="lotfi">
     <words>
       <w>consigne</w>
+      <w>diagnostique</w>
       <w>gardem</w>
       <w>infermiere</w>
       <w>infirmiere</w>
@@ -17,6 +18,7 @@
       <w>secretaire</w>
       <w>soin</w>
       <w>soins</w>
+      <w>spatient</w>
     </words>
   </dictionary>
 </component>

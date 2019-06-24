@@ -91,7 +91,7 @@
                                      <a class="dropdown-item" href="patient/update/{{ $patient->id_patient }}">Editer</a>
                                      <a class="dropdown-item" href="#">Supprimer</a>
                                      <div class="dropdown-divider"></div>
-                                     <a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Voire les soins</a>
+                                     <a class="dropdown-item" href="/detail/soin/{{$patient->id_patient}}">Voire les soins</a>
                                      <a class="dropdown-item" href="/prelevement/{{$patient->id_patient}}">Prélevements</a>
                                      <li class="dropdown-submenu">
                                          <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>

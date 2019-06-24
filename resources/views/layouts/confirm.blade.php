@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Confirm Submit
+                Confirmer la modification
             </div>
             <div class="modal-body">
                 Voulez-vous enregistrer les modifications?
@@ -19,7 +19,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Confirm Submit
+                Confirmer la supression
             </div>
             <div class="modal-body">
                 Voulez-vous supprimer cette enregistrement?

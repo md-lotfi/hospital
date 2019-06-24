@@ -14,6 +14,7 @@ class PatientSearchController extends Controller
     const ROUTE_ENREGISTRER_SOIN_MEDICAMENT = 'medic';
     const ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE = 'psyco';
     const ROUTE_ENREGISTRER_SOIN_PRELEVEMENT = 'prelevement';
+    const ROUTE_SORTIE_PATIENT = 'sortie_patient';
     const ROUTE_PRESCRIRE = 'prescrire';
 
     public function index($action, $route){
@@ -46,6 +47,12 @@ class PatientSearchController extends Controller
                     }
                     break;
                 case self::ROUTE_PRESCRIRE:
+                    break;
+                case self::ROUTE_SORTIE_PATIENT:
+                    switch ($request->input('action')){
+                        case 'add' : return redirect('/patient/get/'.$exist->id_patient.'?state=es');
+                        //case 'consult' : return redirect('/consigne/'.$exist->id_patient);
+                    }
                     break;
             }
         }
