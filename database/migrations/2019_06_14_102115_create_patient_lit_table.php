@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePatientLitTable extends Migration
 {
+    const LIT_BUSY = 1;
+    const LIT_FREE = 0;
     /**
      * Run the migrations.
      *
@@ -18,6 +20,7 @@ class CreatePatientLitTable extends Migration
             $table->integer('id_adm')->unsigned();
             $table->integer('id_salle')->unsigned();
             $table->integer('id_lit')->unsigned();
+            $table->tinyInteger('busy')->default(self::LIT_BUSY);
             $table->timestamps();
         });
     }

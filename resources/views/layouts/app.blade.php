@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        @if( \Illuminate\Support\Facades\Auth::user() )
+        @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -39,7 +39,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('patient')}}">Mes patients</a>
                         </li>
-                        @if( \Illuminate\Support\Facades\Auth::user()->type !== \SP\User::MEDECIN_TYPE )
+                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
                             <li class="nav-item">
                                 <a class="nav-link" href="/patient/create">Admission</a>
                             </li>
@@ -157,7 +157,7 @@
             </div>
         </nav>
         @endif
-        <main class="py-4">
+        <main><!-- class="py-4"-->
             @include('flash-message')
 
             @yield('content')

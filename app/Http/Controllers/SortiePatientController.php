@@ -58,6 +58,7 @@ class SortiePatientController extends Controller
                     $sp->type = $request->input('type');
                     $sp->date_sortie = $request->input('date_sortie');
                     $sp->save();
+                    //Lit::where('i')
                 }
             }
         }

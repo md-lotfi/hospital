@@ -1,11 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <div class="container-fluid" style="background-color: #6b420f96;">
+        <div class="container">
+            <h1>Hopital Mohammed Medahi</h1>
+            <!--<p class="lead">Application de gestion et suivie des patients</p>-->
+        </div>
+    <!--<div class="jumbotron jumbotron-fluid" style="height: 200px; background-image: url('/images/outpatient.jpg');background-repeat:no-repeat;background-position: center center;background-size:cover;">
+    #6b420f96
+    </div>-->
+
+    <div class="row justify-content-center p-5 min-vw-100 h-100" style="background-image: url('/images/outpatient.jpg');background-repeat:no-repeat;background-position: center center;background-size:cover;">
+        <div class="col-md-6">
+            <div class="card" style="background-color: rgba(255,255,255,0.36)">
+                <div class="card-header">Connexion</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
