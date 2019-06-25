@@ -5,9 +5,9 @@
 <div class="container">
     <h3>Détails sur le patient
         @if( app('request')->input('state') === 'es' )
-            <a href="/spatient/create/{{$patient->id_patient}}" class="btn btn-warning float-right">Diagnostique de sortie</a>
-        @else
-            <a href="/gardem/historique/{{$patient->id_patient}}" class="btn btn-warning float-right">Historique des gardes malades</a>
+            <a href="/spatient/create/{{$patient->id_adm}}" class="btn btn-warning float-right">Diagnostique de sortie</a>
+        @elseif( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
+            <a href="/gardem/historique/{{$patient->id_adm}}" class="btn btn-warning float-right">Historique des gardes malades</a>
         @endif
     </h3>
     <div class="row">
@@ -104,11 +104,11 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="/admission/update/{{ $admission->id_admission }}">Editer</a>
                                                 <a class="dropdown-item" href="#">Supprimer</a>
-                                                <div class="dropdown-divider"></div>
+                                                <!--<div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="/soin/{{ $admission->id_patient }}">Soins</a>
                                                 <a class="dropdown-item" href="/patientlit/service/{{ $admission->id_admission }}">Service</a>
                                                 <a class="dropdown-item" href="/assign/add/{{ $admission->id_admission }}">Garde malade</a>
-                                                <a class="dropdown-item" href="/validate/update?idadm={{ $admission->id_admission }}">Valider admission</a>
+                                                <a class="dropdown-item" href="/validate/update?idadm={{ $admission->id_admission }}">Valider admission</a>-->
                                             </div>
                                         </div>
                                     </td>

@@ -15,7 +15,7 @@ class CreateConsigneTable extends Migration
     {
         Schema::create('consigne', function (Blueprint $table) {
             $table->increments('id_consigne');
-            $table->integer('id_patient');
+            $table->integer('id_adm');
             $table->integer('id_medecin');
             $table->text('observation');
             $table->timestamps();

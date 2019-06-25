@@ -88,11 +88,15 @@
                                  </button>
                                  <div class="dropdown-menu dropdown-menu-right">
                                      <a class="dropdown-item" href="patient/get/{{ $patient->id_patient }}">Détail</a>
-                                     <a class="dropdown-item" href="patient/update/{{ $patient->id_patient }}">Editer</a>
-                                     <a class="dropdown-item" href="#">Supprimer</a>
-                                     <div class="dropdown-divider"></div>
-                                     <a class="dropdown-item" href="/detail/soin/{{$patient->id_patient}}">Voire les soins</a>
-                                     <a class="dropdown-item" href="/prelevement/{{$patient->id_patient}}">Prélevements</a>
+                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
+                                        <a class="dropdown-item" href="patient/update/{{ $patient->id_patient }}">Editer</a>
+                                        <a class="dropdown-item" href="#">Supprimer</a>
+                                     @endif
+                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/detail/soin/{{$patient->id_adm}}">Voire les soins</a>
+                                     @endif
+                                     <!--<a class="dropdown-item" href="/prelevement/{{$patient->id_adm}}">Prélevements</a>
                                      <li class="dropdown-submenu">
                                          <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>
                                          <ul class="dropdown-menu">
@@ -106,7 +110,7 @@
                                              <li><a class="dropdown-item" href="/prelevement/create/{{$patient->id_patient}}">Prélevements</a></li>
                                          </ul>
                                      </li>
-                                     <a class="dropdown-item" href="#">Sortie de patient</a>
+                                     <a class="dropdown-item" href="#">Sortie de patient</a>-->
                                  </div>
                              </div>
                         </td>

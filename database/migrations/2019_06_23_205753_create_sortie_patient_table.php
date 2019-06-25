@@ -15,7 +15,7 @@ class CreateSortiePatientTable extends Migration
     {
         Schema::create('sortie_patient', function (Blueprint $table) {
             $table->increments('id_sp');
-            $table->integer('id_patient');
+            $table->integer('id_adm');
             $table->integer('id_med');
             $table->text('diagnostic');
             $table->string('type');

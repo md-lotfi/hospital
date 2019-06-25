@@ -15,7 +15,7 @@ class CreatePrescriptionTable extends Migration
     {
         Schema::create('prescription', function (Blueprint $table) {
             $table->increments('id_pres');
-            $table->integer('id_patient');
+            $table->integer('id_adm');
             $table->integer('id_medecin');
             $table->timestamp('date_pres');
             $table->text('observation');

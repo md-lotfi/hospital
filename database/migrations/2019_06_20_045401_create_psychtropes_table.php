@@ -15,7 +15,7 @@ class CreatePsychtropesTable extends Migration
     {
         Schema::create('psychtropes', function (Blueprint $table) {
             $table->increments('id_psy');
-            $table->integer('id_patient');
+            $table->integer('id_adm');
             $table->integer('id_inf');
             $table->integer('id_med');
             $table->string('nom_psy');

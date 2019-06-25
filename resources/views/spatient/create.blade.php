@@ -30,7 +30,7 @@
                 <textarea rows="3" class="form-control" id="diag" name="diagnostic"></textarea>
                 <small class="form-text text-muted">Saisisser le diagnostique du patient</small>
             </div>
-            <input type="hidden" value="{{$id_patient}}" name="id_patient">
+            <input type="hidden" value="{{$id_adm}}" name="id_adm">
             <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
             <div class="clearfix"></div>
         </form>

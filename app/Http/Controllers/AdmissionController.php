@@ -25,15 +25,12 @@ class AdmissionController extends Controller
             $admission->motif = $request->input('motif');
             $admission->diag = $request->input('diag');
             $admission->date_adm = $request->input('date_adm');
-            /*if( !empty($request->input('date_sort', null)) )
-                $admission->date_sort= $request->input('date_sort');
-            $admission->etat_sort = $request->input('etat_sort');*/
 
             $admission->save();
 
-            $p = Patient::where('id_patient', $request->input('id_patient'))->get()->first();
+            //$p = Patient::where('id_patient', $request->input('id_patient'));
             return response()->redirectTo('messages?redirect='.urldecode('/patientlit/service/'.$admission->getKey()))
-                ->with('success', "Admission enregistrer pour le patient $p->nom $p->prenom, Redirection vers la page service aprés 5 seconds...");
+                ->with('success', "Admission enregistrer pour ce patient, Redirection vers la page service aprés 5 seconds...");
             //return redirect('/patientlit/service/'.$admission->getKey());
             //return redirect('patient/get/'.$admission->id_patient);
         }

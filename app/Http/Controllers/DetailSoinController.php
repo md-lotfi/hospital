@@ -32,43 +32,29 @@ class DetailSoinController extends Controller
      * @param $id_patient
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($id_patient){
-        $soins = Soin::where('soins.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'soins.id_patient')
-            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'soins.id_inf')
-            ->leftJoin('medicaments', 'medicaments.id_medic', '=', 'soins.id_medic')
-            ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
-            //->orderBy('name', 'desc')
-            ->get();
+    public function index($id_adm){
+        $soins = Soin::getSoin($id_adm);
 
-        $prelevs = Prelevement::where('prelevements.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'prelevements.id_patient')
+        $prelevs = Prelevement::where('prelevements.id_adm', $id_adm)
+            ->Join('admissions', 'admissions.id_adm', '=', 'prelevements.id_adm')
+            ->leftJoin('patients', 'patients.id_patient', '=', 'admissions.id_patient')
             ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'prelevements.id_inf')
             ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
             //->orderBy('name', 'desc')
             ->get();
 
-        $psys = Psychotrope::where('psychtropes.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'psychtropes.id_patient')
+        $psys = Psychotrope::where('psychtropes.id_adm', $id_adm)
+            ->Join('admissions', 'admissions.id_adm', '=', 'psychtropes.id_adm')
+            ->leftJoin('patients', 'patients.id_patient', '=', 'admissions.id_patient')
             ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'psychtropes.id_inf')
             ->leftJoin('medecin', 'medecin.id_med', '=', 'psychtropes.id_med')
             ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
             //->orderBy('name', 'desc')
             ->get();
 
-        $patient = Patient::where('id_patient', $id_patient)->get()->first();
+        $patient = Admission::getPatientAdm($id_adm);
 
-        return view('detailSoin.index', ['soins' => $soins, 'prelevs'=> $prelevs, 'psys'=>$psys, 'patient'=>$patient, 'id_patient'=>$id_patient]);
-        /*var_dump($inf);
-        exit();*/
-        /*$soins = Soin::where('soins.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'soins.id_patient')
-            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'soins.id_inf')
-            ->leftJoin('medicaments', 'medicaments.id_medic', '=', 'soins.id_medic')
-            ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
-            //->orderBy('name', 'desc')
-            ->get();
-        return view('soin.index', ['soins' => $soins, 'id_patient'=>$id_patient]);*/
+        return view('detailSoin.index', ['soins' => $soins, 'prelevs'=> $prelevs, 'psys'=>$psys, 'patient'=>$patient, 'id_adm'=>$id_adm]);
     }
 
 }

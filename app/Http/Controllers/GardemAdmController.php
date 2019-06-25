@@ -37,11 +37,6 @@ class GardemAdmController extends Controller
         return view('gardemAdm.index', ['gardems' => $gardems]);
     }
 
-    /*public function historique($id_adm) {
-        $gardems = GardemAdm::where('id_adm', $id_adm);
-        return view('gardemAdm.historique', ['gardems' => $gardems]);
-    }*/
-
     /**
      * avec bouton
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <h1>Liste des prelevements
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::INFERMIERE_TYPE )
-                        <a href="/prelevement/create/{{$id_patient}}" class="btn btn-warning float-right">Ajouter un prélevement</a>
+                        <a href="/prelevement/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter un prélevement</a>
                     @endif
                 </h1>
                 <table class="table">

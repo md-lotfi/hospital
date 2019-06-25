@@ -36,14 +36,14 @@ class PatientSearchController extends Controller
             switch ($request->input('route')) {
                 case self::ROUTE_CONSIGNE:
                     switch ($request->input('action')){
-                        case 'add' : return redirect('/consigne/create/'.$exist->id_patient);
-                        case 'consult' : return redirect('/consigne/'.$exist->id_patient);
+                        case 'add' : return redirect('/consigne/create/'.$exist->id_adm);
+                        case 'consult' : return redirect('/consigne/'.$exist->id_adm);
                     }
                     break;
                 case self::ROUTE_ENREGISTRER_SOIN_MEDICAMENT:
                     switch ($request->input('action')){
-                        case 'add' : return redirect('/soins/create/'.$exist->id_patient);
-                        case 'consult' : return redirect('/consigne/'.$exist->id_patient);
+                        case 'add' : return redirect('/soins/create/'.$exist->id_adm);
+                        case 'consult' : return redirect('/consigne/'.$exist->id_adm);
                     }
                     break;
                 case self::ROUTE_PRESCRIRE:
@@ -51,7 +51,6 @@ class PatientSearchController extends Controller
                 case self::ROUTE_SORTIE_PATIENT:
                     switch ($request->input('action')){
                         case 'add' : return redirect('/patient/get/'.$exist->id_patient.'?state=es');
-                        //case 'consult' : return redirect('/consigne/'.$exist->id_patient);
                     }
                     break;
             }

@@ -27,23 +27,25 @@ class PrelevementController extends Controller
      * @param $id_patient
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($id_patient){
-        $prelvs = Prelevement::where('prelevements.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'prelevements.id_patient')
+    public function index($id_adm){
+        $prelvs = Prelevement::where('prelevements.id_adm', $id_adm)
+            ->leftJoin('admissions', 'admissions.id_adm', '=', 'prelevements.id_adm')
+            ->leftJoin('patients', 'patients.id_patient', '=', 'admissions.id_patient')
             ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'prelevements.id_inf')
             ->leftJoin('users as u_inf', 'u_inf.id', '=', 'infirmiere.id_user')
             ->select(
                 'prelevements.*',
                 'patients.*',
+                'admissions.*',
                 'infirmiere.*',
                 'u_inf.name as name_inf'
             )
             ->get();
-        return view('prelevement.index', ['prelevs' => $prelvs, 'id_patient'=>$id_patient]);
+        return view('prelevement.index', ['prelevs' => $prelvs, 'id_adm'=>$id_adm]);
     }
 
-    public function create($id_patient) {
-        return view('prelevement.create', ['id_patient'=>$id_patient]);
+    public function create($id_adm) {
+        return view('prelevement.create', ['id_adm'=>$id_adm]);
     }
 
     public function store(Request $request) {
@@ -52,7 +54,7 @@ class PrelevementController extends Controller
             if( $user->type = User::INFERMIERE_TYPE ) {
                 $inf = Infermiere::where('id_user', $user->id)->get()->first();
                 $prelev = new Prelevement();
-                $prelev->id_patient = $request->input('id_patient');
+                $prelev->id_adm = $request->input('id_adm');
                 $prelev->id_inf = $inf->id_inf;
                 $prelev->temp = $request->input('temp');
                 $prelev->poid = $request->input('poid');
@@ -66,7 +68,7 @@ class PrelevementController extends Controller
                 $prelev->save();
             }
         }
-        return redirect('prelevement/'.$request->input('id_patient'));
+        return redirect('prelevement/'.$request->input('id_adm'));
     }
 
     public function edit($id_prel) {
@@ -76,7 +78,7 @@ class PrelevementController extends Controller
 
     public function update(Request $request) {
         $prel = Prelevement::where(self::TABLE.'.id_prel', $request->input('id_prel'));
-        $id_patient = $prel->get()->first()->id_patient;
+        $id_adm = $prel->get()->first()->id_adm;
         $prel->update(
             [
                 'temp' => $request->input('temp'),
@@ -90,13 +92,13 @@ class PrelevementController extends Controller
                 'observation' => $request->input('observation')
             ]
         );
-        return redirect('prelevement/'.$id_patient);
+        return redirect('prelevement/'.$id_adm);
     }
 
     public function destroy($id_prel) {
         $prel = Prelevement::find($id_prel);
-        $id_patient = $prel->get()->first()->id_patient;
+        $id_adm = $prel->get()->first()->id_adm;
         $prel->delete();
-        return redirect('prelevement/'.$id_patient);
+        return redirect('prelevement/'.$id_adm);
     }
 }

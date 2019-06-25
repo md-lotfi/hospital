@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <h3>Liste des consignes pour <u>{{$p_name}} {{$p_prenom}}</u>
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
-                        <a href="/consigne/create/{{$id_patient}}" class="btn btn-warning float-right">Ajouter une consigne</a>
+                        <a href="/consigne/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter une consigne</a>
                     @endif
                 </h3>
                 <table class="table">

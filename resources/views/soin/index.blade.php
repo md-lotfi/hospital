@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <h1>Liste des soins
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
-                        <a href="/soins/create/{{$id_patient}}" class="btn btn-warning float-right">Ajouter un traitement</a>
+                        <a href="/soins/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter un traitement</a>
                     @endif
                 </h1>
                 <table class="table">

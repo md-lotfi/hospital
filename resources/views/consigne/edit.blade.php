@@ -16,7 +16,7 @@
                     </div>
 
                     <input type="hidden" value="{{$consigne->id_consigne}}" name="id_consigne">
-                    <input type="hidden" value="{{$consigne->id_patient}}" name="id_patient">
+                    <input type="hidden" value="{{$consigne->id_adm}}" name="id_adm">
                     <input type="button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger float-right" value="Enregistrer">
                     <div class="clearfix"></div>
                 </form>

@@ -35,11 +35,6 @@ class PatientController extends Controller
             $patient->adresse = $request->input('adresse');
 
             $patient->save();
-            //return redirect('admission/create?idp='.$patient->getKey());
-            //return redirect('patient/get/' . $patient->getKey());//patient?idp=
-            //return redirect('admission/create/' . $patient->getKey());
-            //return back()->with('success', "Patient ajouter avec succeé, vous allez ètre rediriger vers la page d'admission.")->header("Refresh", "5;url=/admission/create/".$patient->getKey());
-            //return redirect('messages/success?'.rawurldecode('Patient ajouter avec succeé, vous allez ètre rediriger vers la page d\'admission.').'/' .urlencode('admission/create/'.$patient->getKey()));
             return response()->redirectTo('messages?redirect='.urldecode("/admission/create/".$patient->getKey()))
                 ->with('success', "Patient ajouter avec succeé, vous allez ètre rediriger vers la page d'admission aprés 5 seconds...");
         }

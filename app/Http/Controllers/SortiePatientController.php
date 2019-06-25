@@ -31,7 +31,7 @@ class SortiePatientController extends Controller
      * @param $id_patient
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($id_patient){
+    public function index($id_adm){
         /*$sortie = SortiePatient::where('sortie_patient.id_patient', $id_patient)
             ->leftJoin('patients', 'patients.id_patient', '=', 'sortie_patient.id_patient')
             ->leftJoin('medecin', 'medecin.id_med', '=', 'sortie_patient.id_med')
@@ -41,8 +41,8 @@ class SortiePatientController extends Controller
         return view('spatient.index', ['sortie' => $sortie, 'id_patient'=>$id_patient]);*/
     }
 
-    public function create($id_patient) {
-        return view('spatient.create', ['id_patient'=>$id_patient]);
+    public function create($id_adm) {
+        return view('spatient.create', ['id_adm'=>$id_adm]);
     }
 
     public function store(Request $request) {
@@ -52,42 +52,17 @@ class SortiePatientController extends Controller
                 $med = Medecin::where('id_user', $user->id)->get()->first();
                 if( $med ) {
                     $sp = new SortiePatient();
-                    $sp->id_patient = $request->input('id_patient');
+                    $sp->id_adm = $request->input('id_adm');
                     $sp->id_med = $med->id_med;
                     $sp->diagnostic = $request->input('diagnostic');
                     $sp->type = $request->input('type');
                     $sp->date_sortie = $request->input('date_sortie');
                     $sp->save();
-                    //Lit::where('i')
+                    PatientLit::where('id_adm', $request->input('id_adm'))->uupdate(['busy', PatientLit::LIT_FREE]);
                 }
             }
         }
-        return redirect('/patient/get/'.$request->input('id_patient'));
+        $p = Admission::getPatientAdm($request->input('id_adm'));
+        return redirect('/patient/get/'.$p->id_patient);
     }
-
-    /*public function edit($id_soin) {
-        $medics = Medicaments::all();
-        $soin = Soin::where('id_soin', $id_soin)->get()->first();
-        return view('soin.edit', ['soin'=>$soin, 'medics'=>$medics]);
-    }
-
-    public function update(Request $request) {
-        $soin = Soin::where(self::TABLE.'.id_soin', $request->input('id_soin'));
-        $id_patient = $soin->get()->first()->id_patient;
-        $soin->update(
-            [
-                'id_medic' => $request->input('id_medic'),
-                'dose_admini' => $request->input('dose'),
-                'voie' => $request->input('nom_voie')
-            ]
-        );
-        return redirect('soin/'.$id_patient);
-    }
-
-    public function destroy($id_soin) {
-        $soin = Soin::find($id_soin);
-        $id_patient = $soin->get()->first()->id_patient;
-        $soin->delete();
-        return redirect('soin/'.$id_patient);
-    }*/
 }

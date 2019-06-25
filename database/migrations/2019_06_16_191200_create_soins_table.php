@@ -16,7 +16,7 @@ class CreateSoinsTable extends Migration
         Schema::create('soins', function (Blueprint $table) {
             $table->increments('id_soin');
             $table->integer('id_medic');
-            $table->integer('id_patient');
+            $table->integer('id_adm');
             $table->integer('id_inf');
             $table->string('dose_admini');
             $table->string('voie');

@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <h1>Liste des soins
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::INFERMIERE_TYPE )
-                        <a href="/psychotrope/create/{{$id_patient}}" class="btn btn-warning float-right">Ajouter un psychotrope</a>
+                        <a href="/psychotrope/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter un psychotrope</a>
                     @endif
                 </h1>
                 <table class="table">

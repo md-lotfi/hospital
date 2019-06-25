@@ -29,9 +29,10 @@ class ConsigneController extends Controller
      * @param $id_patient
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($id_patient){
-        $consignes = Consigne::where('consigne.id_patient', $id_patient)
-            ->Join('patients', 'patients.id_patient', '=', 'consigne.id_patient')
+    public function index($id_adm){
+        $consignes = Consigne::where('consigne.id_adm', $id_adm)
+            ->Join('admissions', 'admissions.id_adm', '=', 'consigne.id_adm')
+            ->Join('patients', 'patients.id_patient', '=', 'admissions.id_patient')
             ->Join('medecin', 'medecin.id_med', '=', 'consigne.id_medecin')
             ->Join('users', 'users.id', '=', 'medecin.id_user')
             ->get();
@@ -39,13 +40,13 @@ class ConsigneController extends Controller
             'consignes' => $consignes,
             'p_name' => $consignes->count() > 0  ? $consignes[0]->name : '',
             'p_prenom' => $consignes->count() > 0  ? $consignes[0]->prenom : '',
-            'id_patient'=>$id_patient]);
+            'id_adm'=>$id_adm]);
     }
 
-    public function create($id_patient) {
-        $p = Patient::where('id_patient', $id_patient)->get()->first();
+    public function create($id_adm) {
+        $p = Admission::getPatientAdm($id_adm);
         $a = new \DateTime($p->datenai);
-        return view('consigne.create', ['patient'=>$p, 'age'=>$a->diff(Now())->y, 'id_patient'=>$id_patient]);
+        return view('consigne.create', ['patient'=>$p, 'age'=>$a->diff(Now())->y, 'id_adm'=>$id_adm]);
     }
 
     public function store(Request $request) {
@@ -55,14 +56,14 @@ class ConsigneController extends Controller
                 $med = Medecin::where('id_user', $user->id)->get()->first();
                 if( $med ) {
                     $cons = new Consigne();
-                    $cons->id_patient = $request->input('id_patient');
+                    $cons->id_adm = $request->input('id_adm');
                     $cons->id_medecin = $med->id_med;
                     $cons->observation = $request->input('observation');
                     $cons->save();
                 }
             }
         }
-        return response()->redirectTo('messages?redirect='.urldecode('consigne/'.$request->input('id_patient')))
+        return response()->redirectTo('messages?redirect='.urldecode('consigne/'.$request->input('id_adm')))
             ->with('success', "Consigne enregistrer avec succées, Redirection vers la page des consignes aprés 5 seconds...");
         //return redirect('consigne/'.$request->input('id_patient'));
     }
@@ -74,19 +75,19 @@ class ConsigneController extends Controller
 
     public function update(Request $request) {
         $consigne = Consigne::where(self::TABLE.'.id_consigne', $request->input('id_consigne'));
-        $id_patient = $consigne->get()->first()->id_patient;
+        $id_adm = $consigne->get()->first()->id_adm;
         $consigne->update(
             [
                 'observation' => $request->input('observation')
             ]
         );
-        return redirect('consigne/'.$id_patient);
+        return redirect('consigne/'.$id_adm);
     }
 
     public function destroy($id_prel) {
         $consigne = Consigne::find($id_prel);
-        $id_patient = $consigne->get()->first()->id_patient;
+        $id_adm = $consigne->get()->first()->id_adm;
         $consigne->delete();
-        return redirect('consigne/'.$id_patient);
+        return redirect('consigne/'.$id_adm);
     }
 }

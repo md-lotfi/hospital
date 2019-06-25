@@ -31,22 +31,23 @@ class SoinController extends Controller
      * @param $id_patient
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($id_patient){
-        $soins = Soin::where('soins.id_patient', $id_patient)
-            ->leftJoin('patients', 'patients.id_patient', '=', 'soins.id_patient')
+    public function index($id_adm){
+        $soins = Soin::where('soins.id_adm', $id_adm)
+            ->join('admissions', 'admissions.id_adm', '=', 'soins.id_adm')
+            ->leftJoin('patients', 'patients.id_patient', '=', 'admissions.id_patient')
             ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'soins.id_inf')
             ->leftJoin('medicaments', 'medicaments.id_medic', '=', 'soins.id_medic')
             ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
             //->orderBy('name', 'desc')
             ->get();
-        return view('soin.index', ['soins' => $soins, 'id_patient'=>$id_patient]);
+        return view('soin.index', ['soins' => $soins, 'id_adm'=>$id_adm]);
     }
 
-    public function create($id_patient) {
+    public function create($id_adm) {
         $medics = Medicaments::all();
-        $p = Patient::where('id_patient', $id_patient)->get()->first();
+        $p = Admission::getPatientAdm($id_adm);
         $a = new \DateTime($p->datenai);
-        return view('soin.create', ['medics'=>$medics, 'age'=>$a->diff(Now())->y, 'patient'=>$p, 'id_patient'=>$id_patient]);
+        return view('soin.create', ['medics'=>$medics, 'age'=>$a->diff(Now())->y, 'patient'=>$p, 'id_adm'=>$id_adm]);
     }
 
     public function store(Request $request) {
@@ -55,7 +56,7 @@ class SoinController extends Controller
             if( $user->type = User::INFERMIERE_TYPE ) {
                 $inf = Infermiere::where('id_user', $user->id)->get()->first();
                 $medic = new Soin();
-                $medic->id_patient = $request->input('id_patient');
+                $medic->id_adm = $request->input('id_adm');
                 $medic->id_inf = $inf->id_inf;
                 $medic->id_medic = $request->input('id_medic');
                 $medic->voie = $request->input('nom_voie');
@@ -63,7 +64,7 @@ class SoinController extends Controller
                 $medic->save();
             }
         }
-        return redirect('soin/'.$request->input('id_patient'));
+        return redirect('soin/'.$request->input('id_adm'));
     }
 
     public function edit($id_soin) {
@@ -74,7 +75,7 @@ class SoinController extends Controller
 
     public function update(Request $request) {
         $soin = Soin::where(self::TABLE.'.id_soin', $request->input('id_soin'));
-        $id_patient = $soin->get()->first()->id_patient;
+        $id_adm = $soin->get()->first()->id_adm;
         $soin->update(
             [
                 'id_medic' => $request->input('id_medic'),
@@ -82,13 +83,17 @@ class SoinController extends Controller
                 'voie' => $request->input('nom_voie')
             ]
         );
-        return redirect('soin/'.$id_patient);
+        return redirect('soin/'.$id_adm);
     }
 
     public function destroy($id_soin) {
         $soin = Soin::find($id_soin);
-        $id_patient = $soin->get()->first()->id_patient;
+        $id_adm = $soin->get()->first()->id_adm;
         $soin->delete();
-        return redirect('soin/'.$id_patient);
+        return redirect('soin/'.$id_adm);
+    }
+
+    public function buttons(){
+        return view('soin.buttons');
     }
 }

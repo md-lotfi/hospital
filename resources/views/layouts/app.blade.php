@@ -22,8 +22,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' )
+    <div id="app" class="h-100">
+        @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@buttons' )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -70,7 +70,7 @@
                                         <a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_MEDICAMENT}}">Médicaments</a></li>
-                                            <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE}}">Psycotropes</a></li>
+                                            <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE}}">Psychotropes</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -157,11 +157,13 @@
             </div>
         </nav>
         @endif
-        <main><!-- class="py-4"-->
-            @include('flash-message')
 
-            @yield('content')
-        </main>
+        @include('flash-message')
+
+        @yield('content')
+        <!--<main>
+
+        </main>-->
     </div>
 </body>
 </html>

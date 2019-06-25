@@ -52,8 +52,7 @@ class PatientLitController extends Controller
             $pl->id_lit = $request->input('id_lit');
             $pl->id_salle = $request->input('id_salle');
             $pl->save();
-            $adm = Admission::where('id_adm',$id_adm)
-                ->join('patients', 'patients.id_patient', 'admissions.id_patient')->get()->first();
+            $adm = Admission::getPatientAdm($id_adm);
             if( $adm ) {
                 return response()->redirectTo('messages?redirect=' . urldecode('patient/get/' . $adm->id_patient))
                     ->with('success', "Service enregistrer pour le patient $adm->nom $adm->prenom, Redirection vers les détails du patients dans 5 seconds...");

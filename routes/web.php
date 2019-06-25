@@ -42,6 +42,7 @@ Route::post('unite', 'UniteController@store');
 Route::get('unite/get/{id_unite}', 'UniteController@edit');
 Route::post('unite/update', 'UniteController@update');
 Route::get('unite/remove/{id_unite}', 'UniteController@destroy');
+Route::get('unite/remove/{id_unite}', 'UniteController@destroy');
 
 Route::get('salle/{id_unite}', 'SallController@index');
 Route::get('salle/create/{id_unite}', 'SallController@create');
@@ -105,29 +106,31 @@ Route::get('medicament/get/{id_gardem}', 'MedicamentController@edit');
 Route::post('medicament/update', 'MedicamentController@update');
 Route::get('medicament/remove/{id_gardem}', 'MedicamentController@destroy');
 
-Route::get('soin/{id_patient}', 'SoinController@index');
-Route::get('soins/create/{id_patient}', 'SoinController@create');
+Route::get('soin/{id_adm}', 'SoinController@index');
+Route::get('soins/create/{id_adm}', 'SoinController@create');
 Route::post('soin', 'SoinController@store');
-Route::get('soin/get/{id_patient}', 'SoinController@edit');
+Route::get('soin/get/{id_soin}', 'SoinController@edit');
 Route::post('soin/update', 'SoinController@update');
-Route::get('soin/remove/{id_patient}', 'SoinController@destroy');
+Route::get('soin/remove/{id_soin}', 'SoinController@destroy');
 
-Route::get('spatient/{id_patient}', 'SortiePatientController@index');
-Route::get('spatient/create/{id_patient}', 'SortiePatientController@create');
+Route::get('soin/show/buttons', 'SoinController@buttons');
+
+Route::get('spatient/{id_adm}', 'SortiePatientController@index');
+Route::get('spatient/create/{id_adm}', 'SortiePatientController@create');
 Route::post('spatient', 'SortiePatientController@store');
-Route::get('spatient/get/{id_patient}', 'SortiePatientController@edit');
+Route::get('spatient/get/{id_sp}', 'SortiePatientController@edit');
 Route::post('spatient/update', 'SortiePatientController@update');
-Route::get('spatient/remove/{id_patient}', 'SortiePatientController@destroy');
+Route::get('spatient/remove/{id_sp}', 'SortiePatientController@destroy');
 
-Route::get('prelevement/{id_patient}', 'PrelevementController@index');
-Route::get('prelevement/create/{id_patient}', 'PrelevementController@create');
+Route::get('prelevement/{id_adm}', 'PrelevementController@index');
+Route::get('prelevement/create/{id_adm}', 'PrelevementController@create');
 Route::post('prelevement', 'PrelevementController@store');
-Route::get('prelevement/get/{id_patient}', 'PrelevementController@edit');
+Route::get('prelevement/get/{id_adm}', 'PrelevementController@edit');
 Route::post('prelevement/update', 'PrelevementController@update');
-Route::get('prelevement/remove/{id_patient}', 'PrelevementController@destroy');
+Route::get('prelevement/remove/{id_adm}', 'PrelevementController@destroy');
 
-Route::get('psychotrope/{id_patient}', 'PsychotropeController@index');
-Route::get('psychotrope/create/{id_patient}', 'PsychotropeController@create');
+Route::get('psychotrope/{id_adm}', 'PsychotropeController@index');
+Route::get('psychotrope/create/{id_admid_adm}', 'PsychotropeController@create');
 Route::post('psychotrope', 'PsychotropeController@store');
 Route::get('psychotrope/get/{id_psy}', 'PsychotropeController@edit');
 Route::post('psychotrope/update', 'PsychotropeController@update');
@@ -137,10 +140,10 @@ Route::get('messages', 'MessagesController@index');
 Route::get('patient/search/{action}/{route}', 'PatientSearchController@index');
 Route::post('patient/search', 'PatientSearchController@find');
 
-Route::get('detail/soin/{id_patient}', 'DetailSoinController@index');
+Route::get('detail/soin/{id_adm}', 'DetailSoinController@index');
 
-Route::get('consigne/{id_patient}', 'ConsigneController@index');
-Route::get('consigne/create/{id_patient}', 'ConsigneController@create');
+Route::get('consigne/{id_adm}', 'ConsigneController@index');
+Route::get('consigne/create/{id_adm}', 'ConsigneController@create');
 Route::post('consigne', 'ConsigneController@store');
 Route::get('consigne/get/{id_consigne}', 'ConsigneController@edit');
 Route::post('consigne/update', 'ConsigneController@update');
