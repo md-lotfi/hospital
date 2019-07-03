@@ -86,7 +86,7 @@
                     </div>
                     <div class="card-group mt-3">
                         <div class="card mr-3" style="width: 11rem;">
-                            <a href="{{ url('/secretaire')}}">
+                            <a href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_PRESCRIRE}}">
                                 <img src="/images/prescrire.png" class="card-img-top" style="height: 140px">
                             </a>
                             <div class="card-body">

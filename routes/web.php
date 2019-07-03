@@ -22,7 +22,7 @@ Route::get('cvs/{id}/edit', 'CvController@edit');
 Route::put('cvs/{id}', 'CvController@update');
 Route::delete('cvs/{id}', 'CvController@destroy');
 
-Route::get('admission', 'AdmissionController@index');
+Route::get('admission/{id_patient}', 'AdmissionController@index');
 Route::get('admission/create/{id_patient}', 'AdmissionController@create');
 Route::post('admission', 'AdmissionController@store');
 Route::get('admission/{id}/edit', 'AdmissionController@edit');
@@ -106,6 +106,34 @@ Route::get('medicament/get/{id_gardem}', 'MedicamentController@edit');
 Route::post('medicament/update', 'MedicamentController@update');
 Route::get('medicament/remove/{id_gardem}', 'MedicamentController@destroy');
 
+Route::get('analyse', 'AnalyseController@index');
+Route::get('analyse/create', 'AnalyseController@create');
+Route::post('analyse', 'AnalyseController@store');
+Route::get('analyse/get/{id_analyse}', 'AnalyseController@edit');
+Route::post('analyse/update', 'AnalyseController@update');
+Route::get('analyse/remove/{id_analyse}', 'AnalyseController@destroy');
+
+Route::get('radio', 'RadioController@index');
+Route::get('radio/create', 'RadioController@create');
+Route::post('radio', 'RadioController@store');
+Route::get('radio/get/{id_radio}', 'RadioController@edit');
+Route::post('radio/update', 'RadioController@update');
+Route::get('radio/remove/{id_radio}', 'RadioController@destroy');
+
+Route::get('analyse/patient/index/{id_adm}', 'PatientAnalyseController@index');
+Route::get('analyse/patient/create/{id_adm}', 'PatientAnalyseController@create');
+Route::post('analyse/patient/store', 'PatientAnalyseController@store');
+Route::post('analyse/patient/update', 'PatientAnalyseController@update');
+Route::get('analyse/patient/get/{id_pa}', 'PatientAnalyseController@edit');
+Route::get('analyse/patient/remove/{id_pa}', 'PatientAnalyseController@destroy');
+
+Route::get('radio/patient/index/{id_adm}', 'PatientRadioController@index');
+Route::get('radio/patient/create/{id_adm}', 'PatientRadioController@create');
+Route::post('radio/patient/store', 'PatientRadioController@store');
+Route::post('radio/patient/update', 'PatientRadioController@update');
+Route::get('radio/patient/get/{id_pa}', 'PatientRadioController@edit');
+Route::get('radio/patient/remove/{id_pa}', 'PatientRadioController@destroy');
+
 Route::get('soin/{id_adm}', 'SoinController@index');
 Route::get('soins/create/{id_adm}', 'SoinController@create');
 Route::post('soin', 'SoinController@store');
@@ -136,6 +164,13 @@ Route::get('psychotrope/get/{id_psy}', 'PsychotropeController@edit');
 Route::post('psychotrope/update', 'PsychotropeController@update');
 Route::get('psychotrope/remove/{id_psy}', 'PsychotropeController@destroy');
 
+Route::get('prescrire/{id_adm}', 'PrescrireController@index');
+Route::get('prescrire/create/{id_admid_adm}', 'PrescrireController@create');
+Route::post('prescrire', 'PrescrireController@store');
+Route::get('prescrire/get/{id_psy}', 'PrescrireController@edit');
+Route::post('prescrire/update', 'PrescrireController@update');
+Route::get('prescrire/remove/{id_psy}', 'PrescrireController@destroy');
+
 Route::get('messages', 'MessagesController@index');
 Route::get('patient/search/{action}/{route}', 'PatientSearchController@index');
 Route::post('patient/search', 'PatientSearchController@find');
@@ -148,6 +183,26 @@ Route::post('consigne', 'ConsigneController@store');
 Route::get('consigne/get/{id_consigne}', 'ConsigneController@edit');
 Route::post('consigne/update', 'ConsigneController@update');
 Route::get('consigne/remove/{id_consigne}', 'ConsigneController@destroy');
+Route::get('consigne/all/unreceived', 'ConsigneController@all');
+
+Route::get('ordonnances/{id_adm}', 'OrdonnanceController@index');
+Route::get('ordonnances/create/{id_adm}', 'OrdonnanceController@create');
+Route::post('ordonnances', 'OrdonnanceController@store');
+Route::get('ordonnances/get/{id_consigne}', 'OrdonnanceController@edit');
+Route::post('ordonnances/update', 'OrdonnanceController@update');
+Route::get('ordonnances/remove/{id_consigne}', 'OrdonnanceController@destroy');
+
+Route::get('ordonnances/medic/list/{id_ord}', 'OrdonnanceMedicController@index');
+Route::get('ordonnances/medic/add/{id_ord}/{id_adm}', 'OrdonnanceMedicController@create');
+Route::post('ordonnances/medic/store', 'OrdonnanceMedicController@store');
+Route::post('ordonnances/medic/update', 'OrdonnanceMedicController@update');
+Route::get('ordonnances/medic/remove/{id_ord_medic}', 'OrdonnanceMedicController@destroy');
+Route::get('ordonnances/medic/get/{id_ord_medic}', 'OrdonnanceMedicController@edit');
+/*Route::get('ordonnances/create/{id_adm}', 'OrdonnancesController@create');
+Route::post('ordonnances', 'ConsigneController@store');
+Route::get('ordonnances/get/{id_consigne}', 'ConsigneController@edit');
+Route::post('ordonnances/update', 'ConsigneController@update');:
+Route::get('ordonnances/remove/{id_consigne}', 'ConsigneController@destroy');*/
 
 Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
@@ -155,6 +210,8 @@ Route::post('patient', 'PatientController@store');
 Route::get('patient/get/{id}', 'PatientController@get');
 Route::get('patient/update/{id}', 'PatientController@update');
 Route::get('patient/delete/{id}', 'PatientController@destroy');
+Route::post('patient/form/search', 'PatientController@search');
+Route::post('patient/form/locate', 'PatientController@locate');
 
 
 Auth::routes();

@@ -8,12 +8,18 @@ use SP\Admission;
 
 class AdmissionController extends Controller
 {
-    public function index() {
-    
+    public function index($id_patient) {
+        $adms = Admission::getPatientAdmAll($id_patient);
+        return view('admission.index', ['id_patient'=>$id_patient, 'adms'=>$adms]);
     }
 
     public function create($id_patient) {
-        return view('admission.create', ['id_patient'=>$id_patient]);
+        $adms = Admission::where('id_patient', $id_patient)->get();
+        $has_adms = false;
+        if( $adms )
+            if( $adms->count() > 0 )
+                $has_adms = true;
+        return view('admission.create', ['id_patient'=>$id_patient, 'has_adms'=>$has_adms]);
         
     }
 

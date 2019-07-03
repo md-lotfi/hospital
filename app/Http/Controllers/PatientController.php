@@ -4,6 +4,8 @@ namespace SP\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SP\Patient;
+use SP\PatientLit;
+use SP\User;
 
 class PatientController extends Controller
 {
@@ -42,6 +44,58 @@ class PatientController extends Controller
             ->with('warning', "Patient éxiste déja, vous allez ètre rediriger vers la page d'admission aprés 5 seconds...");
     }
 
+    public function search(Request $request){
+        $name = $request->input('name');
+        $prenom = $request->input('prenom');
+        $p = new Patient();
+        if( !$name && !$prenom ){
+            $p = Patient::all();
+        }elseif( $name && !$prenom ) {
+            $p = Patient::where('nom', 'like', '%'.$name.'%')
+                ->get();
+        }elseif( $prenom && !$name ) {
+            $p = Patient::where('prenom', 'like', '%'.$prenom.'%')
+                ->get();
+        }elseif( $prenom && $name ) {
+            $p = Patient::where('nom', 'like', '%'.$name.'%')
+                ->where('prenom', 'like', '%'.$prenom.'%')
+                ->get();
+        }
+        return view('patient.index', ['patients' => $p ]);
+    }
+
+    public function locate(Request $request){
+        $nom_salle = $request->input('nom_salle');
+        $nom_lit = $request->input('nom_lit');
+        $p = new Patient();
+        if( !$nom_salle && !$nom_lit ){
+            $p = Patient::all();
+        }elseif( $nom_salle && !$nom_lit ) {
+            $p = PatientLit::where('salls.nom_salle', $nom_salle)
+                ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
+                ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
+                ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
+                ->join('patients', 'patients.id_patient', 'admissions.id_patient')
+                ->get();
+        }elseif( $nom_lit && !$nom_salle ) {
+            $p = PatientLit::where('lits.nom_lit', $nom_lit)
+                ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
+                ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
+                ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
+                ->join('patients', 'patients.id_patient', 'admissions.id_patient')
+                ->get();
+        }elseif( $nom_salle && $nom_lit ) {
+            PatientLit::where('salls.nom_salle', $nom_salle)
+                ->where('lits.nom_lit', $nom_lit)
+                ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
+                ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
+                ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
+                ->join('patients', 'patients.id_patient', 'admissions.id_patient')
+                ->get()->first();
+        }
+        return view('patient.index', ['patients' => $p ]);
+    }
+
     public function edit() {
         
     }
@@ -55,6 +109,7 @@ class PatientController extends Controller
         exit();*/
         $patient = Patient::where('patients.id_patient',$id)
             ->whereNull('gardem_adm.date_fin')
+            //->where('patient_lit.busy', '=', PatientLit::LIT_FREE)
             ->leftJoin('admissions', 'patients.id_patient', '=', 'admissions.id_patient')
             ->leftJoin('patient_lit', 'admissions.id_adm', '=', 'patient_lit.id_adm')
             ->leftJoin('lits', 'lits.id_lit', '=', 'patient_lit.id_lit')
@@ -63,6 +118,7 @@ class PatientController extends Controller
             ->leftJoin('services', 'services.id_service', '=', 'unite.id_service')
             ->leftJoin('gardem_adm', 'gardem_adm.id_adm', '=', 'admissions.id_adm')
             ->leftJoin('gardem', 'gardem.id_gardem', '=', 'gardem_adm.id_gardem')
+            ->leftJoin('sortie_patient', 'sortie_patient.id_adm', '=', 'admissions.id_adm')
             ->select(
                 'patients.*',
                 'admissions.id_adm as id_admission',
@@ -76,8 +132,10 @@ class PatientController extends Controller
                 'gardem.nom as nom_gardem',
                 'gardem.prenom as prenom_gardem',
                 'gardem_adm.date_debut as date_debut_gardem',
-                'services.nom as nom_service'
+                'services.nom as nom_service',
+                'sortie_patient.*'
             )
+            ->groupBy('admissions.id_adm')
             //->orderBy('name', 'desc')
             ->get();
         if( count($patient) > 0 )
@@ -86,7 +144,9 @@ class PatientController extends Controller
             return view('patient.details', ['patient' => new Patient(), 'admissions'=>null]);
     }
 
-    public function destroy() {
-        
+    public function destroy($id_patient) {
+        $p = Patient::find($id_patient);
+        $p->delete();
+        return redirect('/patient');
     }
 }

@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,7 +25,7 @@
 <body>
     <div id="app" class="h-100">
         @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@buttons' )
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -81,7 +82,7 @@
                         @endif
                         @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
                         <li class="nav-item">
-                            <a class="nav-link" href="/patient/search/{{\SP\Http\Controllers\PatientSearchController::ROUTE_PRESCRIRE}}">Prescrire</a>
+                            <a class="nav-link" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_PRESCRIRE}}">Prescrire</a>
                         </li>
                         @endif
                         <li class="nav-item dropdown">
@@ -94,7 +95,9 @@
                                         <a class="dropdown-item" href="/service">service</a>
                                     @endif
                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
-                                        <a class="dropdown-item" href="/medicament/create">Ajouter Médicaments</a>
+                                            <a class="dropdown-item" href="/medicament">Médicaments</a>
+                                            <a class="dropdown-item" href="/analyse">Analyse</a>
+                                            <a class="dropdown-item" href="/radio">Radio</a>
                                         @endif
                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
                                         <a class="dropdown-item" href="{{ url('medecin/create')}}">Ajouter Médecins</a>
@@ -134,6 +137,11 @@
                                 </li>
                             @endif
                         @else
+                            @if( \SP\Consigne::hasUnreceived() )
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/consigne/all/unreceived"><i class="icon-message"></i>Consigne Notif</a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

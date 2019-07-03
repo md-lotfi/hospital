@@ -58,7 +58,7 @@ class SortiePatientController extends Controller
                     $sp->type = $request->input('type');
                     $sp->date_sortie = $request->input('date_sortie');
                     $sp->save();
-                    PatientLit::where('id_adm', $request->input('id_adm'))->uupdate(['busy', PatientLit::LIT_FREE]);
+                    PatientLit::where('id_adm', $request->input('id_adm'))->update(['busy'=> PatientLit::LIT_FREE]);
                 }
             }
         }

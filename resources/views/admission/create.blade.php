@@ -28,9 +28,10 @@
 
             <input type="hidden" name="id_patient" value="{{$id_patient}}"/>
 
-            <div class="form-group text-right">
-            <input type="submit" class="btn btn-info" value="Enregistrer">
-            </div>
+            @if( $has_adms )
+                <a href="/admission/{{$id_patient}}" class="btn btn-outline-primary">Utiliser une admission</a>
+            @endif
+            <input type="submit" class="btn btn-info float-right" value="Enregistrer">
 
         </form>
         </div>

@@ -43,6 +43,17 @@ class ConsigneController extends Controller
             'id_adm'=>$id_adm]);
     }
 
+    public function all(){
+        $consignes = Consigne::
+            Join('admissions', 'admissions.id_adm', '=', 'consigne.id_adm')
+            ->Join('patients', 'patients.id_patient', '=', 'admissions.id_patient')
+            ->Join('medecin', 'medecin.id_med', '=', 'consigne.id_medecin')
+            ->Join('users', 'users.id', '=', 'medecin.id_user')
+            ->groupBy('patients.id_patient')
+            ->get();
+        return view('consigne.all', ['consignes' => $consignes]);
+    }
+
     public function create($id_adm) {
         $p = Admission::getPatientAdm($id_adm);
         $a = new \DateTime($p->datenai);

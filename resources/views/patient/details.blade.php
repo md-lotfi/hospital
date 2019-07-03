@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="container">
+<div class="container mt-4">
     <h3>Détails sur le patient
         @if( app('request')->input('state') === 'es' )
-            <a href="/spatient/create/{{$patient->id_adm}}" class="btn btn-warning float-right">Diagnostique de sortie</a>
+            <a href="/spatient/create/{{$patient->id_admission}}" class="btn btn-warning float-right">Diagnostique de sortie</a>
         @elseif( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
-            <a href="/gardem/historique/{{$patient->id_adm}}" class="btn btn-warning float-right">Historique des gardes malades</a>
+            <a href="/gardem/historique/{{$patient->id_admission}}" class="btn btn-warning float-right">Historique des gardes malades</a>
         @endif
     </h3>
     <div class="row">
@@ -53,7 +53,8 @@
                                 <th class="col-md-2">Dignostique</th>
                                 <th class="col-md-2">Date d'Admission</th>
                                 <th class="col-md-2">Emplacement</th>
-                                <th class="col-md-3">Garde M.</th>
+                                <th class="col-md-2">Garde M.</th>
+                                <th class="col-md-1">Etat Patient</th>
                                 <th class="col-md-1">Actions</th>
                             </tr>
                         </head>
@@ -82,7 +83,7 @@
                                             <b>Non installé</b>
                                         @endif
                                     </td>
-                                    <td class="col-md-3">
+                                    <td class="col-md-2">
                                         @if(!empty($admission->nom_gardem))
                                             <dl class="row">
                                                 <dt class="col-sm-3">Nom</dt>
@@ -94,6 +95,13 @@
                                             </dl>
                                         @else
                                             <b>Non installé</b>
+                                        @endif
+                                    </td>
+                                    <td class="col-md-1">
+                                        @if( $admission->date_sortie )
+                                            Sortie le {{$admission->date_sortie}}
+                                        @else
+                                            Admis
                                         @endif
                                     </td>
                                     <td class="col-md-1">
@@ -143,6 +151,4 @@
     </div>
 
 </div>
-
-
 @endsection

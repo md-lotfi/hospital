@@ -47,6 +47,11 @@ class PatientLitController extends Controller
             $id_salle = $request->input('id_salle');
             return redirect('patientlit/lit/'.$id_adm.'/'.$id_salle);
         }elseif( $type === 'lit' ) {
+            PatientLit::where('id_adm', $id_adm)->update(
+                [
+                    'busy' => PatientLit::LIT_FREE,
+                ]
+            );
             $pl = new PatientLit();
             $pl->id_adm = $id_adm;
             $pl->id_lit = $request->input('id_lit');

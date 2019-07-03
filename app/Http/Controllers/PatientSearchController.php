@@ -47,6 +47,9 @@ class PatientSearchController extends Controller
                     }
                     break;
                 case self::ROUTE_PRESCRIRE:
+                    switch ($request->input('action')){
+                        case 'add' : return redirect('/ordonnances/'.$exist->id_adm);
+                    }
                     break;
                 case self::ROUTE_SORTIE_PATIENT:
                     switch ($request->input('action')){

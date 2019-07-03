@@ -17,6 +17,7 @@ class CreateConsigneTable extends Migration
             $table->increments('id_consigne');
             $table->integer('id_adm');
             $table->integer('id_medecin');
+            $table->tinyInteger('received')->nullable()->default(0);//set to 1 if doctor saw the notif
             $table->text('observation');
             $table->timestamps();
         });
