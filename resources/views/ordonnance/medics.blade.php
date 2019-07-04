@@ -32,6 +32,7 @@
                     <a href="/ordonnances/{{ $id_adm }}" class="btn btn-outline-danger float-right">Consulter les ordonnances</a>
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
                         <a href="/ordonnances/medic/add/{{ $id_ord }}/{{ $id_adm }}" class="btn btn-warning float-right mr-2">Ajouter médicament</a>
+                        <a href="/printer/print/ordonnance/{{ $id_ord }}" class="btn btn-outline-primary float-right mr-2">Imprimer</a>
                     @endif
                 </h1>
                 <table class="table">
