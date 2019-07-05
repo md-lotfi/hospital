@@ -2,13 +2,16 @@
 
 namespace SP\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use SP\Admission;
 use SP\Analyse;
 use Illuminate\Http\Request;
+use SP\Medecin;
 use SP\Patient;
 use SP\PatientAnalyse;
 use SP\PatientRadio;
 use SP\Radio;
+use SP\User;
 
 class PatientRadioController extends Controller
 {
@@ -32,12 +35,19 @@ class PatientRadioController extends Controller
     }
 
     public function store(Request $request) {
-        $rad = new PatientRadio();
-        $rad->id_radio = $request->input('id_radio');
-        $rad->id_adm = $request->input('id_adm');
-        $rad->results = $request->input('results');
-        $rad->save();
-        return redirect('/radio/patient/index/'.$request->input('id_adm'));
+        $user = Auth::user();
+        if( $user ) {
+            if ($user->type === User::MEDECIN_TYPE) {
+                $med = Medecin::where('id_user', $user->id)->get()->first();
+                $rad = new PatientRadio();
+                $rad->id_radio = $request->input('id_radio');
+                $rad->id_med = $med->id_med;
+                $rad->id_adm = $request->input('id_adm');
+                $rad->results = $request->input('results');
+                $rad->save();
+                return redirect('/radio/patient/index/' . $request->input('id_adm'));
+            }
+        }
     }
 
     public function edit($id_pr) {

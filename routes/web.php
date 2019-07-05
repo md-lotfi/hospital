@@ -135,6 +135,7 @@ Route::get('radio/patient/get/{id_pa}', 'PatientRadioController@edit');
 Route::get('radio/patient/remove/{id_pa}', 'PatientRadioController@destroy');
 
 Route::get('printer/print/ordonnance/{id_ord}', 'OrdonnanceController@print');
+Route::get('printer/print/radio/{id_radio}', 'RadioController@print');
 
 Route::get('soin/{id_adm}', 'SoinController@index');
 Route::get('soins/create/{id_adm}', 'SoinController@create');

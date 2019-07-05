@@ -9,22 +9,28 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @if( \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print' )
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @else
+        <!--<link href="{{ asset('css/app_print.css') }}" rel="stylesheet">-->
+            <script src="{{ asset('bootstrap3/jquery.js') }}" defer></script>
+            <link href="{{ asset('bootstrap3/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('bootstrap3/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+            <script src="{{ asset('bootstrap3/js/bootstrap.min.js') }}" defer></script>
+    @endif
+<!-- Scripts -->
     <script src="{{ asset('js/init.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">-->
-    <!--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app" class="h-100">
-        @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@buttons' )
+        @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@buttons' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print' )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

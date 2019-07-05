@@ -16,6 +16,7 @@ class CreatePatientRadiosTable extends Migration
         Schema::create('patient_radios', function (Blueprint $table) {
             $table->increments('id_pr');
             $table->integer('id_adm');
+            $table->integer('id_med');
             $table->integer('id_radio');
             $table->text('results')->nullable();
             $table->timestamps();

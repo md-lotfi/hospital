@@ -5,7 +5,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Liste des radio<a href="/radio/create" class="btn btn-warning float-right">Ajouter une radio</a></h1>
+                <h1>Liste des radio
+                    <a href="/radio/create" class="btn btn-warning float-right">Ajouter une radio</a>
+                    <!--<a href="/printer/print/radio/" class="btn btn-outline-primary float-right mr-2">Imprimer</a>-->
+                </h1>
                 <table class="table">
                     <head>
                         <tr class="d-flex">
@@ -30,6 +33,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/radio/get/{{ $radio->id_radio }}">Editer</a>
                                         <a class="dropdown-item" href="/radio/remove/{{ $radio->id_radio }}">Supprimer</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/printer/print/radio/{{ $radio->id_radio }}">Imprimer</a>
                                     </div>
                                 </div>
                             </td>

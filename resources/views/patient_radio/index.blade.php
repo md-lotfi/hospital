@@ -44,6 +44,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/radio/patient/get/{{ $radio->id_pr }}">Editer</a>
                                         <a class="dropdown-item" href="/radio/patient/remove/{{ $radio->id_pr }}">Supprimer</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" target="_blank" href="/printer/print/radio/{{ $radio->id_pr }}">Imprimer</a>
                                     </div>
                                 </div>
                             </td>
