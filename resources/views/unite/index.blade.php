@@ -30,7 +30,7 @@
                                         <a class="dropdown-item" href="/unite/remove/{{ $unite->id_unite }}">Supprimer</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="/salle/create/{{ $unite->id_unite }}">Ajouter une salle</a>
-                                        <a class="dropdown-item" href="/salle/get/{{ $unite->id_unite }}">Consulter les salles</a>
+                                        <a class="dropdown-item" href="/salle/{{ $unite->id_unite }}">Consulter les salles</a>
                                         <a class="dropdown-item" href="/patients/list/{{ $unite->id_unite }}">Voire liste patients</a>
                                     </div>
                                 </div>

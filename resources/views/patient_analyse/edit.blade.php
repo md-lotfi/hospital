@@ -29,7 +29,7 @@
                     </div>
 
                     <input type="hidden" name="id_pa" value="{{$ap->id_pa}}">
-                    <input type="hidden" name="id_adm" value="{{$ap->id_adm}}">
+                    <input type="hidden" name="id_pam" value="{{$ap->id_pam}}">
                     <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
                     <div class="clearfix"></div>
                 </form>

@@ -93,7 +93,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="/patient/get/{{ $patient->id_patient }}">Détail</a>
                                             @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
-                                                <a class="dropdown-item" href="/patient/update/{{ $patient->id_patient }}">Editer</a>
+                                                <a class="dropdown-item" href="/patient/edit/{{ $patient->id_patient }}">Editer</a>
                                                 <a class="dropdown-item" href="/patient/delete/{{ $patient->id_patient }}">Supprimer</a>
                                             @endif
                                             @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )

@@ -4,9 +4,35 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-4">Nom</dt>
+                    <dd class="col-sm-8">{{$patient->nom}}</dd>
+
+                    <dt class="col-sm-4">Prénom</dt>
+                    <dd class="col-sm-8">{{$patient->prenom}}</dd>
+
+                    <dt class="col-sm-4">Age</dt>
+                    <dd class="col-sm-8">{{$age}}</dd>
+                </dl>
+                <hr>
+                <dl class="row">
+                    <dt class="col-sm-4">Salle</dt>
+                    <dd class="col-sm-8">{{$position->nom}}</dd>
+
+                    <dt class="col-sm-4">Unité</dt>
+                    <dd class="col-sm-8">{{$position->nom_unite}}</dd>
+
+                    <dt class="col-sm-4">Salle</dt>
+                    <dd class="col-sm-8">{{$position->nom_salle}}</dd>
+
+                    <dt class="col-sm-4">Lit</dt>
+                    <dd class="col-sm-8">{{$position->nom_lit}}</dd>
+                </dl>
+            </div>
             <div class="col-md-12">
                 <h1>Liste des prelevements
-                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::INFERMIERE_TYPE )
+                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
                         <a href="/prelevement/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter un prélevement</a>
                     @endif
                 </h1>

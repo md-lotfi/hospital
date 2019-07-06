@@ -12,6 +12,7 @@ use SP\Ordonnance;
 use SP\OrdonnanceMedic;
 use SP\Patient;
 use SP\PatientAnalyse;
+use SP\PatientAnalyseMaster;
 use SP\PatientRadio;
 use SP\User;
 use Illuminate\Http\Request;
@@ -38,9 +39,7 @@ class OrdonnanceController extends Controller
         $rads = PatientRadio::where('id_adm', $id_adm)
             ->join('radios', 'radios.id_radio', 'patient_radios.id_radio')
             ->get();
-        $anals = PatientAnalyse::where('id_adm', $id_adm)
-            ->join('analyses', 'analyses.id_analyse', 'patient_analyses.id_analyse')
-            ->get();
+        $anals = PatientAnalyseMaster::where('id_adm', $id_adm)->get();
         $age = null;
         $patient = Admission::getPatientAdm($id_adm);
         if( $patient )

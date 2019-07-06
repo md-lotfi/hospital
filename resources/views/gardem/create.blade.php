@@ -11,14 +11,24 @@
 
             <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom du garde malade">
+                <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" placeholder="Nom du garde malade">
                 <small class="form-text text-muted">Saisisser un nom</small>
+                @error('nom')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom du garde malade">
+                <input type="text" class="form-control @error('prenom') is-invalid @enderror" id="prenom" name="prenom" placeholder="Prénom du garde malade">
                 <small class="form-text text-muted">Saisisser un prénom</small>
+                @error('prenom')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
             </div>
 
             <div class="form-group">

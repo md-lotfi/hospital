@@ -120,6 +120,13 @@ Route::get('radio/get/{id_radio}', 'RadioController@edit');
 Route::post('radio/update', 'RadioController@update');
 Route::get('radio/remove/{id_radio}', 'RadioController@destroy');
 
+Route::get('analyse/patient/master/index/{id_adm}', 'PatientAnalyseMasterController@index');
+Route::get('analyse/patient/master/create/{id_adm}', 'PatientAnalyseMasterController@create');
+Route::post('analyse/patient/master/store', 'PatientAnalyseMasterController@store');
+Route::post('analyse/patient/master/update', 'PatientAnalyseMasterController@update');
+Route::get('analyse/patient/master/get/{id_pa}', 'PatientAnalyseMasterController@edit');
+Route::get('analyse/patient/master/remove/{id_pa}', 'PatientAnalyseMasterController@destroy');
+
 Route::get('analyse/patient/index/{id_adm}', 'PatientAnalyseController@index');
 Route::get('analyse/patient/create/{id_adm}', 'PatientAnalyseController@create');
 Route::post('analyse/patient/store', 'PatientAnalyseController@store');
@@ -135,7 +142,8 @@ Route::get('radio/patient/get/{id_pa}', 'PatientRadioController@edit');
 Route::get('radio/patient/remove/{id_pa}', 'PatientRadioController@destroy');
 
 Route::get('printer/print/ordonnance/{id_ord}', 'OrdonnanceController@print');
-Route::get('printer/print/radio/{id_radio}', 'RadioController@print');
+Route::get('printer/print/radio/{id_pr}', 'RadioController@print');
+Route::get('printer/print/analyse/{id_pam}', 'AnalyseController@print');
 
 Route::get('soin/{id_adm}', 'SoinController@index');
 Route::get('soins/create/{id_adm}', 'SoinController@create');
@@ -211,7 +219,8 @@ Route::get('patient', 'PatientController@index');
 Route::get('patient/create', 'PatientController@create');
 Route::post('patient', 'PatientController@store');
 Route::get('patient/get/{id}', 'PatientController@get');
-Route::get('patient/update/{id}', 'PatientController@update');
+Route::get('patient/edit/{id}', 'PatientController@edit');
+Route::post('patient/update', 'PatientController@update');
 Route::get('patient/delete/{id}', 'PatientController@destroy');
 Route::post('patient/form/search', 'PatientController@search');
 Route::post('patient/form/locate', 'PatientController@locate');

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h1>Liste des soins
-                    @if( \Illuminate\Support\Facades\Auth::user()->type === \App\User::INFERMIERE_TYPE )
+                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
                         <a href="/psychotrope/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter un psychotrope</a>
                     @endif
                 </h1>
@@ -36,8 +36,8 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/soin/get/{{ $psy->id_psy }}">Editer</a>
-                                        <a class="dropdown-item" href="/soin/remove/{{ $psy->id_psy }}">Supprimer</a>
+                                        <a class="dropdown-item" href="/psychotrope/get/{{ $psy->id_psy }}">Editer</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/psychotrope/remove/{{ $psy->id_psy }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

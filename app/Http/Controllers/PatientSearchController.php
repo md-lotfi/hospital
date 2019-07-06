@@ -46,6 +46,18 @@ class PatientSearchController extends Controller
                         case 'consult' : return redirect('/consigne/'.$exist->id_adm);
                     }
                     break;
+                case self::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE:
+                    switch ($request->input('action')){
+                        case 'add' : return redirect('/psychotrope/create/'.$exist->id_adm);
+                        case 'consult' : return redirect('/psychotrope/'.$exist->id_adm);
+                    }
+                    break;
+                case self::ROUTE_ENREGISTRER_SOIN_PRELEVEMENT:
+                    switch ($request->input('action')){
+                        case 'add' : return redirect('/prelevement/create/'.$exist->id_adm);
+                        case 'consult' : return redirect('/prelevement/'.$exist->id_adm);
+                    }
+                    break;
                 case self::ROUTE_PRESCRIRE:
                     switch ($request->input('action')){
                         case 'add' : return redirect('/ordonnances/'.$exist->id_adm);

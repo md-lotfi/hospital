@@ -20,6 +20,16 @@ class GardeMaladeController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'nom' => 'required|between:5,150',
+            'prenom' => 'required|between:5,150',
+        ],
+            [
+                'nom.required' => 'Vous devez saisir le nom du patient',
+                'prenom.required' => 'Vous devez saisir le prenom du patient',
+                'nom.between' => 'Le nom doit ètre entre 5 et 15 charactères',
+                'prenom.between' => 'Le prénom doit ètre entre 5 et 15 charactères'
+            ]);
         $gm = new GardMalade();
         $gm->nom = $request->input('nom');
         $gm->prenom = $request->input('prenom');

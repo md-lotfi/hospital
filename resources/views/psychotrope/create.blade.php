@@ -17,7 +17,7 @@
 
             <div class="form-group">
                 <label for="mat_psy">Matricule psychotrope</label>
-                <input type="text" class="form-control" id="mat_psy" name="MAT_psy" placeholder="Mat du psychotrope">
+                <input type="text" class="form-control" id="mat_psy" name="mat_psy" placeholder="Mat du psychotrope">
                 <small class="form-text text-muted">Saisisser la matricule psychotrope</small>
             </div>
 

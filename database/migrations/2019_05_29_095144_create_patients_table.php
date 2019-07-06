@@ -18,10 +18,10 @@ class CreatePatientsTable extends Migration
             $table->string('nom', 150);
             $table->string('prenom');
             $table->dateTime('datenai');
-            $table->string('prenompere');
-            $table->string('nommere');
-            $table->string('prenommere');
-            $table->string('adresse');
+            $table->string('prenompere')->nullable();
+            $table->string('nommere')->nullable();
+            $table->string('prenommere')->nullable();
+            $table->string('adresse')->nullable();
             $table->timestamps();
         });
     }

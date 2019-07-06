@@ -25,7 +25,7 @@
                 <small class="form-text text-muted">Saisisser le résulta si terminer</small>
             </div>
 
-            <input type="hidden" name="id_adm" value="{{$id_adm}}">
+            <input type="hidden" name="id_pam" value="{{$id_pam}}">
             <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
             <div class="clearfix"></div>
         </form>

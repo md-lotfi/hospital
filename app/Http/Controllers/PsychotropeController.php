@@ -4,7 +4,6 @@ namespace SP\Http\Controllers;
 
 use SP\Infermiere;
 use SP\Medecin;
-use SP\Medicaments;
 use SP\Psychotrope;
 use SP\User;
 use Illuminate\Http\Request;
@@ -31,6 +30,7 @@ class PsychotropeController extends Controller
                 'patients.*',
                 'admissions.*',
                 'infirmiere.*',
+                self::TABLE.'.*',
                 'medecin.*',
                 'u_inf.name as name_inf',
                 'u_med.name as name_med'

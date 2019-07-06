@@ -2,9 +2,17 @@
 
 namespace SP\Http\Controllers;
 
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+use SP\Admission;
 use SP\Analyse;
+use SP\Medecin;
 use SP\Medicaments;
 use Illuminate\Http\Request;
+use SP\Patient;
+use SP\PatientAnalyse;
+use SP\PatientAnalyseMaster;
+use SP\PatientLit;
+use SP\PatientRadio;
 
 class AnalyseController extends Controller
 {
@@ -48,5 +56,32 @@ class AnalyseController extends Controller
         $anal = Analyse::find($id_analyse);
         $anal->delete();
         return redirect('analyse');
+    }
+
+    public function print($id_pam){
+        $analyse = PatientAnalyseMaster::where('patient_analyses_master.id_pam', $id_pam)->get()->first();
+        $analyses = PatientAnalyse::where('patient_analyses.id_pam', $id_pam)
+            ->join('analyses', 'analyses.id_analyse', 'patient_analyses.id_analyse')
+            ->get();
+        $doctor = Medecin::getFull($analyse->id_med);
+        $age = null;
+        $patient = Admission::getPatientAdm($analyse->id_adm);
+
+        $lit = PatientLit::getInfo($analyse->id_adm);
+
+        if($patient){
+            $id_adm = $patient->id_adm;
+            $age = Patient::getAge($patient->datenai);
+        }
+        return PDF::loadView('analyse.print', ['patient'=> $patient, 'age'=>$age, 'analyse'=>$analyse, 'analyses'=>$analyses, 'lit'=> $lit, 'doctor'=>$doctor])
+            ->setPaper('a4')
+            /*->setOption('page-width', '116.9')
+            ->setOption('page-height', '139.7')*/
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 2)
+            ->setOption('margin-top', 5)
+            ->setOption('margin-right', 2)
+            ->setOption('margin-left', 2)
+            ->inline();
     }
 }

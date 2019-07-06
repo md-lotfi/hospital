@@ -28,7 +28,7 @@
                 @if(\Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
                     <div>
                         <a href="/radio/patient/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter une radio</a>
-                        <a href="/analyse/patient/create/{{$id_adm}}" class="btn btn-warning float-right mr-3">Ajouter une analyse</a>
+                        <a href="/analyse/patient/master/create/{{$id_adm}}" class="btn btn-warning float-right mr-3">Ajouter une analyse</a>
                         <a href="/ordonnances/create/{{$id_adm}}" class="btn btn-warning float-right mr-3">Ajouter une ordonnance</a>
                         <div class="clearfix"></div>
                     </div>
@@ -82,8 +82,8 @@
                             <table class="table">
                                 <head>
                                     <tr class="d-flex">
-                                        <th class="col-md-3">Analyse</th>
-                                        <th class="col-md-4">Resultats</th>
+                                        <th class="col-md-2">N° Analyse</th>
+                                        <th class="col-md-5">Observation</th>
                                         <th class="col-md-2">Date de création</th>
                                         <th class="col-md-2">Date de mise à jour</th>
                                         <th class="col-md-1">Action</th>
@@ -93,8 +93,8 @@
                                 <body>
                                 @foreach($analyses as $anal)
                                     <tr class="d-flex">
-                                        <td class="col-md-3">{{ $anal->nom_analyse }}</td>
-                                        <td class="col-md-4">{{ $anal->results }}</td>
+                                        <td class="col-md-2">{{ $anal->id_pam }}</td>
+                                        <td class="col-md-5">{{ $anal->observation }}</td>
                                         <td class="col-md-2">{{ $anal->created_at }}</td>
                                         <td class="col-md-2">{{ $anal->updated_at }}</td>
                                         <td class="col-md-1">
@@ -103,8 +103,13 @@
                                                     A
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="/analyse/patient/get/{{ $anal->id_pa }}">Editer</a>
-                                                    <a class="dropdown-item" href="/analyse/patient/remove/{{ $anal->id_pa }}">Supprimer</a>
+                                                    <a class="dropdown-item" href="/analyse/patient/master/get/{{ $anal->id_pam }}">Editer</a>
+                                                    <a class="dropdown-item" href="/analyse/patient/master/remove/{{ $anal->id_pam }}">Supprimer</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="/analyse/patient/create/{{ $anal->id_pam }}">Ajouter analyse</a>
+                                                    <a class="dropdown-item" href="/analyse/patient/index/{{ $anal->id_pam }}">Voire analyse</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" target="_blank" href="/printer/print/analyse/{{ $anal->id_pam }}">Imprimer</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -146,7 +151,7 @@
                                                     <a class="dropdown-item" href="/radio/patient/get/{{ $radio->id_pr }}">Editer</a>
                                                     <a class="dropdown-item" href="/radio/patient/remove/{{ $radio->id_pr }}">Supprimer</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" target="_blank" href="/printer/print/radio/{{ $radio->id_radio }}">Imprimer</a>
+                                                    <a class="dropdown-item" target="_blank" href="/printer/print/radio/{{ $radio->id_pr }}">Imprimer</a>
                                                 </div>
                                             </div>
                                         </td>

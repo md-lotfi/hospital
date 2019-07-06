@@ -9,6 +9,21 @@ use SP\User;
 
 class PatientController extends Controller
 {
+
+    const VALIDATE_RULES_PATIENT = [
+        'nom' => 'required|between:5,150',
+        'prenom' => 'required|between:5,150',
+        'datenai' => 'required|date',
+    ];
+
+    const VALIDATE_MESSAGE_PATIENT = [
+        'nom.required' => 'Vous devez saisir le nom du patient',
+        'prenom.required' => 'Vous devez saisir le prenom du patient',
+        'datenai.required' => 'Vous devez saisir la date de naissance du patient',
+        'nom.between' => 'Le nom doit ètre entre 5 et 15 charactères',
+        'prenom.between' => 'Le prénom doit ètre entre 5 et 15 charactères',
+    ];
+
     public function index() {
         $listpatient = Patient::all();
         return view('patient.index', ['patients' => $listpatient ]);
@@ -20,6 +35,8 @@ class PatientController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate(self::VALIDATE_RULES_PATIENT,self::VALIDATE_MESSAGE_PATIENT);
+
         $exist = Patient::where('nom', '=', $request->input('nom'))
             ->where('prenom', '=', $request->input('prenom'))
             ->where('datenai', '=', $request->input('datenai'))
@@ -96,11 +113,23 @@ class PatientController extends Controller
         return view('patient.index', ['patients' => $p ]);
     }
 
-    public function edit() {
-        
+    public function edit($id_patient) {
+        $patient = Patient::where('id_patient', $id_patient)->get()->first();
+        return view('patient.edit', ['patient' => $patient ]);
     }
 
-    public function update() {
+    public function update(Request $request) {
+        $request->validate(self::VALIDATE_RULES_PATIENT,self::VALIDATE_MESSAGE_PATIENT);
+        Patient::where('id_patient', $request->input('id_patient'))->update([
+            'nom'=>$request->input('nom'),
+            'prenom'=>$request->input('prenom'),
+            'datenai'=>$request->input('datenai'),
+            'prenompere'=>$request->input('prenompere'),
+            'nommere'=>$request->input('nommere'),
+            'prenommere'=>$request->input('prenommere'),
+            'adresse'=>$request->input('adresse'),
+        ]);
+        return redirect('/patient');
     }
 
     public function get($id) {

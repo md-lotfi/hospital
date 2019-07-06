@@ -46,7 +46,8 @@ class SoinController extends Controller
     public function create($id_adm) {
         $medics = Medicaments::all();
         $p = Admission::getPatientAdm($id_adm);
-        return view('soin.create', ['medics'=>$medics, 'age'=>Patient::getAge($p->datenai), 'patient'=>$p, 'id_adm'=>$id_adm]);
+        $pos = PatientLit::getInfo($id_adm);
+        return view('soin.create', ['medics'=>$medics, 'position'=>$pos, 'age'=>Patient::getAge($p->datenai), 'patient'=>$p, 'id_adm'=>$id_adm]);
     }
 
     public function store(Request $request) {

@@ -58,8 +58,8 @@ class RadioController extends Controller
         return redirect('radio');
     }
 
-    public function print($id_radio){
-        $radio = PatientRadio::where('patient_radios.id_radio', $id_radio)
+    public function print($id_pr){
+        $radio = PatientRadio::where('patient_radios.id_pr', $id_pr)
             ->join('radios', 'radios.id_radio', 'patient_radios.id_radio')
             ->get()->first();
         $doctor = Medecin::getFull($radio->id_med);

@@ -9,7 +9,10 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @if( \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print' )
+    @if( \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print'
+    && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print'
+    && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\AnalyseController@print'
+    )
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,7 +33,13 @@
 </head>
 <body>
     <div id="app" class="h-100">
-        @if( \Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@buttons' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print' && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print' )
+        @if( \Illuminate\Support\Facades\Auth::user()
+        && \Illuminate\Support\Facades\Route::currentRouteName() !== 'home'
+        && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@buttons'
+        && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print'
+        && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print'
+        && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\AnalyseController@print'
+        )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -51,7 +60,7 @@
                                 <a class="nav-link" href="/patient/create">Admission</a>
                             </li>
                         @endif
-                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE )
+                        @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
                             <li class="nav-item">
                                 <a class="nav-link" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_SORTIE_PATIENT}}">Sortie patient</a>
                             </li>

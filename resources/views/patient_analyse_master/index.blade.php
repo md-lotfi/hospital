@@ -17,15 +17,12 @@
                 </dl>
             </div>
             <div class="col-md-9">
-                <h1>Liste des analyses
-                    <a href="/analyse/patient/create/{{$id_pam}}" class="btn btn-warning float-right">Ajouter une analyse</a>
-                    <a href="/analyse/patient/master/index/{{$id_adm}}" class="btn btn-outline-dark float-right mr-3">Voire les analyses</a>
-                </h1>
+                <h1>Liste des analyses<a href="/analyse/patient/master/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter une analyse</a></h1>
                 <table class="table">
                     <head>
                         <tr class="d-flex">
-                            <th class="col-md-3">Analyse</th>
-                            <th class="col-md-4">Resultats</th>
+                            <th class="col-md-2">N° Analyse</th>
+                            <th class="col-md-5">Observation</th>
                             <th class="col-md-2">Date de création</th>
                             <th class="col-md-2">Date de mise à jour</th>
                             <th class="col-md-1">Action</th>
@@ -35,8 +32,8 @@
                     <body>
                     @foreach($analyses as $anal)
                         <tr class="d-flex">
-                            <td class="col-md-3">{{ $anal->nom_analyse }}</td>
-                            <td class="col-md-4">{{ $anal->results }}</td>
+                            <td class="col-md-2">{{ $anal->id_pam }}</td>
+                            <td class="col-md-5">{{ $anal->observation }}</td>
                             <td class="col-md-2">{{ $anal->created_at }}</td>
                             <td class="col-md-2">{{ $anal->updated_at }}</td>
                             <td class="col-md-1">
@@ -45,8 +42,13 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/analyse/patient/get/{{ $anal->id_pa }}">Editer</a>
-                                        <a class="dropdown-item" href="/analyse/patient/remove/{{ $anal->id_pa }}">Supprimer</a>
+                                        <a class="dropdown-item" href="/analyse/patient/master/get/{{ $anal->id_pam }}">Editer</a>
+                                        <a class="dropdown-item" href="/analyse/patient/master/remove/{{ $anal->id_pam }}">Supprimer</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/analyse/patient/create/{{ $anal->id_pam }}">Ajouter analyse</a>
+                                        <a class="dropdown-item" href="/analyse/patient/index/{{ $anal->id_pam }}">Voire analyse</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" target="_blank" href="/printer/print/analyse/{{ $anal->id_pam }}">Imprimer</a>
                                     </div>
                                 </div>
                             </td>
