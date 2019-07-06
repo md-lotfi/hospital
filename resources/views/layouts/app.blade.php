@@ -85,12 +85,12 @@
                                     <li class="dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_MEDICAMENT}}">Médicaments</a></li>
-                                            <li><a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE}}">Psychotropes</a></li>
+                                            <li><a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_MEDICAMENT}}">Médicaments</a></li>
+                                            <li><a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE}}">Psychotropes</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PRELEVEMENT}}">Prélevements</a>
+                                        <a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PRELEVEMENT}}">Prélevements</a>
                                     </li>
                                 </ul>
                             </li>

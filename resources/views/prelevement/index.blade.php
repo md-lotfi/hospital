@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <dl class="row">
                     <dt class="col-sm-4">Nom</dt>
                     <dd class="col-sm-8">{{$patient->nom}}</dd>
@@ -15,7 +15,8 @@
                     <dt class="col-sm-4">Age</dt>
                     <dd class="col-sm-8">{{$age}}</dd>
                 </dl>
-                <hr>
+            </div>
+            <div class="col-md-6">
                 <dl class="row">
                     <dt class="col-sm-4">Salle</dt>
                     <dd class="col-sm-8">{{$position->nom}}</dd>
@@ -30,6 +31,9 @@
                     <dd class="col-sm-8">{{$position->nom_lit}}</dd>
                 </dl>
             </div>
+        </div>
+        <hr>
+        <div class="row">
             <div class="col-md-12">
                 <h1>Liste des prelevements
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
@@ -75,7 +79,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/prelevement/get/{{ $prelev->id_prel }}">Editer</a>
-                                        <a class="dropdown-item" href="/prelevement/remove/{{ $prelev->id_prel }}">Supprimer</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/prelevement/remove/{{ $prelev->id_prel }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

@@ -40,7 +40,9 @@ class SoinController extends Controller
             ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
             //->orderBy('name', 'desc')
             ->get();
-        return view('soin.index', ['soins' => $soins, 'id_adm'=>$id_adm]);
+        $p = Admission::getPatientAdm($id_adm);
+        $pos = PatientLit::getInfo($id_adm);
+        return view('soin.index', ['soins' => $soins, 'id_adm'=>$id_adm, 'age'=>Patient::getAge($p->datenai), 'position'=>$pos, 'patient'=>$p]);
     }
 
     public function create($id_adm) {

@@ -2,8 +2,11 @@
 
 namespace SP\Http\Controllers;
 
+use SP\Admission;
 use SP\Infermiere;
 use SP\Medecin;
+use SP\Patient;
+use SP\PatientLit;
 use SP\Psychotrope;
 use SP\User;
 use Illuminate\Http\Request;
@@ -36,7 +39,9 @@ class PsychotropeController extends Controller
                 'u_med.name as name_med'
             )
             ->get();
-        return view('psychotrope.index', ['psys' => $psys, 'id_adm'=>$id_adm]);
+        $p = Admission::getPatientAdm($id_adm);
+        $pos = PatientLit::getInfo($id_adm);
+        return view('psychotrope.index', ['psys' => $psys, 'id_adm'=>$id_adm, 'age'=>Patient::getAge($p->datenai), 'position'=>$pos, 'patient'=>$p]);
     }
 
     public function create($id_adm) {

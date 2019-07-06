@@ -43,7 +43,7 @@ class PatientSearchController extends Controller
                 case self::ROUTE_ENREGISTRER_SOIN_MEDICAMENT:
                     switch ($request->input('action')){
                         case 'add' : return redirect('/soins/create/'.$exist->id_adm);
-                        case 'consult' : return redirect('/consigne/'.$exist->id_adm);
+                        case 'consult' : return redirect('/soin/'.$exist->id_adm);
                     }
                     break;
                 case self::ROUTE_ENREGISTRER_SOIN_PSYCHOTROPE:

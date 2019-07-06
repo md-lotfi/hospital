@@ -4,6 +4,36 @@
     @include('layouts.confirm')
     <div class="container">
         <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Nom</dt>
+                    <dd class="col-sm-8">{{$patient->nom}}</dd>
+
+                    <dt class="col-sm-4">Prénom</dt>
+                    <dd class="col-sm-8">{{$patient->prenom}}</dd>
+
+                    <dt class="col-sm-4">Age</dt>
+                    <dd class="col-sm-8">{{$age}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Salle</dt>
+                    <dd class="col-sm-8">{{$position->nom}}</dd>
+
+                    <dt class="col-sm-4">Unité</dt>
+                    <dd class="col-sm-8">{{$position->nom_unite}}</dd>
+
+                    <dt class="col-sm-4">Salle</dt>
+                    <dd class="col-sm-8">{{$position->nom_salle}}</dd>
+
+                    <dt class="col-sm-4">Lit</dt>
+                    <dd class="col-sm-8">{{$position->nom_lit}}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
             <div class="col-md-12">
                 <h1>Liste des soins
                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )

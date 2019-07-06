@@ -41,7 +41,9 @@ class PrelevementController extends Controller
                 'u_inf.name as name_inf'
             )
             ->get();
-        return view('prelevement.index', ['prelevs' => $prelvs, 'id_adm'=>$id_adm]);
+        $p = Admission::getPatientAdm($id_adm);
+        $pos = PatientLit::getInfo($id_adm);
+        return view('prelevement.index', ['prelevs' => $prelvs, 'id_adm'=>$id_adm, 'age'=>Patient::getAge($p->datenai), 'position'=>$pos, 'patient'=>$p]);
     }
 
     public function create($id_adm) {
