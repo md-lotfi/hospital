@@ -4,6 +4,8 @@ namespace SP\Http\Controllers;
 
 use SP\Sall;
 use Illuminate\Http\Request;
+use SP\Service;
+use SP\Unite;
 
 class SallController extends Controller
 {
@@ -11,7 +13,10 @@ class SallController extends Controller
 
     public function index($id_unite) {
         $salles = Sall::where(self::TABLE.'.id_unite', '=', $id_unite)->get();
-        return view('salle.index', ['salles' => $salles, 'id_unite'=>$id_unite]);
+        $service = Unite::where('id_unite', $id_unite)
+            ->join('services', 'services.id_service', 'unite.id_service')
+            ->get()->first();
+        return view('salle.index', ['salles' => $salles, 'id_unite'=>$id_unite, 'service'=>$service]);
     }
 
     public function create($id_unite) {

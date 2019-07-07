@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -22,7 +22,7 @@
                     @foreach($infs as $inf)
                         <tr class="d-flex">
                             <td class="col-md-1">{{ $inf->id_inf }}</td>
-                            <td class="col-md-3">{{ $inf->nom_inf }}</td>
+                            <td class="col-md-3">{{ $inf->name }}</td>
                             <td class="col-md-3">{{ $inf->prenom_inf }}</td>
                             <td class="col-md-2">{{ $inf->adr_inf }}</td>
                             <td class="col-md-2">{{ $inf->tel_inf }}</td>
@@ -33,7 +33,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/infermiere/get/{{ $inf->id_inf }}">Editer</a>
-                                        <a class="dropdown-item" href="/infermiere/remove/{{ $inf->id_inf }}">Supprimer</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/infermiere/remove/{{ $inf->id_inf }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

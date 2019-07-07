@@ -5,6 +5,7 @@ namespace SP\Http\Controllers;
 use SP\Lit;
 use SP\Sall;
 use Illuminate\Http\Request;
+use SP\Unite;
 
 class LitController extends Controller
 {
@@ -12,7 +13,11 @@ class LitController extends Controller
 
     public function index($id_salle) {
         $lits = Lit::where(self::TABLE.'.id_salle', '=', $id_salle)->get();
-        return view('lit.index', ['lits' => $lits, 'id_salle'=>$id_salle]);
+        $service = Sall::where('id_salle', $id_salle)
+            ->join('unite', 'unite.id_unite', 'salls.id_unite')
+            ->join('services', 'services.id_service', 'unite.id_service')
+            ->get()->first();
+        return view('lit.index', ['lits' => $lits, 'id_salle'=>$id_salle, 'service'=>$service]);
     }
 
     public function create($id_salle) {

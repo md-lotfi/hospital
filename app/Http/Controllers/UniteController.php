@@ -9,8 +9,11 @@ use SP\Service;
 class UniteController extends Controller
 {
     public function index($id_service) {
-        $unites = Unite::where('unite.id_service', '=', $id_service)->get();
-        return view('unite.index', ['unites' => $unites, 'id_service'=>$id_service]);
+        $unites = Unite::where('unite.id_service', '=', $id_service)
+            ->join('services', 'services.id_service', 'unite.id_service')
+            ->get();
+        $service = Service::where('id_service', $id_service)->get()->first();
+        return view('unite.index', ['unites' => $unites, 'id_service'=>$id_service, 'service'=>$service]);
     }
 
     public function create($id_service) {

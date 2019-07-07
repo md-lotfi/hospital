@@ -96,10 +96,10 @@
                                                 <a class="dropdown-item" href="/patient/edit/{{ $patient->id_patient }}">Editer</a>
                                                 <a class="dropdown-item" href="/patient/delete/{{ $patient->id_patient }}">Supprimer</a>
                                             @endif
-                                            @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
+                                            <!--@if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="/detail/soin/{{$patient->id_adm}}">Voire les soins</a>
-                                        @endif
+                                        @endif-->
                                         <!--<a class="dropdown-item" href="/prelevement/{{$patient->id_adm}}">Prélevements</a>
                                      <li class="dropdown-submenu">
                                          <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>

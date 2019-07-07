@@ -16,7 +16,8 @@ class InfermiereController extends Controller
     const TABLE = 'infirmiere';
 
     public function index() {
-        $infs = Infermiere::all();
+        $infs = Infermiere::select('infirmiere.*', 'users.*')
+            ->join('users', 'users.id', 'infirmiere.id_user')->get();
         return view('infermiere.index', ['infs' => $infs]);
     }
 
@@ -43,14 +44,22 @@ class InfermiereController extends Controller
     }
 
     public function edit($id_inf) {
-        $inf = Infermiere::find($id_inf);
+        //$inf = Infermiere::find($id_inf);
+        $inf = Infermiere::where('infirmiere.id_inf', $id_inf)
+            ->join('users', 'users.id', 'infirmiere.id_user')
+            ->get()
+            ->first();
         return view('infermiere.edit', ['inf' => $inf]);
     }
 
     public function update(Request $request) {
-        Infermiere::where(self::TABLE.'.id_inf', $request->input('id_inf'))->update(
+        $inf = Infermiere::where(self::TABLE.'.id_inf', $request->input('id_inf'));
+        User::where('id', $inf->get()->first()->id_user)->update([
+            'name'=>$request->input('nom')
+        ]);
+        $inf->update(
             [
-                'nom_inf' => $request->input('nom'),
+                //'nom_inf' => $request->input('nom'),
                 'prenom_inf' => $request->input('prenom'),
                 'adr_inf' => $request->input('adr'),
                 'tel_inf' => $request->input('tel')

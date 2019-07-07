@@ -5,6 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h4><u>Service</u> -> <b>{{$service->nom}}</b> -> <u>Unité</u> -> <b>{{$service->nom_unite}}</b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <h1>Liste des salles<a href="/salle/create/{{$id_unite}}" class="btn btn-warning float-right">Ajouter une salle</a></h1>
                 <table class="table">
                     <head>

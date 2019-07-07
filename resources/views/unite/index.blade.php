@@ -5,6 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h4><u>Service</u> -> <b>{{$service->nom}}</b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <h1>Liste des unités<a href="/unite/create/{{$id_service}}" class="btn btn-warning float-right">Ajouter une unité</a></h1>
                 <table class="table">
                     <head>
