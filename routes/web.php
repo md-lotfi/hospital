@@ -142,6 +142,7 @@ Route::get('radio/patient/get/{id_pa}', 'PatientRadioController@edit');
 Route::get('radio/patient/remove/{id_pa}', 'PatientRadioController@destroy');
 
 Route::get('printer/print/ordonnance/{id_ord}', 'OrdonnanceController@print');
+Route::get('printer/print/soins/{id_adm}', 'SoinController@print');
 Route::get('printer/print/radio/{id_pr}', 'RadioController@print');
 Route::get('printer/print/analyse/{id_pam}', 'AnalyseController@print');
 
@@ -149,6 +150,7 @@ Route::get('soin/{id_adm}', 'SoinController@index');
 Route::get('soins/create/{id_adm}', 'SoinController@create');
 Route::post('soin', 'SoinController@store');
 Route::get('soin/get/{id_soin}', 'SoinController@edit');
+Route::get('soins/list/{id_adm}', 'SoinController@list');
 Route::post('soin/update', 'SoinController@update');
 Route::get('soin/remove/{id_soin}', 'SoinController@destroy');
 

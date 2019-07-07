@@ -12,6 +12,7 @@
     @if( \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print'
     && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print'
     && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\AnalyseController@print'
+    && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@print'
     )
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
@@ -39,6 +40,7 @@
         && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\OrdonnanceController@print'
         && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\RadioController@print'
         && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\AnalyseController@print'
+        && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@print'
         )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-4">
             <div class="container">
@@ -91,6 +93,9 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_PRELEVEMENT}}">Prélevements</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_ENREGISTRER_SOIN_LIST_ALL}}">Consulter les soins</a>
                                     </li>
                                 </ul>
                             </li>

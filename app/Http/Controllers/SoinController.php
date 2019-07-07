@@ -2,12 +2,16 @@
 
 namespace SP\Http\Controllers;
 
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use SP\Admission;
 use SP\Infermiere;
 use SP\Lit;
+use SP\Medecin;
 use SP\Medicaments;
 use SP\Patient;
 use SP\PatientLit;
+use SP\Prelevement;
+use SP\Psychotrope;
 use SP\Sall;
 use SP\Service;
 use SP\Soin;
@@ -43,6 +47,54 @@ class SoinController extends Controller
         $p = Admission::getPatientAdm($id_adm);
         $pos = PatientLit::getInfo($id_adm);
         return view('soin.index', ['soins' => $soins, 'id_adm'=>$id_adm, 'age'=>Patient::getAge($p->datenai), 'position'=>$pos, 'patient'=>$p]);
+    }
+
+    public function getSoin($id_adm){
+        $soins = Soin::where('soins.id_adm', $id_adm)
+            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'soins.id_inf')
+            ->leftJoin('medicaments', 'medicaments.id_medic', '=', 'soins.id_medic')
+            ->leftJoin('users', 'users.id', '=', 'infirmiere.id_user')
+            //->orderBy('name', 'desc')
+            ->get();
+        $psys = Psychotrope::where('psychtropes.id_adm', $id_adm)
+            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'psychtropes.id_inf')
+            ->leftJoin('medecin', 'medecin.id_med', '=', 'psychtropes.id_med')
+            ->leftJoin('users as u_inf', 'u_inf.id', '=', 'infirmiere.id_user')
+            ->leftJoin('users as u_med', 'u_med.id', '=', 'medecin.id_user')
+            ->select(
+                'infirmiere.*',
+                'psychtropes.*',
+                'medecin.*',
+                'u_inf.name as name_inf',
+                'u_med.name as name_med'
+            )
+            ->get();
+        $prelvs = Prelevement::where('prelevements.id_adm', $id_adm)
+            ->leftJoin('infirmiere', 'infirmiere.id_inf', '=', 'prelevements.id_inf')
+            ->leftJoin('users as u_inf', 'u_inf.id', '=', 'infirmiere.id_user')
+            ->select(
+                'prelevements.*',
+                'infirmiere.*',
+                'u_inf.name as name_inf'
+            )
+            ->get();
+        $p = Admission::getPatientAdm($id_adm);
+        $pos = PatientLit::getInfo($id_adm);
+        $lit = PatientLit::getInfo($id_adm);
+        return [
+            'soins' => $soins,
+            'psys' => $psys,
+            'prelevs' => $prelvs,
+            'id_adm'=>$id_adm,
+            'age'=>Patient::getAge($p->datenai),
+            'position'=>$pos,
+            'patient'=>$p,
+            'lit'=>$lit
+        ];
+    }
+
+    public function list($id_adm){
+        return view('soin.list', $this->getSoin($id_adm));
     }
 
     public function create($id_adm) {
@@ -97,5 +149,18 @@ class SoinController extends Controller
 
     public function buttons(){
         return view('soin.buttons');
+    }
+
+    public function print($id_adm){
+        return PDF::loadView('soin.print', $this->getSoin($id_adm))
+            ->setPaper('a4')
+            /*->setOption('page-width', '116.9')
+            ->setOption('page-height', '139.7')*/
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 5)
+            ->setOption('margin-top', 5)
+            ->setOption('margin-right', 5)
+            ->setOption('margin-left', 5)
+            ->inline();
     }
 }
