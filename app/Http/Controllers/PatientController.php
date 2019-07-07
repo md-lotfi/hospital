@@ -11,8 +11,8 @@ class PatientController extends Controller
 {
 
     const VALIDATE_RULES_PATIENT = [
-        'nom' => 'required|between:5,150',
-        'prenom' => 'required|between:5,150',
+        'nom' => 'required|between:4,150',
+        'prenom' => 'required|between:4,150',
         'datenai' => 'required|date',
     ];
 
@@ -20,8 +20,8 @@ class PatientController extends Controller
         'nom.required' => 'Vous devez saisir le nom du patient',
         'prenom.required' => 'Vous devez saisir le prenom du patient',
         'datenai.required' => 'Vous devez saisir la date de naissance du patient',
-        'nom.between' => 'Le nom doit ètre entre 5 et 15 charactères',
-        'prenom.between' => 'Le prénom doit ètre entre 5 et 15 charactères',
+        'nom.between' => 'Le nom doit ètre entre 4 et 15 charactères',
+        'prenom.between' => 'Le prénom doit ètre entre 4 et 15 charactères',
     ];
 
     public function index() {
