@@ -47,23 +47,30 @@ class PatientLitController extends Controller
             $id_salle = $request->input('id_salle');
             return redirect('patientlit/lit/'.$id_adm.'/'.$id_salle);
         }elseif( $type === 'lit' ) {
-            PatientLit::where('id_adm', $id_adm)->update(
-                [
-                    'busy' => PatientLit::LIT_FREE,
-                ]
-            );
-            $pl = new PatientLit();
-            $pl->id_adm = $id_adm;
-            $pl->id_lit = $request->input('id_lit');
-            $pl->id_salle = $request->input('id_salle');
-            $pl->save();
-            $adm = Admission::getPatientAdm($id_adm);
-            if( $adm ) {
-                return response()->redirectTo('messages?redirect=' . urldecode('patient/get/' . $adm->id_patient))
-                    ->with('success', "Service enregistrer pour le patient $adm->nom $adm->prenom, Redirection vers les détails du patients dans 5 seconds...");
+            //$l = PatientLit::where('id_adm', $id_adm);
+            //$x = $l->get()->first();
+            if( !PatientLit::isBusy($request->input('id_lit')) ) {
+                /*PatientLit::where('id_adm', $id_adm)->update(
+                    [
+                        'busy' => PatientLit::LIT_FREE,
+                    ]
+                );*/
+                $pl = new PatientLit();
+                $pl->id_adm = $id_adm;
+                $pl->id_lit = $request->input('id_lit');
+                $pl->id_salle = $request->input('id_salle');
+                $pl->busy = PatientLit::LIT_BUSY;
+                $pl->save();
+                $adm = Admission::getPatientAdm($id_adm);
+                if ($adm) {
+                    return response()->redirectTo('messages?redirect=' . urldecode('patient/get/' . $adm->id_patient))
+                        ->with('success', "Service enregistrer pour le patient $adm->nom $adm->prenom, Redirection vers les détails du patients dans 5 seconds...");
+                } else {
+                    return back()
+                        ->with('error', "Une érreur est survenue lors de l'insertion, veuillez réssayer.");
+                }
             }else{
-                return back()
-                    ->with('error', "Une érreur est survenue lors de l'insertion, veuillez réssayer.");
+                return back()->with('warning', "Le lit N° ".$request->input('id_lit')." dans la salle N° ".$request->input('id_salle')." est occupé.");
             }
         }
         return back()->with('error', "Commande inconnue");

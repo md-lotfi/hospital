@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
 
-                <form action="{{ url('patient/update') }}" method="post">
+                <form id="formSbm" action="{{ url('patient/update') }}" method="post">
 
                     {{ csrf_field() }}
 
@@ -53,7 +53,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="datenai">Date de naissance</label>
-                            <input type="date" value="{{$patient->datenai}}" required class="form-control @error('datenai') is-invalid @enderror" id="datenai" name="datenai">
+                            <input type="date" value="{{Carbon\Carbon::parse($patient->datenai)->format('Y-m-d')}}" required class="form-control @error('datenai') is-invalid @enderror" id="datenai" name="datenai">
                             <small class="form-text text-muted">Saisisser une date</small>
                             @error('datenai')
                             <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="id_patient" value="{{$patient->id_patient}}">
-                    <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
+                    <input type="button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger float-right" value="Enregistrer">
                 </form>
             </div>
         </div>

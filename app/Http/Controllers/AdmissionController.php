@@ -5,6 +5,7 @@ namespace SP\Http\Controllers;
 use SP\Patient;
 use Illuminate\Http\Request;
 use SP\Admission;
+use SP\PatientLit;
 
 class AdmissionController extends Controller
 {
@@ -46,15 +47,28 @@ class AdmissionController extends Controller
         
     }
 
-    public function edit() {
-        
+    public function edit($id_adm) {
+        $patient = Admission::getPatientAdm($id_adm);
+        $lit = PatientLit::getInfo($id_adm);
+        if( empty($lit) )
+            $lit = new PatientLit();
+        return view('admission.edit', ['admission' => $patient, 'lit'=>$lit]);
     }
 
-    public function update() {
-        
+    public function update(Request $request) {
+        //$request->validate(self::VALIDATE_RULES_PATIENT,self::VALIDATE_MESSAGE_PATIENT);
+        Admission::where('id_adm', $request->input('id_adm'))->update([
+            'motif'=>$request->input('motif'),
+            'diag'=>$request->input('diag'),
+            'date_adm'=>$request->input('date_adm')
+        ]);
+        return redirect('/patient/get/'.$request->input('id_patient'));
     }
 
-    public function destroy() {
-        
+    public function destroy($id_adm) {
+        $admission = Admission::where('id_adm', $id_adm);
+        $id_patient = $admission->get()->first()->id_patient;
+        $admission->delete();
+        return redirect('/patient/get/'.$id_patient);
     }
 }

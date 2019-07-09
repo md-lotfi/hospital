@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -46,7 +46,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/analyse/patient/get/{{ $anal->id_pa }}">Editer</a>
-                                        <a class="dropdown-item" href="/analyse/patient/remove/{{ $anal->id_pa }}">Supprimer</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/analyse/patient/remove/{{ $anal->id_pa }}">Supprimer</a>
                                     </div>
                                 </div>
                             </td>

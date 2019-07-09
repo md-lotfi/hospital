@@ -14,6 +14,7 @@
     && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\AnalyseController@print'
     && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@print'
     && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SortiePatientController@print'
+    && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\PatientController@print'
     )
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
@@ -43,6 +44,7 @@
         && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\AnalyseController@print'
         && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SoinController@print'
         && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\SortiePatientController@print'
+        && \Illuminate\Support\Facades\Route::currentRouteAction() !== 'SP\Http\Controllers\PatientController@print'
         )
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-4">
             <div class="container">

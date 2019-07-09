@@ -3,6 +3,8 @@
 namespace SP\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Knp\Snappy\Pdf;
+use SP\Admission;
 use SP\Patient;
 use SP\PatientLit;
 use SP\SortiePatient;
@@ -90,6 +92,7 @@ class PatientController extends Controller
             $p = Patient::all();
         }elseif( $nom_salle && !$nom_lit ) {
             $p = PatientLit::where('salls.nom_salle', $nom_salle)
+                ->where('patient_lit.busy', PatientLit::LIT_BUSY)
                 ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
                 ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
                 ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
@@ -97,21 +100,25 @@ class PatientController extends Controller
                 ->get();
         }elseif( $nom_lit && !$nom_salle ) {
             $p = PatientLit::where('lits.nom_lit', $nom_lit)
+                ->where('patient_lit.busy', PatientLit::LIT_BUSY)
                 ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
                 ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
                 ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
                 ->join('patients', 'patients.id_patient', 'admissions.id_patient')
                 ->get();
         }elseif( $nom_salle && $nom_lit ) {
-            PatientLit::where('salls.nom_salle', $nom_salle)
+            $p = PatientLit::where('salls.nom_salle', $nom_salle)
                 ->where('lits.nom_lit', $nom_lit)
+                ->where('patient_lit.busy', PatientLit::LIT_BUSY)
                 ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
                 ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
                 ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
                 ->join('patients', 'patients.id_patient', 'admissions.id_patient')
-                ->get()->first();
+                ->get();
+            //return view('patient.details', ['patients' => $p ]);
         }
-        return view('patient.index', ['patients' => $p ]);
+
+        return view('patient.index', ['patients' => $p]);
     }
 
     public function edit($id_patient) {
@@ -130,12 +137,12 @@ class PatientController extends Controller
             'prenommere'=>$request->input('prenommere'),
             'adresse'=>$request->input('adresse'),
         ]);
-        return redirect('/patient');
+        return redirect('/patient/get/'.$request->input('id_patient'));
     }
 
     public function get($id) {
         $patient = Patient::where('patients.id_patient',$id)
-            ->whereNull('gardem_adm.date_fin')
+            //->whereNull('gardem_adm.date_fin')
             //->where('patient_lit.busy', '=', PatientLit::LIT_FREE)
             ->leftJoin('admissions', 'patients.id_patient', '=', 'admissions.id_patient')
             ->leftJoin('patient_lit', 'admissions.id_adm', '=', 'patient_lit.id_adm')
@@ -177,5 +184,19 @@ class PatientController extends Controller
         $p = Patient::find($id_patient);
         $p->delete();
         return redirect('/patient');
+    }
+
+    public function print($id_adm){
+        $patient = Admission::getPatientAdm($id_adm);
+        return \PDF::loadView('patient.print', [])
+            //->setPaper('a4')
+            ->setOption('page-width', '116.9')
+            ->setOption('page-height', '139.7')
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 2)
+            ->setOption('margin-top', 5)
+            ->setOption('margin-right', 2)
+            ->setOption('margin-left', 2)
+            ->inline();
     }
 }

@@ -25,6 +25,7 @@ class PatientSearchController extends Controller
     private function getDetails($nom_salle, $nom_lit){
         return PatientLit::where('salls.nom_salle', $nom_salle)
             ->where('lits.nom_lit', $nom_lit)
+            ->where('patient_lit.busy', PatientLit::LIT_BUSY)
             ->join('salls', 'salls.id_salle', 'patient_lit.id_salle')
             ->join('lits', 'lits.id_lit', 'patient_lit.id_lit')
             ->join('admissions', 'admissions.id_adm', 'patient_lit.id_adm')
@@ -76,7 +77,7 @@ class PatientSearchController extends Controller
                     break;
             }
         }
-        return back()->with('error', "Le lit ".$request->input('nom_lit')." dans la salle ".$request->input('nom_salle')." n'est pas trouver.");
+        return back()->with('error', "Le lit ".$request->input('nom_lit')." dans la salle ".$request->input('nom_salle')." n'est pas trouver, il est peut être vide.");
     }
 
 }

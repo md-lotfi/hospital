@@ -15,19 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('cvs', 'CvController@index');
+/*Route::get('cvs', 'CvController@index');
 Route::get('cvs/create', 'CvController@create');
 Route::post('cvs', 'CvController@store');
 Route::get('cvs/{id}/edit', 'CvController@edit');
 Route::put('cvs/{id}', 'CvController@update');
-Route::delete('cvs/{id}', 'CvController@destroy');
+Route::delete('cvs/{id}', 'CvController@destroy');*/
 
 Route::get('admission/{id_patient}', 'AdmissionController@index');
 Route::get('admission/create/{id_patient}', 'AdmissionController@create');
 Route::post('admission', 'AdmissionController@store');
-Route::get('admission/{id}/edit', 'AdmissionController@edit');
-Route::put('admission/{id}', 'AdmissionController@update');
-Route::delete('admission/{id}', 'AdmissionController@destroy');
+Route::get('admission/get/{id_adm}', 'AdmissionController@edit');
+Route::post('admission/update', 'AdmissionController@update');
+Route::get('admission/remove/{id_adm}', 'AdmissionController@destroy');
 
 Route::get('service', 'ServiceController@index');
 Route::get('service/create', 'ServiceController@create');
@@ -62,7 +62,7 @@ Route::get('assign/add/{id_adm}', 'GardemAdmController@create');
 Route::post('gardemAdm', 'GardemAdmController@store');
 Route::get('dconfig_show/{id_adm}/{id_gardem}', 'GardemAdmController@dconfig_show');
 Route::post('dconfig_show', 'GardemAdmController@dconfig_store');
-Route::get('gardem/historique/{id_patient}', 'GardemAdmController@myGardem');
+Route::get('gardem/historique/{id_adm}', 'GardemAdmController@myGardem');
 //Route::index('gardemadm', 'GardemAdmController@index');
 
 Route::get('patientlit/service/{id_adm}', 'PatientLitController@service');
@@ -146,6 +146,7 @@ Route::get('printer/print/soins/{id_adm}', 'SoinController@print');
 Route::get('printer/print/radio/{id_pr}', 'RadioController@print');
 Route::get('printer/print/analyse/{id_pam}', 'AnalyseController@print');
 Route::get('printer/print/spatient/{id_sp}', 'SortiePatientController@print');
+Route::get('printer/print/patient/{id_adm}', 'PatientController@print');
 
 Route::get('soin/{id_adm}', 'SoinController@index');
 Route::get('soins/create/{id_adm}', 'SoinController@create');

@@ -32,7 +32,7 @@ class SortiePatientController extends Controller
     const TABLE = 'sortie_patient';
 
     /**
-     * @param $id_patient
+     * @param $id_adm
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($id_adm){
@@ -47,7 +47,9 @@ class SortiePatientController extends Controller
     }
 
     public function create($id_adm) {
-        return view('spatient.create', ['id_adm'=>$id_adm]);
+        $patient = Admission::getPatientAdm($id_adm);
+        $lit = PatientLit::getInfo($id_adm);
+        return view('spatient.create', ['id_adm'=>$id_adm, 'admission' => $patient, 'lit'=>$lit]);
     }
 
     public function store(Request $request) {

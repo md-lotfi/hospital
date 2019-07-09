@@ -10,7 +10,7 @@ class Admission extends Model
     protected $primaryKey = 'id_adm';
 
     public static function getPatientAdm($id_adm){
-        return Admission::where('id_adm', $id_adm)->Join('patients', 'patients.id_patient', '=', 'admissions.id_patient')->get()->first();
+        return Admission::where('id_adm', $id_adm)->join('patients', 'patients.id_patient', '=', 'admissions.id_patient')->get()->first();
     }
 
     public static function getOrdAdm($id_ord){

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                <form action="{{ url('medicament/update') }}" method="post">
+                <form id="formSbm" action="{{ url('medicament/update') }}" method="post">
 
                     {{ csrf_field() }}
 
@@ -20,7 +20,7 @@
                         <small class="form-text text-muted">Saisisser une dose</small>
                     </div>
                     <input type="hidden" name="id_medic" value="{{ $medic->id_medic }}" />
-                    <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
+                    <input type="button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger float-right" value="Enregistrer">
                     <div class="clearfix"></div>
                 </form>
             </div>

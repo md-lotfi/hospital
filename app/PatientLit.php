@@ -20,4 +20,17 @@ class PatientLit extends Model
             ->leftJoin('services', 'services.id_service', '=', 'unite.id_service')
             ->get()->first();
     }
+
+    /**
+     * @param $id_lit
+     * @return bool
+     */
+    public static function isBusy($id_lit){
+        $ls = PatientLit::where('id_lit', $id_lit)->get();
+        foreach ($ls as $l){
+            if( $l->busy === self::LIT_BUSY )
+                return true;
+        }
+        return false;
+    }
 }

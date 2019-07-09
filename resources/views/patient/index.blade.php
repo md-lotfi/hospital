@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('layouts.confirm')
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
@@ -77,7 +77,7 @@
                             <tr>
                                 <td>{{ $patient->nom }}</td>
                                 <td>{{ $patient->prenom }}</td>
-                                <td>{{ $patient->datenai }}</td>
+                                <td>{{ Carbon\Carbon::parse($patient->datenai)->format('d/m/Y') }}</td>
                                 <td>{{ $patient->prenompere }}</td>
                                 <td>{{ $patient->nommere }}</td>
                                 <td>{{ $patient->prenommere }}</td>
@@ -94,27 +94,8 @@
                                             <a class="dropdown-item" href="/patient/get/{{ $patient->id_patient }}">Détail</a>
                                             @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
                                                 <a class="dropdown-item" href="/patient/edit/{{ $patient->id_patient }}">Editer</a>
-                                                <a class="dropdown-item" href="/patient/delete/{{ $patient->id_patient }}">Supprimer</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/patient/delete/{{ $patient->id_patient }}">Supprimer</a>
                                             @endif
-                                            <!--@if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::MEDECIN_TYPE || \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="/detail/soin/{{$patient->id_adm}}">Voire les soins</a>
-                                        @endif-->
-                                        <!--<a class="dropdown-item" href="/prelevement/{{$patient->id_adm}}">Prélevements</a>
-                                     <li class="dropdown-submenu">
-                                         <a class="dropdown-item dropdown-toggle" href="#">Enregistrer soins</a>
-                                         <ul class="dropdown-menu">
-                                             <li class="dropdown-submenu">
-                                             <li><a class="dropdown-item dropdown-toggle" href="#">Traitements</a>
-                                                 <ul class="dropdown-menu">
-                                                     <li><a class="dropdown-item" href="/soin/{{$patient->id_patient}}">Médicaments</a></li>
-                                                     <li><a class="dropdown-item" href="/psychotrope/create/{{$patient->id_patient}}">Psycotropes</a></li>
-                                                 </ul>
-                                             </li>
-                                             <li><a class="dropdown-item" href="/prelevement/create/{{$patient->id_patient}}">Prélevements</a></li>
-                                         </ul>
-                                     </li>
-                                     <a class="dropdown-item" href="#">Sortie de patient</a>-->
                                         </div>
                                     </div>
                                 </td>

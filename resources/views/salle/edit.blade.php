@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
+    @include('layouts.confirm')
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
 
-                <form action="{{ url('salle/update') }}" method="post">
+                <form id="formSbm" action="{{ url('salle/update') }}" method="post">
 
                     {{ csrf_field() }}
 
@@ -16,7 +16,7 @@
                     </div>
                     <input type="hidden" name="id_salle" value="{{ $salle->id_salle }}" />
                     <input type="hidden" name="id_unite" value="{{ $salle->id_unite }}" />
-                    <input type="submit" class="btn btn-danger float-right" value="Enregistrer">
+                    <input type="button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger float-right" value="Enregistrer">
                     <div class="clearfix"></div>
                 </form>
                 <a href="/salle/{{ $salle->id_unite }}"><- Retoure</a>

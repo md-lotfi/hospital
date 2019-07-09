@@ -3,7 +3,33 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-5 offset-md-4">
+        <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-sm-4">Nom</dt>
+                <dd class="col-sm-8">{{$admission->nom}}</dd>
+
+                <dt class="col-sm-4">Prénom</dt>
+                <dd class="col-sm-8">{{$admission->prenom}}</dd>
+
+                <dt class="col-sm-4">Age</dt>
+                <dd class="col-sm-8">{{\SP\Patient::getAge($admission->datenai)}}</dd>
+            </dl>
+            <hr>
+            <dl class="row">
+                <dt class="col-sm-4">Service</dt>
+                <dd class="col-sm-8">{{$lit->nom}}</dd>
+
+                <dt class="col-sm-4">Unité</dt>
+                <dd class="col-sm-8">{{$lit->nom_unite}}</dd>
+
+                <dt class="col-sm-4">Salle</dt>
+                <dd class="col-sm-8">{{$lit->nom_salle}}</dd>
+
+                <dt class="col-sm-4">Lit</dt>
+                <dd class="col-sm-8">{{$lit->nom_lit}}</dd>
+            </dl>
+        </div>
+        <div class="col-md-5">
 
         <form action="{{ url('spatient') }}" method="post">
         
@@ -21,13 +47,13 @@
 
             <div class="form-group">
                 <label for="d">Date</label>
-                <input type="date" id="d" class="form-control" name="date_sortie">
+                <input type="date" id="d" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" class="form-control" name="date_sortie">
                 <small class="form-text text-muted">Saisisser une date</small>
             </div>
 
             <div class="form-group">
                 <label for="t">Heur de sortie</label>
-                <input type="time" id="t" class="form-control" name="heur_sortie">
+                <input type="time" id="t" value="{{ Carbon\Carbon::now()->format('h:m:s') }}" class="form-control" name="heur_sortie">
                 <small class="form-text text-muted">Saisisser l'heur de sortie</small>
             </div>
 

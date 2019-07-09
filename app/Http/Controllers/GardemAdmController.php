@@ -20,8 +20,10 @@ class GardemAdmController extends Controller
         return view('gardemAdm.index', ['gardems' => $gardems]);
     }
 
-    public function myGardem($id_patient) {
-        $gardems = Admission::where('admissions.id_patient', $id_patient)
+    public function myGardem($id_adm) {
+        $patient = Admission::getPatientAdm($id_adm);
+        $gardems = GardemAdm::getGardem($id_adm);
+        /*$gardems = Admission::where('admissions.id_patient', $id_patient)
             ->leftJoin('gardem_adm', 'gardem_adm.id_adm', '=', 'admissions.id_adm')
             ->leftJoin('gardem', 'gardem.id_gardem', '=', 'gardem_adm.id_gardem')
             ->select(
@@ -33,7 +35,7 @@ class GardemAdmController extends Controller
                 'gardem.tel',
                 'gardem.id_gardem',
                 'gardem_adm.date_debut'
-            )->get();
+            )->get();*/
         return view('gardemAdm.index', ['gardems' => $gardems]);
     }
 
@@ -63,9 +65,9 @@ class GardemAdmController extends Controller
         $gm->date_fin = $request->input('date_fin');
         $gm->save();
 
-        $adm = Admission::find($gm->id_adm);
+        $adm = Admission::getPatientAdm($request->input('id_adm'));
 
-        return redirect('patient/get/'.$adm->id_adm);
+        return redirect('patient/get/'.$adm->id_patient);
     }
 
     public function store(Request $request) {
