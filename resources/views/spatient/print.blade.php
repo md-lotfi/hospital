@@ -52,7 +52,7 @@
                 </dl>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
+        <div class="row" style="margin-top: 20px; margin-bottom: 30px">
             <div class="col-xs-6 text-left">
                 <h4>Nom prénom et grade du praticien</h4>
             </div>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6 text-center">
+            <div class="col-xs-4 text-center">
                 <p>Date et cachet</p>
                 <p>Signature,</p>
             </div>
