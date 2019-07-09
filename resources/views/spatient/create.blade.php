@@ -26,6 +26,12 @@
             </div>
 
             <div class="form-group">
+                <label for="t">Heur de sortie</label>
+                <input type="time" id="t" class="form-control" name="heur_sortie">
+                <small class="form-text text-muted">Saisisser l'heur de sortie</small>
+            </div>
+
+            <div class="form-group">
                 <label for="diag">Diagnostique</label>
                 <textarea rows="3" class="form-control" id="diag" name="diagnostic"></textarea>
                 <small class="form-text text-muted">Saisisser le diagnostique du patient</small>

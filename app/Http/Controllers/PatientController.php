@@ -5,6 +5,7 @@ namespace SP\Http\Controllers;
 use Illuminate\Http\Request;
 use SP\Patient;
 use SP\PatientLit;
+use SP\SortiePatient;
 use SP\User;
 
 class PatientController extends Controller
@@ -133,9 +134,6 @@ class PatientController extends Controller
     }
 
     public function get($id) {
-        /*$id = Auth::user();
-        var_dump($id);
-        exit();*/
         $patient = Patient::where('patients.id_patient',$id)
             ->whereNull('gardem_adm.date_fin')
             //->where('patient_lit.busy', '=', PatientLit::LIT_FREE)
@@ -148,6 +146,7 @@ class PatientController extends Controller
             ->leftJoin('gardem_adm', 'gardem_adm.id_adm', '=', 'admissions.id_adm')
             ->leftJoin('gardem', 'gardem.id_gardem', '=', 'gardem_adm.id_gardem')
             ->leftJoin('sortie_patient', 'sortie_patient.id_adm', '=', 'admissions.id_adm')
+            ->leftJoin('medecin', 'medecin.id_med', '=', 'sortie_patient.id_med')
             ->select(
                 'patients.*',
                 'admissions.id_adm as id_admission',
@@ -162,14 +161,15 @@ class PatientController extends Controller
                 'gardem.prenom as prenom_gardem',
                 'gardem_adm.date_debut as date_debut_gardem',
                 'services.nom as nom_service',
-                'sortie_patient.*'
+                'sortie_patient.*',
+                'medecin.*'
             )
             ->groupBy('admissions.id_adm')
             //->orderBy('name', 'desc')
             ->get();
-        if( count($patient) > 0 )
-            return view('patient.details', ['patient' => $patient[0], 'admissions'=>$patient]);
-        else
+        if( count($patient) > 0 ) {
+            return view('patient.details', ['patient' => $patient[0], 'admissions' => $patient]);
+        }else
             return view('patient.details', ['patient' => new Patient(), 'admissions'=>null]);
     }
 

@@ -145,6 +145,7 @@ Route::get('printer/print/ordonnance/{id_ord}', 'OrdonnanceController@print');
 Route::get('printer/print/soins/{id_adm}', 'SoinController@print');
 Route::get('printer/print/radio/{id_pr}', 'RadioController@print');
 Route::get('printer/print/analyse/{id_pam}', 'AnalyseController@print');
+Route::get('printer/print/spatient/{id_sp}', 'SortiePatientController@print');
 
 Route::get('soin/{id_adm}', 'SoinController@index');
 Route::get('soins/create/{id_adm}', 'SoinController@create');

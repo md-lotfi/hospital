@@ -5,46 +5,49 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Liste des sortie du patient
-                    @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::INFERMIERE_TYPE )
-                        <a href="/soins/create/{{$id_adm}}" class="btn btn-warning float-right">Ajouter un traitement</a>
-                    @endif
+                <h1>
+                    Sortie du patient
+                    <a href="/printer/print/spatient/{{$sortie->id_sp}}" class="btn btn-warning float-right">Imprimer</a>
                 </h1>
-                <table class="table">
-                    <head>
-                        <tr class="d-flex">
-                            <th class="col-md-3">Infermiere</th>
-                            <th class="col-md-2">Médicament</th>
-                            <th class="col-md-2">Dose</th>
-                            <th class="col-md-2">Voie</th>
-                            <th class="col-md-2">Date et Heure</th>
-                            <th class="col-md-1">Action</th>
-                        </tr>
-                    </head>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-4">Nom patient</dt>
+                    <dd class="col-sm-8">{{$sortie->nom}}</dd>
 
-                    <body>
-                    @foreach($soins as $soin)
-                        <tr class="d-flex">
-                            <td class="col-md-3">{{ $soin->name }} {{ $soin->prenom_inf }}</td>
-                            <td class="col-md-2">{{ $soin->nom_medic }}</td>
-                            <td class="col-md-2">{{ $soin->dose_admini }}</td>
-                            <td class="col-md-2">{{ $soin->voie }}</td>
-                            <td class="col-md-2">{{ $soin->created_at }}</td>
-                            <td class="col-md-1">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/soin/get/{{ $soin->id_soin }}">Modifier</a>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/soin/remove/{{ $soin->id_soin }}">Supprimer</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </body>
-                </table>
+                    <dt class="col-sm-4">Prénom patient</dt>
+                    <dd class="col-sm-8">{{$sortie->prenom}}</dd>
+
+                    <dt class="col-sm-4">Age</dt>
+                    <dd class="col-sm-8">{{SP\Patient::getAge($sortie->datenai)}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-4">Nom secrétaire</dt>
+                    <dd class="col-sm-8">{{$sortie->name}}</dd>
+
+                    <dt class="col-sm-4">Prénom secrétaire</dt>
+                    <dd class="col-sm-8">{{$sortie->prenom_sec}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="row">
+                    <dt class="col-sm-4">N° sortie</dt>
+                    <dd class="col-sm-8">{{$sortie->id_sp}}</dd>
+
+                    <dt class="col-sm-4">Diagnostique de sortie</dt>
+                    <dd class="col-sm-8">{{$sortie->diagnostic}}</dd>
+
+                    <dt class="col-sm-4">Type</dt>
+                    <dd class="col-sm-8">{{$sortie->type}}</dd>
+
+                    <dt class="col-sm-4">Date de sortie</dt>
+                    <dd class="col-sm-8">{{$sortie->date_sortie}}</dd>
+                </dl>
             </div>
         </div>
     </div>

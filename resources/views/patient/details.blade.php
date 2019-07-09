@@ -112,11 +112,10 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="/admission/update/{{ $admission->id_admission }}">Editer</a>
                                                 <a class="dropdown-item" href="#">Supprimer</a>
-                                                <!--<div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="/soin/{{ $admission->id_patient }}">Soins</a>
-                                                <a class="dropdown-item" href="/patientlit/service/{{ $admission->id_admission }}">Service</a>
-                                                <a class="dropdown-item" href="/assign/add/{{ $admission->id_admission }}">Garde malade</a>
-                                                <a class="dropdown-item" href="/validate/update?idadm={{ $admission->id_admission }}">Valider admission</a>-->
+                                                @if( $admission->id_sp !== null )
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="/spatient/{{ $admission->id_admission }}">Consulter Sortie Patient</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
@@ -125,26 +124,6 @@
                         @endif
                         </body>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <!--<h3>Historique des Gardes Malade du Patient</h3>
-                    <table class="table">
-                        <head>
-                            <tr class="d-flex">
-                                <th class="col-md-3">Nom</th>
-                                <th class="col-md-3">Prénom</th>
-                                <th class="col-md-2">Lien P.</th>
-                                <th class="col-md-3">Tél</th>
-                                <th class="col-md-1">Actions</th>
-                            </tr>
-                        </head>
-
-                        <body>
-
-                        </body>
-                    </table>-->
                 </div>
             </div>
         </div>

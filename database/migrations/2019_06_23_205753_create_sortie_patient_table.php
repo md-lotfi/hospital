@@ -20,6 +20,7 @@ class CreateSortiePatientTable extends Migration
             $table->text('diagnostic');
             $table->string('type');
             $table->dateTime('date_sortie');
+            $table->time('heur_sortie');
             $table->timestamps();
         });
     }
