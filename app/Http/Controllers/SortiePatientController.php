@@ -81,9 +81,9 @@ class SortiePatientController extends Controller
             //->orderBy('name', 'desc')
             ->get()->first();
         return PDF::loadView('spatient.print', ['sortie' => $sortie])
-            ->setPaper('a4')
-            /*->setOption('page-width', '116.9')
-            ->setOption('page-height', '139.7')*/
+            //->setPaper('a4')
+            ->setOption('page-width', '116.9')
+            ->setOption('page-height', '150.7')
             ->setOrientation('portrait')
             ->setOption('margin-bottom', 2)
             ->setOption('margin-top', 5)

@@ -8,62 +8,51 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-xs-12">
+                <ul class="list-unstyled">
+                    <li><b>Nom patient: </b>{{$sortie->nom}}</li>
+                    <li><b>Prénom patient: </b>{{$sortie->prenom}}</li>
+                    <li><b>Age: </b>{{SP\Patient::getAge($sortie->datenai)}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <p>CADRE RESERVE AU PRATICIEN</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <dl class="dl-horizontal">
-                    <dt>Nom patient</dt>
-                    <dd>{{$sortie->nom}}</dd>
-                    <dt>Prénom patient</dt>
-                    <dd>{{$sortie->prenom}}</dd>
-                    <dt>Age</dt>
-                    <dd>{{SP\Patient::getAge($sortie->datenai)}}</dd>
-                </dl>
-            </div>
-        </div>
         <div class="row" style="border: 2px #333 solid">
             <div class="col-xs-6">
-                <dl class="dl-horizontal">
-                    <dt>Date de sortie</dt>
-                    <dd>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $sortie->date_sortie)->format('d/m/Y') }}</dd>
-                    <dt>Mode de sortie</dt>
-                    <dd>{{$sortie->type}}</dd>
-                    <dt>Dignostic ou motif d'entrée</dt>
-                    <dd>{{$sortie->diag}}</dd>
-                    <dt>Diagnostique de sortie</dt>
-                    <dd>{{$sortie->diagnostic}}</dd>
-                    <dt>Code C.I.M</dt>
-                    <dd>|___|___|___|</dd>
-                </dl>
+                <ul class="list-unstyled">
+                    <li><b>Date de sortie: </b>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $sortie->date_sortie)->format('d/m/Y') }}</li>
+                    <li><b>Mode de sortie: </b>{{$sortie->type}}</li>
+                    <li><b>Dignostic ou motif d'entrée: </b>{{$sortie->diag}}</li>
+                    <li><b>Diagnostique de sortie: </b>{{$sortie->diagnostic}}</li>
+                    <li><b>Code C.I.M: </b>|___|___|___|</li>
+                </ul>
             </div>
             <div class="col-xs-6">
-                <dl class="dl-horizontal">
-                    <dt>Heur de sortie</dt>
-                    <dd>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $sortie->date_sortie)->format('H:i:s') }}</dd>
+                <ul class="list-unstyled">
+                    <li><b>Heur de sortie: </b>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $sortie->date_sortie)->format('H:i:s') }}</li>
 
-                    <dt>Code de sortie</dt>
-                    <dd>|___|___|</dd>
+                    <li><b>Code de sortie: </b>|___|___|</li>
 
-                    <dt>Code C.H.M</dt>
-                    <dd>|___|___|___|</dd>
-                </dl>
+                    <li><b>Code C.H.M: </b>|___|___|___|</li>
+                </ul>
             </div>
         </div>
         <div class="row" style="margin-top: 20px; margin-bottom: 30px">
             <div class="col-xs-6 text-left">
-                <h4>Nom prénom et grade du praticien</h4>
+                <h5>Nom prénom et grade du praticien</h5>
             </div>
             <div class="col-xs-6 text-right">
-                <p>Visa du chef de service</p>
+                <h5>Visa du chef de service</h5>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-4 text-center">
-                <p>Date et cachet</p>
-                <p>Signature,</p>
+                <h5 style="margin-bottom: 30px">Date et cachet</h5>
+                <h5>Signature,</h5>
             </div>
         </div>
     </div>
