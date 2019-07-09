@@ -15,7 +15,7 @@ class CreateSecretaireTable extends Migration
     {
         Schema::create('secretaire', function (Blueprint $table) {
             $table->increments('id_sec');
-            $table->integer('id_user');
+            $table->integer('id_user')->unsigned();
             $table->string('prenom_sec');
             $table->string('adr_sec');
             $table->string('tel_sec');

@@ -15,8 +15,8 @@ class CreateGardemAdmTable extends Migration
     {
         Schema::create('gardem_adm', function (Blueprint $table) {
             $table->increments('id_gardem_adm');
-            $table->integer('id_gardem');
-            $table->integer('id_adm');
+            $table->integer('id_gardem')->unsigned();
+            $table->integer('id_adm')->unsigned();
             $table->dateTime('date_debut');
             $table->dateTime('date_fin')->nullable();
             $table->timestamps();

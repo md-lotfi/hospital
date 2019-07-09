@@ -15,9 +15,9 @@ class CreatePrelevementsTable extends Migration
     {
         Schema::create('prelevements', function (Blueprint $table) {
             $table->increments('id_prel');
-            $table->integer('id_adm');
+            $table->integer('id_adm')->unsigned();
             //$table->integer('id_med');
-            $table->integer('id_inf');
+            $table->integer('id_inf')->unsigned();
             $table->string('temp')->nullable();
             $table->string('poid')->nullable();
             $table->string('taille')->nullable();

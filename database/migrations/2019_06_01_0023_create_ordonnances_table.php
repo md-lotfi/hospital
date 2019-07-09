@@ -15,8 +15,8 @@ class CreateOrdonnancesTable extends Migration
     {
         Schema::create('ordonnances', function (Blueprint $table) {
             $table->increments('id_ord');
-            $table->integer('id_adm');
-            $table->integer('id_med');
+            $table->integer('id_adm')->unsigned();
+            $table->integer('id_med')->unsigned()   ;
             $table->text('observation');
             $table->timestamps();
             $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');

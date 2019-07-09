@@ -15,11 +15,11 @@ class CreateSlookupTable extends Migration
     {
         Schema::create('slookup', function (Blueprint $table) {
             $table->increments('id_slookup');
-            $table->integer('id_adm');
-            $table->integer('id_service');
-            $table->integer('id_unite');
-            $table->integer('id_salle');
-            $table->integer('id_lit');
+            $table->integer('id_adm')->unsigned();
+            $table->integer('id_service')->unsigned();
+            $table->integer('id_unite')->unsigned();
+            $table->integer('id_salle')->unsigned();
+            $table->integer('id_lit')->unsigned();
             $table->timestamps();
             $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
             $table->foreign('id_service')->references('id_service')->on('services')->onDelete('cascade');

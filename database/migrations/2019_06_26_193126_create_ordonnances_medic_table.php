@@ -15,8 +15,8 @@ class CreateOrdonnancesMedicTable extends Migration
     {
         Schema::create('ordonnances_medic', function (Blueprint $table) {
             $table->increments('id_ord_medic');
-            $table->integer('id_ord');
-            $table->integer('id_medic');
+            $table->integer('id_ord')->unsigned();
+            $table->integer('id_medic')->unsigned();
             $table->string('doze_ord');
             $table->string('freq_ord');
             $table->string('qte_ord')->nullable();//durée de prise de médicaments

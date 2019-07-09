@@ -15,8 +15,8 @@ class CreatePrescriptionTable extends Migration
     {
         Schema::create('prescription', function (Blueprint $table) {
             $table->increments('id_pres');
-            $table->integer('id_adm');
-            $table->integer('id_medecin');
+            $table->integer('id_adm')->unsigned();
+            $table->integer('id_medecin')->unsigned();
             $table->timestamp('date_pres');
             $table->text('observation');
             $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');

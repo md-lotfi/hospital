@@ -15,8 +15,8 @@ class CreatePatientAnalysesTable extends Migration
     {
         Schema::create('patient_analyses', function (Blueprint $table) {
             $table->increments('id_pa');
-            $table->integer('id_pam');
-            $table->integer('id_analyse');
+            $table->integer('id_pam')->unsigned();
+            $table->integer('id_analyse')->unsigned();
             $table->text('results')->nullable();
             $table->timestamps();
             $table->foreign('id_pam')->references('id_pam')->on('patient_analyses_master')->onDelete('cascade');

@@ -15,9 +15,9 @@ class CreatePatientRadiosTable extends Migration
     {
         Schema::create('patient_radios', function (Blueprint $table) {
             $table->increments('id_pr');
-            $table->integer('id_adm');
-            $table->integer('id_med');
-            $table->integer('id_radio');
+            $table->integer('id_adm')->unsigned();
+            $table->integer('id_med')->unsigned();
+            $table->integer('id_radio')->unsigned();
             $table->text('results')->nullable();
             $table->timestamps();
             $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
