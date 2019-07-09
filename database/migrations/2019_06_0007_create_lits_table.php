@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdonnancesTable extends Migration
+class CreateLitsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,12 +14,12 @@ class CreateOrdonnancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ordonnances', function (Blueprint $table) {
-            $table->increments('id_ord');
-            $table->integer('id_adm');
-            $table->integer('id_med');
-            $table->text('observation');
+        Schema::create('lits', function (Blueprint $table) {
+            $table->increments('id_lit');
+            $table->unsignedInteger('id_salle');
+            $table->string('nom_lit');
             $table->timestamps();
+            $table->foreign('id_salle')->references('id_salle')->on('salls')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateOrdonnancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordonnances');
+        Schema::dropIfExists('lits');
     }
 }

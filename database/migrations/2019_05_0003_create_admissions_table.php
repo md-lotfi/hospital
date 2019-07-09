@@ -22,10 +22,11 @@ class CreateAdmissionsTable extends Migration
             //$table->dateTime('date_sort');
             //$table->string('etat_sort');
             $table->timestamps();
+            $table->foreign('id_patient')->references('id_patient')->on('patients')->onDelete('cascade');
         });
-        Schema::table('admissions',function($table){
+        /*Schema::table('admissions',function($table){
             $table->foreign('id_patient')->references('id_patient')->on('patients');
-        });
+        });*/
     }
 
     /**

@@ -53,7 +53,7 @@ class RadioController extends Controller
     }
 
     public function destroy($id_radio) {
-        $radio = Medicaments::find($id_radio);
+        $radio = Radio::where('id_radio', $id_radio);
         $radio->delete();
         return redirect('radio');
     }

@@ -15,9 +15,10 @@ class CreateUniteTable extends Migration
     {
         Schema::create('unite', function (Blueprint $table) {
             $table->increments('id_unite');
-            $table->integer('id_service')->unsigned();
+            $table->unsignedInteger('id_service');
             $table->string('nom_unite');
             $table->timestamps();
+            $table->foreign('id_service')->references('id_service')->on('services')->onDelete('cascade');
         });
         /*Schema::table('unite',function($table){
             $table->foreign('id_service')->references('id_service')->on('services');

@@ -20,6 +20,7 @@ class CreateSecretaireTable extends Migration
             $table->string('adr_sec');
             $table->string('tel_sec');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

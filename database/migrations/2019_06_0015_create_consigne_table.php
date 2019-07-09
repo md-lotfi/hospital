@@ -20,6 +20,8 @@ class CreateConsigneTable extends Migration
             $table->tinyInteger('received')->nullable()->default(0);//set to 1 if doctor saw the notif
             $table->text('observation');
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_medecin')->references('id_med')->on('medecin')->onDelete('cascade');
         });
         /*Schema::table('consigne',function($table){
             $table->foreign('id_patient')->references('id_patient')->on('patients');

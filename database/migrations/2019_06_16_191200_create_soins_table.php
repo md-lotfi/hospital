@@ -21,6 +21,9 @@ class CreateSoinsTable extends Migration
             $table->string('dose_admini');
             $table->string('voie');
             $table->timestamps();
+            $table->foreign('id_medic')->references('id_medic')->on('medicaments')->onDelete('cascade');
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_inf')->references('id_inf')->on('infirmiere')->onDelete('cascade');
         });
     }
 

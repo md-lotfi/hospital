@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatientRadiosTable extends Migration
+class CreateOrdonnancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreatePatientRadiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_radios', function (Blueprint $table) {
-            $table->increments('id_pr');
+        Schema::create('ordonnances', function (Blueprint $table) {
+            $table->increments('id_ord');
             $table->integer('id_adm');
             $table->integer('id_med');
-            $table->integer('id_radio');
-            $table->text('results')->nullable();
+            $table->text('observation');
             $table->timestamps();
             $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
             $table->foreign('id_med')->references('id_med')->on('medecin')->onDelete('cascade');
-            $table->foreign('id_radio')->references('id_radio')->on('radios')->onDelete('cascade');
         });
     }
 
@@ -33,6 +31,6 @@ class CreatePatientRadiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_radios');
+        Schema::dropIfExists('ordonnances');
     }
 }

@@ -20,6 +20,9 @@ class CreatePatientLitTable extends Migration
             $table->integer('id_lit')->unsigned();
             $table->tinyInteger('busy')->default(\SP\PatientLit::LIT_BUSY);
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_salle')->references('id_salle')->on('salls')->onDelete('cascade');
+            $table->foreign('id_lit')->references('id_lit')->on('lits')->onDelete('cascade');
         });
     }
 

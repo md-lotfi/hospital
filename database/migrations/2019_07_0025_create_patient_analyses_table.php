@@ -19,6 +19,8 @@ class CreatePatientAnalysesTable extends Migration
             $table->integer('id_analyse');
             $table->text('results')->nullable();
             $table->timestamps();
+            $table->foreign('id_pam')->references('id_pam')->on('patient_analyses_master')->onDelete('cascade');
+            $table->foreign('id_analyse')->references('id_analyse')->on('analyses')->onDelete('cascade');
         });
     }
 

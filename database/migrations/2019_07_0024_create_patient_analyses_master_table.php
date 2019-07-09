@@ -19,6 +19,8 @@ class CreatePatientAnalysesMasterTable extends Migration
             $table->integer('id_med');
             $table->text('observation')->nullable();
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_med')->references('id_med')->on('medecin')->onDelete('cascade');
         });
     }
 

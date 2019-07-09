@@ -21,6 +21,9 @@ class CreatePsychtropesTable extends Migration
             $table->string('nom_psy');
             $table->string('mat_psy');
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_inf')->references('id_inf')->on('infirmiere')->onDelete('cascade');
+            $table->foreign('id_med')->references('id_med')->on('medecin')->onDelete('cascade');
         });
     }
 

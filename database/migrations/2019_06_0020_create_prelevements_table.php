@@ -28,6 +28,8 @@ class CreatePrelevementsTable extends Migration
             $table->string('diurese')->nullable();
             $table->text('observation')->nullable();
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_inf')->references('id_inf')->on('infirmiere')->onDelete('cascade');
         });
     }
 

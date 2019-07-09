@@ -22,6 +22,8 @@ class CreateOrdonnancesMedicTable extends Migration
             $table->string('qte_ord')->nullable();//durée de prise de médicaments
             $table->string('delay_ord');
             $table->timestamps();
+            $table->foreign('id_ord')->references('id_ord')->on('ordonnances')->onDelete('cascade');
+            $table->foreign('id_medic')->references('id_medic')->on('medicaments')->onDelete('cascade');
         });
     }
 

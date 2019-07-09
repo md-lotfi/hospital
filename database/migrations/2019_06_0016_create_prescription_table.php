@@ -19,6 +19,8 @@ class CreatePrescriptionTable extends Migration
             $table->integer('id_medecin');
             $table->timestamp('date_pres');
             $table->text('observation');
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_medecin')->references('id_med')->on('medecin')->onDelete('cascade');
         });
         /*Schema::table('prescription',function($table){
             $table->foreign('id_patient')->references('id_patient')->on('patients');

@@ -22,6 +22,8 @@ class CreateSortiePatientTable extends Migration
             $table->dateTime('date_sortie');
             $table->time('heur_sortie');
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_med')->references('id_med')->on('medecin')->onDelete('cascade');
         });
     }
 

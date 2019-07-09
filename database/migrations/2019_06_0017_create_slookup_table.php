@@ -21,6 +21,11 @@ class CreateSlookupTable extends Migration
             $table->integer('id_salle');
             $table->integer('id_lit');
             $table->timestamps();
+            $table->foreign('id_adm')->references('id_adm')->on('admissions')->onDelete('cascade');
+            $table->foreign('id_service')->references('id_service')->on('services')->onDelete('cascade');
+            $table->foreign('id_unite')->references('id_unite')->on('unite')->onDelete('cascade');
+            $table->foreign('id_salle')->references('id_salle')->on('salls')->onDelete('cascade');
+            $table->foreign('id_lit')->references('id_lit')->on('lits')->onDelete('cascade');
         });
     }
 

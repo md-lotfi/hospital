@@ -33,8 +33,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="/radio/get/{{ $radio->id_radio }}">Editer</a>
                                         <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/radio/remove/{{ $radio->id_radio }}">Supprimer</a>
-                                        <div class="dropdown-divider"></div>
-                                        <!--<a class="dropdown-item" href="/printer/print/radio/{{ $radio->id_radio }}">Imprimer</a>-->
+                                        <!--<div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/printer/print/radio/{{ $radio->id_radio }}">Imprimer</a>-->
                                     </div>
                                 </div>
                             </td>
