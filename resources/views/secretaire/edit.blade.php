@@ -10,7 +10,7 @@
 
                     <div class="form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" class="form-control" value="{{$sec->nom_sec}}" id="nom" name="nom" placeholder="Nom du secrétaire">
+                        <input type="text" class="form-control" value="{{$user->name}}" id="nom" name="nom" placeholder="Nom du secrétaire">
                         <small class="form-text text-muted">Saisisser un nom</small>
                     </div>
 

@@ -22,7 +22,7 @@
                     @foreach($secs as $sec)
                         <tr class="d-flex">
                             <td class="col-md-1">{{ $sec->id_sec }}</td>
-                            <td class="col-md-3">{{ $sec->nom_sec }}</td>
+                            <td class="col-md-3">{{ $sec->name }}</td>
                             <td class="col-md-3">{{ $sec->prenom_sec }}</td>
                             <td class="col-md-2">{{ $sec->adr_sec }}</td>
                             <td class="col-md-2">{{ $sec->tel_sec }}</td>
@@ -32,7 +32,7 @@
                                         Action
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="/infermiere/get/{{ $sec->id_sec }}">Editer</a>
+                                        <a class="dropdown-item" href="/secretaire/get/{{ $sec->id_sec }}">Editer</a>
                                         <a class="dropdown-item" data-toggle="modal" data-target="#confirm-delete" href="#" data-href="/infermiere/remove/{{ $sec->id_sec }}">Supprimer</a>
                                     </div>
                                 </div>

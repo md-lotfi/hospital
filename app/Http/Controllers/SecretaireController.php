@@ -17,7 +17,9 @@ class SecretaireController extends Controller
     const TABLE = 'secretaire';
 
     public function index() {
-        $secs = Secretaire::all();
+        $secs = Secretaire::select('secretaire.*', 'users.*')
+            ->join('users', 'users.id', 'secretaire.id_user')
+            ->get();
         return view('secretaire.index', ['secs' => $secs]);
     }
 
@@ -50,16 +52,24 @@ class SecretaireController extends Controller
 
     public function edit($id_sec) {
         $sec = Secretaire::find($id_sec);
-        return view('secretaire.edit', ['sec' => $sec]);
+        $user = User::where('id', $sec->id_user)->get()->first();
+        return view('secretaire.edit', ['sec' => $sec, 'user'=>$user]);
     }
 
     public function update(Request $request) {
-        Secretaire::where(self::TABLE.'.id_sec', $request->input('id_sec'))->update(
+        $sec = Secretaire::where(self::TABLE.'.id_sec', $request->input('id_sec'));
+        $id_user = $sec->get()->first()->id_user;
+        $sec->update(
             [
-                'nom_sec' => $request->input('nom'),
+                //'nom_sec' => $request->input('nom'),
                 'prenom_sec' => $request->input('prenom'),
                 'adr_sec' => $request->input('adr'),
                 'tel_sec' => $request->input('tel')
+            ]
+        );
+        User::where('id', $id_user)->update(
+            [
+                'name' => $request->input('nom'),
             ]
         );
         return redirect('secretaire');

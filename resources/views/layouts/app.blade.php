@@ -124,16 +124,16 @@
                                             <a class="dropdown-item" href="/radio">Radio</a>
                                         @endif
                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
-                                        <a class="dropdown-item" href="{{ url('medecin/create')}}">Ajouter Médecins</a>
+                                        <a class="dropdown-item" href="/medecin">Médecins</a>
                                     @endif
                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
-                                        <a class="dropdown-item" href="/infermiere">Ajouter Infirmières</a>
+                                        <a class="dropdown-item" href="/infermiere">Infirmières</a>
                                     @endif
                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::ADMIN_TYPE )
-                                        <a class="dropdown-item" href="/secretaire">Ajouter Secrétaire</a>
+                                        <a class="dropdown-item" href="/secretaire">Secrétaire</a>
                                     @endif
                                     @if( \Illuminate\Support\Facades\Auth::user()->type === \SP\User::SECRETAIRE_TYPE )
-                                        <a class="dropdown-item" href="/gardem">Ajouter Garde Malade</a>
+                                        <a class="dropdown-item" href="/gardem">Garde Malade</a>
                                     @endif
                                 @endif
                             </div>
