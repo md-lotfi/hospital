@@ -14,4 +14,7 @@ class SortiePatient extends Model
                         'Terminer',
                         'Transfert'
                         ];
+    public static function getSortie($id_adm){
+        return SortiePatient::where('id_adm')->get()->first();
+    }
 }

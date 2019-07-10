@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="card" style="width: 11rem;">
-                            <a href="{{ url('consigne/create')}}">
+                            <a href="/patient/search/consult/{{\SP\Http\Controllers\PatientSearchController::ROUTE_CONSIGNE}}">
                                 <img src="/images/consigne.png" class="card-img-top">
                             </a>
                             <div class="card-body">

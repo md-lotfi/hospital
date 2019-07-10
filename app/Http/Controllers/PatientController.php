@@ -5,8 +5,14 @@ namespace SP\Http\Controllers;
 use Illuminate\Http\Request;
 use Knp\Snappy\Pdf;
 use SP\Admission;
+use SP\Analyse;
 use SP\Patient;
+use SP\PatientAnalyse;
+use SP\PatientAnalyseMaster;
 use SP\PatientLit;
+use SP\PatientRadio;
+use SP\Psychotrope;
+use SP\Soin;
 use SP\SortiePatient;
 use SP\User;
 
@@ -188,10 +194,31 @@ class PatientController extends Controller
 
     public function print($id_adm){
         $patient = Admission::getPatientAdm($id_adm);
-        return \PDF::loadView('patient.print', [])
-            //->setPaper('a4')
-            ->setOption('page-width', '116.9')
-            ->setOption('page-height', '139.7')
+        $lit = PatientLit::getInfo($id_adm);
+        $sortie = SortiePatient::getSortie($id_adm);
+        if( !$sortie )
+            $sortie = new SortiePatient();
+        $soin = Soin::getSoin($id_adm);
+        if( !$soin )
+            $soin = new Soin();
+        $psy = Psychotrope::getPsychotropes($id_adm);
+        if( !$psy )
+            $psy = new Psychotrope();
+        $analyses = PatientAnalyseMaster::getAnalyse($id_adm);
+        $radios = PatientRadio::getRadio($id_adm);
+
+        return \PDF::loadView('patient.print', [
+            'patient'=>$patient,
+            'position'=>$lit,
+            'sortie'=>$sortie,
+            'soins'=>$soin,
+            'psys'=>$psy,
+            'analyses'=>$analyses,
+            'radios'=>$radios
+        ])
+            ->setPaper('a4')
+            /*->setOption('page-width', '116.9')
+            ->setOption('page-height', '139.7')*/
             ->setOrientation('portrait')
             ->setOption('margin-bottom', 2)
             ->setOption('margin-top', 5)

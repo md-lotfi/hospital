@@ -22,3 +22,7 @@ html, body {
     margin-left: .1rem;
     margin-right: .1rem;
 }
+
+.borderless td, .borderless th {
+    border: none!important;
+}

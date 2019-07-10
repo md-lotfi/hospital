@@ -8,4 +8,6 @@ class Analyse extends Model
 {
     protected $table = 'analyses';
     protected $primaryKey = 'id_analyse';
+
+
 }
