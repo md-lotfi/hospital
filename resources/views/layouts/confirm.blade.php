@@ -12,6 +12,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
                 <a href="#" id="confirmModalSubmit" class="btn btn-success success">Oui</a>
             </div>
+
         </div>
     </div>
 </div>

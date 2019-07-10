@@ -172,14 +172,14 @@
                         </div>
                     </div>
                     <div class="card-group mt-3">
-                        <div class="card mr-3" style="width: 11rem;">
+                        <!--<div class="card mr-3" style="width: 11rem;">
                             <a href="/gardem">
                                 <img src="/images/gardem.png" class="card-img-top" style="height: 140px">
                             </a>
                             <div class="card-body">
                                 <p class="card-text text-center"><b>Garde Malade</b></p>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="card mr-3" style="width: 11rem;">
                             <a href="/patient/search/add/{{\SP\Http\Controllers\PatientSearchController::ROUTE_SORTIE_PATIENT}}">
                                 <img src="/images/sortie_patient.jpg" class="card-img-top" style="height: 140px">
@@ -190,7 +190,7 @@
                         </div>
                         <div class="card" style="width: 11rem;">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                <img src="/images/exit.png" class="card-img-top">
+                                <img src="/images/exit.png" style="height: 138px" class="card-img-top">
                             </a>
                             <div class="card-body">
                                 <p class="card-text text-center"><b>Déconnexion</b></p>

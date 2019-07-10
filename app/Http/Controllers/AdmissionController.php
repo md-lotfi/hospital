@@ -21,7 +21,6 @@ class AdmissionController extends Controller
             if( $adms->count() > 0 )
                 $has_adms = true;
         return view('admission.create', ['id_patient'=>$id_patient, 'has_adms'=>$has_adms]);
-        
     }
 
     public function store(Request $request) {

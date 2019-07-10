@@ -12,11 +12,9 @@ return array(
     ),
     'image' => array(
         'enabled' => true,
-        'binary'  => '"C:\Program Files\wkhtmltoimage\bin\wkhtmltoimage.exe"',//base_path('vendor\h4cc\wkhtmltoimage-amd64\bin\wkhtmltoimage-amd64'),
+        'binary'  => '"C:\Program Files\wkhtmltoimage\bin\wkhtmltoimage.exe"',//base_path('vendor/h4cc/wkhtmltoimage-amd64/bin/wkhtmltoimage-amd64'),
         'timeout' => false,
         'options' => array(),
         'env'     => array(),
     ),
-
-
 );

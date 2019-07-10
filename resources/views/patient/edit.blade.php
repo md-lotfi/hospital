@@ -68,6 +68,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="id_patient" value="{{$patient->id_patient}}">
+
                     <input type="button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-danger float-right" value="Enregistrer">
                 </form>
             </div>
