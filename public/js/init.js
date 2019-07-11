@@ -21,8 +21,33 @@ $(document).ready(function(){
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
 
-    /*$('#submitBtn').click(function() {
-        $('#lname').text($('#lastname').val());
-        $('#fname').text($('#firstname').val());
-    });*/
+    $('.dynamic').change(function(){
+        if($(this).val() != '')
+        {
+            var select = $(this).attr("id");
+            var value = $(this).val();
+            var dependent = $(this).data('dependent');
+            //var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"/service/router/ajax/call",
+                method:"GET",
+                data:{select:select, value:value, dependent:dependent},
+                success:function(result)
+                {
+                    alert(result);
+                    $('#'+dependent).html(result);
+                }
+
+            })
+        }
+    });
+
+    $('#country').change(function(){
+        $('#state').val('');
+        $('#city').val('');
+    });
+
+    $('#state').change(function(){
+        $('#city').val('');
+    });
 });

@@ -71,6 +71,8 @@ Route::get('patientlit/salle/{id_adm}/{id_unite}', 'PatientLitController@salle')
 Route::get('patientlit/lit/{id_adm}/{id_salle}', 'PatientLitController@lit');
 Route::post('patientlit/select/next', 'PatientLitController@next');
 
+Route::get('service/router/ajax/call', 'PatientLitController@ajax');
+
 Route::get('gardem', 'GardeMaladeController@index');
 Route::get('gardem/create', 'GardeMaladeController@create');
 Route::post('gardem', 'GardeMaladeController@store');

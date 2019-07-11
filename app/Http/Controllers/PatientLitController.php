@@ -75,4 +75,8 @@ class PatientLitController extends Controller
         }
         return back()->with('error', "Commande inconnue");
     }
+
+    public function ajax(Request $request){
+        echo $request->input('select');
+    }
 }
