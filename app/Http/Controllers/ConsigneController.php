@@ -45,13 +45,21 @@ class ConsigneController extends Controller
 
     public function all(){
         $consignes = Consigne::
-            Join('admissions', 'admissions.id_adm', '=', 'consigne.id_adm')
+            where('received', 0)
+            ->Join('admissions', 'admissions.id_adm', '=', 'consigne.id_adm')
             ->Join('patients', 'patients.id_patient', '=', 'admissions.id_patient')
             ->Join('medecin', 'medecin.id_med', '=', 'consigne.id_medecin')
             ->Join('users', 'users.id', '=', 'medecin.id_user')
             ->groupBy('patients.id_patient')
             ->get();
         return view('consigne.all', ['consignes' => $consignes]);
+    }
+
+    public function received($id_consigne){
+        Consigne::where('id_consigne', $id_consigne)->update([
+            'received'=>1
+        ]);
+        return redirect('/consigne/all/unreceived');
     }
 
     public function create($id_adm) {

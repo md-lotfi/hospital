@@ -34,20 +34,30 @@ $(document).ready(function(){
                 data:{select:select, value:value, dependent:dependent},
                 success:function(result)
                 {
-                    alert(result);
+                    //alert(result);
                     $('#'+dependent).html(result);
+                },
+                error:function(result)
+                {
+                    console.log(result);
                 }
 
             })
         }
     });
 
-    $('#country').change(function(){
-        $('#state').val('');
-        $('#city').val('');
+    $('#service').change(function(){
+        $('#unite').html('');
+        $('#salle').html('');
+        $('#lit').html('');
     });
 
-    $('#state').change(function(){
-        $('#city').val('');
+    $('#unite').change(function(){
+        $('#salle').html('');
+        $('#lit').html('');
+    });
+
+    $('#salle').change(function(){
+        $('#lit').html('');
     });
 });

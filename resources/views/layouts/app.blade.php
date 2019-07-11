@@ -163,7 +163,7 @@
                         @else
                             @if( \SP\Consigne::hasUnreceived() )
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/consigne/all/unreceived"><i class="icon-message"></i>Consigne Notif</a>
+                                    <a class="nav-link btn btn-warning" href="/consigne/all/unreceived"><i class="icon-message"></i>Consigne Notif</a>
                                 </li>
                             @endif
                             <li class="nav-item dropdown">

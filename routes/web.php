@@ -201,6 +201,7 @@ Route::get('consigne/get/{id_consigne}', 'ConsigneController@edit');
 Route::post('consigne/update', 'ConsigneController@update');
 Route::get('consigne/remove/{id_consigne}', 'ConsigneController@destroy');
 Route::get('consigne/all/unreceived', 'ConsigneController@all');
+Route::get('consigne/received/{id_consigne}', 'ConsigneController@received');
 
 Route::get('ordonnances/{id_adm}', 'OrdonnanceController@index');
 Route::get('ordonnances/create/{id_adm}', 'OrdonnanceController@create');

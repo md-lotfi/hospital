@@ -35,7 +35,26 @@ class PatientLitController extends Controller
     }
 
     public function next(Request $request){
-        $id_adm = $request->input('id_adm');
+        if( !PatientLit::isBusy($request->input('id_lit')) ) {
+            $id_adm = $request->input('id_adm');
+            $pl = new PatientLit();
+            $pl->id_adm = $id_adm;
+            $pl->id_lit = $request->input('id_lit');
+            $pl->id_salle = $request->input('id_salle');
+            $pl->busy = PatientLit::LIT_BUSY;
+            $pl->save();
+            $adm = Admission::getPatientAdm($id_adm);
+            if ($adm) {
+                return response()->redirectTo('messages?redirect=' . urldecode('patient/get/' . $adm->id_patient))
+                    ->with('success', "Service enregistrer pour le patient $adm->nom $adm->prenom, Redirection vers les détails du patients dans 5 seconds...");
+            } else {
+                return back()
+                    ->with('error', "Une érreur est survenue lors de l'insertion, veuillez réssayer.");
+            }
+        }else{
+            return back()->with('warning', "Le lit N° ".$request->input('id_lit')." dans la salle N° ".$request->input('id_salle')." est occupé.");
+        }
+        /*$id_adm = $request->input('id_adm');
         $type = $request->input('type');
         if( $type === 'service' ) {
             $id_service = $request->input('id_service');
@@ -50,11 +69,6 @@ class PatientLitController extends Controller
             //$l = PatientLit::where('id_adm', $id_adm);
             //$x = $l->get()->first();
             if( !PatientLit::isBusy($request->input('id_lit')) ) {
-                /*PatientLit::where('id_adm', $id_adm)->update(
-                    [
-                        'busy' => PatientLit::LIT_FREE,
-                    ]
-                );*/
                 $pl = new PatientLit();
                 $pl->id_adm = $id_adm;
                 $pl->id_lit = $request->input('id_lit');
@@ -73,10 +87,55 @@ class PatientLitController extends Controller
                 return back()->with('warning', "Le lit N° ".$request->input('id_lit')." dans la salle N° ".$request->input('id_salle')." est occupé.");
             }
         }
-        return back()->with('error', "Commande inconnue");
+        return back()->with('error', "Commande inconnue");*/
     }
 
     public function ajax(Request $request){
-        echo $request->input('select');
+        //echo $request->input('select');
+        $select = $request->get('select');
+        $value = $request->get('value');
+        $dependent = $request->get('dependent');
+        $output = '';
+        if( $dependent === 'unite' ){
+            $data = Unite::where('id_service', $value)->get();
+            $output = '<option value="">Selectionner '.ucfirst($dependent).'</option>';
+            foreach($data as $row)
+            {
+                $output .= '<option value="'.$row->id_unite.'">'.$row->nom_unite.'</option>';
+            }
+        }else if( $dependent === 'salle' ){
+            $data = Sall::where('id_unite', $value)->get();
+            $output = '<option value="">Selectionner '.ucfirst($dependent).'</option>';
+            foreach($data as $row)
+            {
+                $output .= '<option value="'.$row->id_salle.'">'.$row->nom_salle.'</option>';
+            }
+        }else if( $dependent === 'lit' ){
+            $pl = PatientLit::where('busy', PatientLit::LIT_BUSY)
+                ->pluck('id_lit')
+                ->toArray();
+            if( !$pl )
+                $pl = array();
+            /*var_dump($pl);
+            exit();*/
+            $data = Lit::where('id_salle', $value)
+                ->whereNotIn('id_lit', $pl)
+                ->get();
+            $output = '<option value="">Selectionner '.ucfirst($dependent).'</option>';
+            foreach($data as $row)
+            {
+                $output .= '<option value="'.$row->id_lit.'">'.$row->nom_lit.'</option>';
+            }
+        }
+        /*$data = DB::table('country_state_city')
+            ->where($select, $value)
+            ->groupBy($dependent)
+            ->get();
+        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+        foreach($data as $row)
+        {
+            $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
+        }*/
+        echo $output;
     }
 }
